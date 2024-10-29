@@ -1,5 +1,5 @@
 package com.example.models;
 
-public class Persona {
+public class Boleto {
     
 }
