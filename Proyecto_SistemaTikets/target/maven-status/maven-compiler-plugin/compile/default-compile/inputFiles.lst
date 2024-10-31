@@ -1,3 +1,4 @@
+/home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/models/Turno.java
 /home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/controls/dao/services/PersonaServices.java
 /home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/rest/Main.java
 /home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/controls/tda/list/Node.java
@@ -8,3 +9,4 @@
 /home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/controls/exception/ListEmptyException.java
 /home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/controls/dao/PersonaDao.java
 /home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/models/Persona.java
+/home/jossibel-perez/Escritorio/Buses/SISTEMA-DE-BUSES/Proyecto_SistemaTikets/src/main/java/com/example/models/Bus.java
