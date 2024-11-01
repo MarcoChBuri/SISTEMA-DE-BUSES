@@ -1,13 +1,22 @@
-package com.example.models;
+package com.example.adapters;
 
 import java.util.Date;
 
-public class Turno {
+public class TurnoDTO {
     private int id;
     private int numeroTurno;
     private Date fecha;
     private String horario;
     private int idFrecuencia;
+
+    // Constructor
+    public TurnoDTO(int id, int numeroTurno, Date fecha, String horario, int idFrecuencia) {
+        this.id = id;
+        this.numeroTurno = numeroTurno;
+        this.fecha = fecha;
+        this.horario = horario;
+        this.idFrecuencia = idFrecuencia;
+    }
 
     // Getters y Setters
     public int getId() {
@@ -48,5 +57,16 @@ public class Turno {
 
     public void setIdFrecuencia(int idFrecuencia) {
         this.idFrecuencia = idFrecuencia;
+    }
+
+    @Override
+    public String toString() {
+        return "TurnoDTO{" +
+                "id=" + id +
+                ", numeroTurno=" + numeroTurno +
+                ", fecha=" + fecha +
+                ", horario='" + horario + '\'' +
+                ", idFrecuencia=" + idFrecuencia +
+                '}';
     }
 }
