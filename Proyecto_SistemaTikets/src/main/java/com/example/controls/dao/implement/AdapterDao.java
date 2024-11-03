@@ -1,5 +1,6 @@
 package com.example.controls.dao.implement;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -85,4 +86,8 @@ public class AdapterDao<T> implements InterfazDao<T> {
             System.out.println("Error al escribir en el archivo: " + e.getMessage());
         }
     }
+=======
+public class AdapterDao {
+    
+>>>>>>> origin/MARCO
 }
