@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.Date;
 
 public class Persona {
@@ -96,3 +97,10 @@ public class Persona {
         this.identificacion = identificacion;
     }
 }
+=======
+package com.example.models;
+
+public class Persona {
+    
+}
+>>>>>>> origin/MARCO
