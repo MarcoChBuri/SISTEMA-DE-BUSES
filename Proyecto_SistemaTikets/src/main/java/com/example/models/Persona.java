@@ -1,3 +1,7 @@
+package com.example.models;
+
+import com.example.models.Enum.Genero;
+import com.example.models.Enum.Identificacion;
 import java.util.Date;
 
 public class Persona {
@@ -11,6 +15,7 @@ public class Persona {
     private Identificacion tipoIdentificacion;
     private String identificacion;
 
+    //Constructor
     public Persona(int id, String nombre, String apellido, String direccion, Date fechaNacimiento,
                    Genero genero, String telefono, Identificacion tipoIdentificacion, String identificacion) {
         this.id = id;
@@ -24,6 +29,7 @@ public class Persona {
         this.identificacion = identificacion;
     }
 
+    // Getters y setters
     public int getId() {
         return id;
     }
@@ -94,5 +100,20 @@ public class Persona {
 
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", genero=" + genero +
+                ", telefono='" + telefono + '\'' +
+                ", tipoIdentificacion=" + tipoIdentificacion +
+                ", identificacion='" + identificacion + '\'' +
+                '}';
     }
 }
