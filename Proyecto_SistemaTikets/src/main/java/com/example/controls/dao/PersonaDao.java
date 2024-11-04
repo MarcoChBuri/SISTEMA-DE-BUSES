@@ -1,19 +1,15 @@
-<<<<<<< HEAD
+
 package com.example.controls.dao;
 
-public class PersonaDao {
-    
-=======
-package examples.controls.dao;
-
-import examples.models.Persona;
+import com.example.models.Persona;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.models.Cuenta;
 
-public class PersonaDAO {
+public class PersonaDao {
     private List<Persona> personas;
 
-    public PersonaDAO() {
+    public PersonaDao() {
         personas = new ArrayList<>();
     }
 
@@ -42,15 +38,15 @@ public class PersonaDAO {
         return null;
     }
 
-    // Validar usuario con correo y contraseña
-    public boolean validarUsuario(String correo, String clave) {
-        for (Persona persona : personas) {
-            /
-            if (persona.getCorreo().equals(correo) && persona.getClave().equals(clave)) {
-                return true;
-            }
-        }
-        return false;
-    }
->>>>>>> fc8ae8d77d957ddfc028d2bbece9579ecd517977
+    //LA CLASE PERSONA NO TINE CORREO REVSEN ESO PORFA
+
+
+    //public boolean validarUsuario(String correo, String clave) {
+        //for (Persona persona : personas) {
+          //  if (persona.getCorreo().equals(correo) && persona.getClave().equals(clave)) {
+          //      return true;
+          //  }
+      //  }
+      //  return false;
+    //}
 }
