@@ -1,12 +1,25 @@
-
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 package com.example.models;
 
 import com.example.models.Enum.Genero;
 import com.example.models.Enum.Identificacion;
+>>>>>>> fc8ae8d77d957ddfc028d2bbece9579ecd517977
 import java.util.Date;
 
 public class Persona {
     private int id;
+=======
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Persona {
+    private Integer id;
+>>>>>>> DILAN
     private String nombre;
     private String apellido;
     private String direccion;
@@ -15,8 +28,18 @@ public class Persona {
     private String telefono;
     private Identificacion tipoIdentificacion;
     private String identificacion;
+<<<<<<< HEAD
 
     //Constructor
+=======
+    @JsonManagedReference
+    private List<Cuenta> cuentas;
+
+    public Persona() {
+        this.cuentas = new ArrayList<>();
+    }
+
+>>>>>>> DILAN
     public Persona(int id, String nombre, String apellido, String direccion, Date fechaNacimiento,
                    Genero genero, String telefono, Identificacion tipoIdentificacion, String identificacion) {
         this.id = id;
@@ -28,6 +51,7 @@ public class Persona {
         this.telefono = telefono;
         this.tipoIdentificacion = tipoIdentificacion;
         this.identificacion = identificacion;
+<<<<<<< HEAD
     }
 
     // Getters y setters
@@ -36,6 +60,24 @@ public class Persona {
     }
 
     public void setId(int id) {
+=======
+        this.cuentas = new ArrayList<>();
+    }
+
+    public void agregarCuenta(Cuenta cuenta) {
+        if (cuenta != null && !cuentas.contains(cuenta)) {
+            cuenta.setPersona(this);
+            cuentas.add(cuenta);
+        }
+    }
+
+    // Getters y setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+>>>>>>> DILAN
         this.id = id;
     }
 
@@ -102,4 +144,28 @@ public class Persona {
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
+<<<<<<< HEAD
 }
+
+public class Persona {
+    
+}
+>>>>>>> origin/MARCO
+=======
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", genero=" + genero +
+                ", telefono='" + telefono + '\'' +
+                ", tipoIdentificacion=" + tipoIdentificacion +
+                ", identificacion='" + identificacion + '\'' +
+                '}';
+    }
+}
+>>>>>>> fc8ae8d77d957ddfc028d2bbece9579ecd517977
