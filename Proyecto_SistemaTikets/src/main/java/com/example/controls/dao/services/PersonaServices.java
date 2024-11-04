@@ -1,19 +1,13 @@
-<<<<<<< HEAD
 package com.example.controls.dao.services;
 
+import com.example.controls.dao.PersonaDao;
+import com.example.models.Persona;
+
 public class PersonaServices {
-    
-=======
-package examples.controls.dao.servicies;
+    private PersonaDao personaDAO;
 
-import examples.dao.PersonaDAO;
-import examples.models.Persona;
-
-public class PersonaService {
-    private PersonaDAO personaDAO;
-
-    public PersonaService() {
-        this.personaDAO = new PersonaDAO();
+    public PersonaServices() {
+        this.personaDAO = new PersonaDao();
     }
 
     public void agregarPersona(Persona persona) {
@@ -32,5 +26,4 @@ public class PersonaService {
     public boolean validarUsuario(String correo, String clave) {
         return personaDAO.validarUsuario(correo, clave);
     }
->>>>>>> fc8ae8d77d957ddfc028d2bbece9579ecd517977
 }

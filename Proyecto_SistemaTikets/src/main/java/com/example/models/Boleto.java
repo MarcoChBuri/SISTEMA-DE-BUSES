@@ -1,10 +1,13 @@
 package com.example.models;
+import java.util.Date;
+
+
 
 public class Boleto {
     private Integer id;
     private Date fecha;
     private float precioFinal;
-    private idBus idBus;
+    private Bus idBus;
     private Persona persona;
 
     public Integer getId() {
@@ -31,11 +34,11 @@ public class Boleto {
         this.precioFinal = precioFinal;
     }
 
-    public idBus getIdBus() {
+    public Bus getIdBus() {
         return this.idBus;
     }
 
-    public void setIdBus(idBus idBus) {
+    public void setIdBus(Bus idBus) {
         this.idBus = idBus;
     }
 
