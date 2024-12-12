@@ -1,0 +1,29 @@
+[
+  {
+    "id_pago": 1,
+    "saldo": 10.0,
+    "numero_tarjeta": "1234567890123456",
+    "titular": "Hector",
+    "fecha_vencimiento": "01/26",
+    "codigo_seguridad": "111",
+    "opcion_pago": "Tarjeta_credito"
+  },
+  {
+    "id_pago": 2,
+    "saldo": 0.0,
+    "numero_tarjeta": "2311111111111111",
+    "titular": "david",
+    "fecha_vencimiento": "11/22",
+    "codigo_seguridad": "111",
+    "opcion_pago": "Tarjeta_credito"
+  },
+  {
+    "id_pago": 3,
+    "saldo": 0.0,
+    "numero_tarjeta": "1111111111111111",
+    "titular": "x",
+    "fecha_vencimiento": "11/25",
+    "codigo_seguridad": "111",
+    "opcion_pago": "Tarjeta_credito"
+  }
+]
