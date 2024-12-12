@@ -1,0 +1,161 @@
+:root {
+    --primary: #7AB730;
+    --secondary: #f4faec;
+    --dark: #212121;
+    --light: #F3F3F3;
+}
+
+.container,
+.ticket-container {
+    max-width: 1400px;
+    margin: 20px auto 0;
+    padding: 2rem;
+}
+
+.ticket-container {
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+}
+
+.card,
+.ticket-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.ticket-header {
+    background: var(--primary);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+input[type="date"],
+select,
+.form-control,
+.form-select {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: #669928;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--dark);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    transition: all 0.3s;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #424242;
+    transform: translateY(-2px);
+    color: white;
+}
+
+.btn-grupo>.btn,
+.btn-group-vertical>.btn {
+    position: relative;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: var(--secondary);
+    border: none;
+    padding: 1rem;
+}
+
+.table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.alert {
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.header-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/carousel-1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px 0;
+    color: white;
+    margin-bottom: -50px;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.card-body.p-5 {
+    padding: 3rem;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.btn-close {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.alert-dismissible {
+    position: relative;
+    padding-right: 4rem;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 22px;
+    right: 0;
+    z-index: 2;
+    padding: 1.25rem 1rem;
+}

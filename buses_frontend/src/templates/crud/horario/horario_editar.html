@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Editar Horario</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style_crud.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="ticket-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <h3 class="mb-0"><i class="fas fa-edit me-2"></i>Editar Horario</h3>
+            </div>
+
+            <div class="card-body p-5">
+                <form method="POST">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-plane-departure me-2"></i>Hora Salida
+                            </label>
+                            <input type="time" class="form-control" id="hora_salida" name="hora_salida"
+                                value="{{ horario.hora_salida }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-plane-arrival me-2"></i>Hora Llegada
+                            </label>
+                            <input type="time" class="form-control" id="hora_llegada" name="hora_llegada"
+                                value="{{ horario.hora_llegada }}" required readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-toggle-on me-2"></i>Estado
+                            </label>
+                            <select class="form-select" id="estado_horario" name="estado_horario" required>
+                                <option value="Disponible" {% if horario.estado_horario=='Disponible' %}selected{% endif
+                                    %}>
+                                    Disponible
+                                </option>
+                                <option value="No_disponible" {% if horario.estado_horario=='No_disponible' %}selected{%
+                                    endif %}>
+                                    No disponible
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-route me-2"></i>Ruta
+                            </label>
+                            <select class="form-select" id="ruta_id" name="ruta_id" required>
+                                {% for ruta in rutas %}
+                                <option value="{{ ruta.id_ruta }}" data-tiempo="{{ ruta.tiempo_estimado }}">
+                                    {{ ruta.origen }} - {{ ruta.destino }} - {{ ruta.bus.placa }} - {{
+                                    ruta.bus.cooperativa.nombre }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-4 py-2 me-2">
+                            <i class="fas fa-save me-2"></i>Actualizar
+                        </button>
+                        <a href="{{ url_for('router.lista_horario') }}" class="btn btn-secondary px-4 py-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function calcularHoraLlegada() {
+            const horaSalida = document.getElementById('hora_salida').value;
+            const rutaSelect = document.getElementById('ruta_id');
+            const tiempoEstimado = rutaSelect.options[rutaSelect.selectedIndex].getAttribute('data-tiempo');
+            if (horaSalida && tiempoEstimado) {
+                const [horas, minutos] = tiempoEstimado.split('h ');
+                const minutosViaje = (parseInt(horas) * 60) + parseInt(minutos);
+                const salida = new Date(`2000-01-01T${horaSalida}`);
+                const llegada = new Date(salida.getTime() + minutosViaje * 60000);
+                const horaLlegada = llegada.toTimeString().slice(0, 5);
+                document.getElementById('hora_llegada').value = horaLlegada;
+            }
+        }
+        document.getElementById('hora_salida').addEventListener('change', calcularHoraLlegada);
+        document.getElementById('ruta_id').addEventListener('change', calcularHoraLlegada);
+        window.addEventListener('load', calcularHoraLlegada);
+    </script>
+
+</body>
+
+</html>

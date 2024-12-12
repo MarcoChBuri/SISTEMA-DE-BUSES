@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Lista de Buses</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style_crud.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-4 align-items-center">
+                    <div class="col">
+                        <h2 class="mb-0"><i class="fas fa-bus me-2"></i>Lista de Buses</h2>
+                    </div>
+                    <div class="col text-end">
+                        <a href="{{ url_for('router.crear_bus') }}" class="btn btn-primary px-4">
+                            <i class="fas fa-plus me-2"></i>Nuevo Bus
+                        </a>
+                    </div>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Número</th>
+                                <th>Placa</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Capacidad</th>
+                                <th>Velocidad</th>
+                                <th>Cooperativa</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bus in lista %}
+                            <tr>
+                                <td>{{ bus.id_bus }}</td>
+                                <td>{{ bus.numero_bus }}</td>
+                                <td>{{ bus.placa }}</td>
+                                <td>{{ bus.marca }}</td>
+                                <td>{{ bus.modelo }}</td>
+                                <td>{{ bus.capacidad_pasajeros }}</td>
+                                <td>{{ bus.velocidad }}</td>
+                                <td>{{ bus.cooperativa.nombre }}</td>
+                                <td>
+                                    <span class="badge bg-{{ 'success' if bus.estado_bus == 'Activo' 
+                                                           else 'warning' if bus.estado_bus == 'En_mantenimiento'
+                                                           else 'danger' }}">
+                                        {{ bus.estado_bus }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-grupo">
+                                        <a href="{{ url_for('router.editar_bus', id=bus.id_bus) }}"
+                                            class="btn btn-sm btn-info me-1">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="{{ url_for('router.eliminar_bus', id=bus.id_bus) }}" method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirm('¿Está seguro de eliminar este bus?')">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
