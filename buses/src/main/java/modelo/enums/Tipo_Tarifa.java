@@ -1,5 +1,5 @@
 package modelo.enums;
 
-public class Tipo_Tarifa {
-    
+public enum Tipo_Tarifa {
+    General, Menor_edad, Tercera_edad, Estudiante, Discapacitado
 }
