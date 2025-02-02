@@ -1,6 +1,7 @@
 package controlador.tda.lista;
 
 import controlador.tda.lista.excepcion.ListEmptyException;
+import java.lang.reflect.Method;
 
 public class LinkedList<E> {
     private Node<E> header; // Nodo cabecera (el primer nodo de la lista)
@@ -315,10 +316,115 @@ public class LinkedList<E> {
                 }
             }
             catch (NoSuchFieldException | IllegalAccessException e) {
-                // Si el campo no existe, ignóralo y continúa
+                System.out.println("Error al acceder al campo '_dni' en la clase "
+                        + node.getInfo().getClass().getName());
             }
             node = node.getNext();
         }
         return false;
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private int compararObjetos(Object obj1, Object obj2) {
+        if (obj1 == null && obj2 == null)
+            return 0;
+        if (obj1 == null)
+            return -1;
+        if (obj2 == null)
+            return 1;
+        if (obj1 instanceof String && obj2 instanceof String) {
+            return ((String) obj1).compareToIgnoreCase((String) obj2);
+        }
+        if (obj1 instanceof Number && obj2 instanceof Number) {
+            return Double.compare(((Number) obj1).doubleValue(), ((Number) obj2).doubleValue());
+        }
+        if (obj1 instanceof Comparable && obj1.getClass().equals(obj2.getClass())) {
+            return ((Comparable) obj1).compareTo(obj2);
+        }
+
+        return obj1.toString().compareToIgnoreCase(obj2.toString());
+    }
+
+    private Object obtenerValorAtributo(E objeto, String atributo) throws Exception {
+        if (atributo.equals("persona.nombre_completo")) {
+            String metodoBuscaNombre = "getPersona";
+            Method metodoPersona = objeto.getClass().getMethod(metodoBuscaNombre);
+            Object persona = metodoPersona.invoke(objeto);
+            if (persona != null) {
+                Method metodoNombre = persona.getClass().getMethod("getNombre");
+                Method metodoApellido = persona.getClass().getMethod("getApellido");
+                String nombre = (String) metodoNombre.invoke(persona);
+                String apellido = (String) metodoApellido.invoke(persona);
+                return (nombre + " " + apellido).trim();
+            }
+            return "";
+        }
+        String[] atributos = atributo.split("\\.");
+        Object resultado = objeto;
+        for (String attr : atributos) {
+            if (resultado == null) {
+                return null;
+            }
+            String metodoBusqueda = "get" + attr.substring(0, 1).toUpperCase() + attr.substring(1);
+            try {
+                Method metodo = resultado.getClass().getMethod(metodoBusqueda);
+                resultado = metodo.invoke(resultado);
+            }
+            catch (Exception e) {
+                throw new Exception("Error al acceder al atributo " + attr + ": " + e.getMessage());
+            }
+        }
+        return resultado;
+    }
+
+    private int particion(E[] array, int inicio, int fin, String atributo, boolean ascendente)
+            throws Exception {
+        Object pivote = obtenerValorAtributo(array[fin], atributo);
+        int i = inicio - 1;
+        for (int j = inicio; j < fin; j++) {
+            Object valorActual = obtenerValorAtributo(array[j], atributo);
+            int comparacion = compararObjetos(valorActual, pivote);
+            if (ascendente ? comparacion <= 0 : comparacion >= 0) {
+                i++;
+                E temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+        E temp = array[i + 1];
+        array[i + 1] = array[fin];
+        array[fin] = temp;
+        return i + 1;
+    }
+
+    public void quickSort(String atributo, boolean ascendente) throws Exception {
+        E[] array = toArray();
+        quickSortRecursivo(array, 0, array.length - 1, atributo, ascendente);
+        toList(array);
+    }
+
+    private void quickSortRecursivo(E[] array, int inicio, int fin, String atributo, boolean ascendente)
+            throws Exception {
+        if (inicio < fin) {
+            int indiceParticion = particion(array, inicio, fin, atributo, ascendente);
+            quickSortRecursivo(array, inicio, indiceParticion - 1, atributo, ascendente);
+            quickSortRecursivo(array, indiceParticion + 1, fin, atributo, ascendente);
+        }
+    }
+
+    public LinkedList<E> binarySearch(Object criterio, String atributo) throws Exception {
+        LinkedList<E> resultados = new LinkedList<>();
+        E[] array = toArray();
+        String criterioStr = criterio.toString().toLowerCase();
+        quickSort(atributo, true);
+        array = toArray();
+        for (E elemento : array) {
+            Object valorAtributo = obtenerValorAtributo(elemento, atributo);
+            String valorAtributoStr = valorAtributo.toString().toLowerCase();
+            if (valorAtributoStr.contains(criterioStr)) {
+                resultados.add(elemento);
+            }
+        }
+        return resultados;
     }
 }

@@ -2,6 +2,7 @@ package controlador.dao.modelo_dao;
 
 import controlador.tda.lista.LinkedList;
 import controlador.dao.AdapterDao;
+import modelo.enums.Estado_turno;
 import com.google.gson.Gson;
 import modelo.Turno;
 
@@ -32,7 +33,7 @@ public class Turno_dao extends AdapterDao<Turno> {
     }
 
     public Boolean save() throws Exception {
-        turno.setId_turno(getLista_turnos().getSize() + 1);
+        turno.setId_turno(obtenerSiguienteId());
         persist(turno);
         this.lista_turnos = listAll();
         return true;
@@ -49,18 +50,6 @@ public class Turno_dao extends AdapterDao<Turno> {
         }
         throw new Exception("No se encontró el turno con el id: " + turno.getId_turno());
     }
-
-    // public Boolean update() throws Exception {
-    //     for (int i = 0; i < getLista_turnos().getSize(); i++) {
-    //         Turno t = getLista_turnos().get(i);
-    //         if (t.getId_turno().equals(getTurno().getId_turno())) {
-    //             merge(getTurno(), i);
-    //             this.lista_turnos = listAll();
-    //             return true;
-    //         }
-    //     }
-    //     throw new Exception("No se encontró el turno con el id: " + turno.getId_turno());
-    // }
 
     public Boolean delete(Integer id) throws Exception {
         try {
@@ -87,6 +76,20 @@ public class Turno_dao extends AdapterDao<Turno> {
         }
         catch (Exception e) {
             throw new Exception("Error al eliminar el turno: " + e.getMessage());
+        }
+    }
+
+    public void verificarYActualizarEstadoTurno(Integer idTurno) throws Exception {
+        Boleto_dao boletoDao = new Boleto_dao();
+        Turno turno = get(idTurno);
+        if (turno != null) {
+            Integer capacidadBus = turno.getHorario().getRuta().getBus().getCapacidad_pasajeros();
+            Integer boletosVendidos = boletoDao.contarBoletosVendidosPorTurno(idTurno);
+            if (boletosVendidos >= capacidadBus && turno.getEstado_turno() != Estado_turno.Agotado) {
+                turno.setEstado_turno(Estado_turno.Agotado);
+                setTurno(turno);
+                update();
+            }
         }
     }
 }

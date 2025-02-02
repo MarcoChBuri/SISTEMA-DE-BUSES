@@ -1,5 +1,6 @@
 package modelo;
 
+import controlador.tda.lista.LinkedList;
 import modelo.enums.Estado_ruta;
 
 public class Ruta {
@@ -11,6 +12,7 @@ public class Ruta {
     private String tiempo_estimado;
     private Estado_ruta estado_ruta;
 
+    private LinkedList<Escala> escalas;
     private Bus bus;
 
     public Ruta() {
@@ -18,7 +20,7 @@ public class Ruta {
     }
 
     public Ruta(Integer id_ruta, String origen, String destino, float precio_unitario, Integer distancia,
-            String tiempo_estimado, Estado_ruta estado_ruta, Bus bus) {
+            String tiempo_estimado, Estado_ruta estado_ruta, LinkedList<Escala> escalas, Bus bus) {
         this.id_ruta = id_ruta;
         this.origen = origen;
         this.destino = destino;
@@ -26,6 +28,7 @@ public class Ruta {
         this.distancia = distancia;
         this.tiempo_estimado = tiempo_estimado;
         this.estado_ruta = estado_ruta;
+        this.escalas = escalas;
         this.bus = bus;
     }
 
@@ -85,6 +88,14 @@ public class Ruta {
         this.estado_ruta = estado_ruta;
     }
 
+    public LinkedList<Escala> getEscalas() {
+        return escalas;
+    }
+
+    public void setEscalas(LinkedList<Escala> escalas) {
+        this.escalas = escalas;
+    }
+
     public Bus getBus() {
         return bus;
     }
@@ -97,7 +108,7 @@ public class Ruta {
     public String toString() {
         return "id_ruta=" + id_ruta + ", origen=" + origen + ", destino=" + destino + ", precio_unitario="
                 + precio_unitario + ", distancia=" + distancia + ", tiempo_estimado=" + tiempo_estimado
-                + ", estado_ruta=" + estado_ruta + ", bus=" + bus;
+                + ", estado_ruta=" + estado_ruta + ", escalas=" + escalas + ", bus=" + bus;
     }
 
 }

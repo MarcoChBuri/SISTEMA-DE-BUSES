@@ -32,7 +32,7 @@ public class Horario_dao extends AdapterDao<Horario> {
     }
 
     public Boolean save() throws Exception {
-        horario.setId_horario(getLista_horarios().getSize() + 1);
+        horario.setId_horario(obtenerSiguienteId());
         persist(horario);
         this.lista_horarios = listAll();
         return true;
@@ -49,18 +49,6 @@ public class Horario_dao extends AdapterDao<Horario> {
         }
         throw new Exception("No se encontró el horario con el id: " + horario.getId_horario());
     }
-
-    // public Boolean update() throws Exception {
-    //     for (int i = 0; i < getLista_horarios().getSize(); i++) {
-    //         Horario h = getLista_horarios().get(i);
-    //         if (h.getId_horario().equals(getHorario().getId_horario())) {
-    //             merge(getHorario(), i);
-    //             this.lista_horarios = listAll();
-    //             return true;
-    //         }
-    //     }
-    //     throw new Exception("No se encontró el horario con el id: " + horario.getId_horario());
-    // }
 
     public Boolean delete(Integer id) throws Exception {
         try {

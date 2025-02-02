@@ -3,22 +3,24 @@ package com.buses.rest.apis;
 import controlador.servicios.Controlador_horario;
 import controlador.servicios.Controlador_turno;
 import controlador.dao.utiles.Sincronizar;
-import java.text.SimpleDateFormat;
+import controlador.tda.lista.LinkedList;
+import controlador.dao.utiles.Fecha;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import modelo.enums.Estado_turno;
 import javax.ws.rs.PathParam;
 import java.util.Collections;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import java.util.HashMap;
+import java.util.Arrays;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.GET;
 import modelo.Horario;
-import java.util.Date;
-
+import modelo.Turno;
 
 @Path("/turno")
 public class Turno_api {
@@ -66,12 +68,10 @@ public class Turno_api {
         Controlador_horario ch = new Controlador_horario();
         try {
             String fechaOriginal = map.get("fecha_salida").toString();
-            SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
-            Date fecha = formatoEntrada.parse(fechaOriginal);
-            String fechaFormateada = formatoSalida.format(fecha);
-            ct.getTurno().setFecha_salida(fechaFormateada);
+            String fechaNormalizada = Fecha.normalizarFecha(fechaOriginal);
+            ct.getTurno().setFecha_salida(fechaNormalizada);
             ct.getTurno().setNumero_turno(Integer.parseInt(map.get("numero_turno").toString()));
+            ct.getTurno().setEstado_turno(Estado_turno.valueOf(map.get("estado_turno").toString()));
             HashMap<String, Object> horarioMap = (HashMap<String, Object>) map.get("horario");
             Integer horarioId = Integer.parseInt(horarioMap.get("id_horario").toString());
             Horario horario = ch.get(horarioId);
@@ -131,14 +131,11 @@ public class Turno_api {
                     .entity(Collections.singletonMap("error", "Faltan datos requeridos")).build();
         }
         try {
-            String fechaOriginal = map.get("fecha_salida").toString();
-            SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy");
-            Date fecha = formatoEntrada.parse(fechaOriginal);
-            String fechaFormateada = formatoSalida.format(fecha);
+            String fechaNormalizada = Fecha.normalizarFecha(map.get("fecha_salida").toString());
             ct.getTurno().setId_turno(Integer.parseInt(map.get("id_turno").toString()));
-            ct.getTurno().setFecha_salida(fechaFormateada);
+            ct.getTurno().setFecha_salida(fechaNormalizada);
             ct.getTurno().setNumero_turno(Integer.parseInt(map.get("numero_turno").toString()));
+            ct.getTurno().setEstado_turno(Estado_turno.valueOf(map.get("estado_turno").toString()));
             HashMap<String, Object> horarioMap = (HashMap<String, Object>) map.get("horario");
             Integer horarioId = Integer.parseInt(horarioMap.get("id_horario").toString());
             Horario horario = ch.get(horarioId);
@@ -159,6 +156,54 @@ public class Turno_api {
         catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(Collections.singletonMap("error", "Error al actualizar el turno")).build();
+        }
+    }
+
+    @Path("/ordenar/{atributo}/{orden}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response ordenarTurnos(@PathParam("atributo") String atributo, @PathParam("orden") String orden) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Controlador_turno ct = new Controlador_turno();
+            LinkedList<modelo.Turno> lista = ct.Lista_turnos();
+            if (!Arrays
+                    .asList("numero_turno", "fecha_salida", "horario.hora_salida", "horario.hora_llegada",
+                            "horario.ruta.origen", "horario.ruta.destino", "horario.ruta.bus.placa",
+                            "horario.ruta.bus.cooperativa.nombre_cooperativa", "estado_turno")
+                    .contains(atributo)) {
+                response.put("mensaje", "Atributo de ordenamiento no válido");
+                return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+            }
+            lista.quickSort(atributo, orden.equalsIgnoreCase("asc"));
+            response.put("mensaje", "Lista ordenada correctamente");
+            response.put("turnos", lista.toArray());
+            return Response.ok(response).build();
+        }
+        catch (Exception e) {
+            response.put("mensaje", "Error al ordenar turnos: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+        }
+    }
+
+    @Path("/buscar/{atributo}/{criterio}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarTurno(@PathParam("atributo") String atributo,
+            @PathParam("criterio") String criterio) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Controlador_turno ct = new Controlador_turno();
+            LinkedList<Turno> lista = ct.Lista_turnos();
+            LinkedList<Turno> resultados = lista.binarySearch(criterio, atributo);
+            response.put("mensaje", "Búsqueda realizada");
+            response.put("cuentas", resultados.toArray());
+            return Response.ok(response).build();
+        }
+        catch (Exception e) {
+            response.put("mensaje", "Error en la búsqueda");
+            response.put("error", e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
         }
     }
 }

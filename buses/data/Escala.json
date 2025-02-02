@@ -1,0 +1,22 @@
+[
+  {
+    "id_escala": 1,
+    "lugar_escala": "Escala",
+    "tiempo": "00:10"
+  },
+  {
+    "id_escala": 2,
+    "lugar_escala": "villonaco",
+    "tiempo": "00:10"
+  },
+  {
+    "id_escala": 3,
+    "lugar_escala": "villonaco",
+    "tiempo": "00:10"
+  },
+  {
+    "id_escala": 4,
+    "lugar_escala": "Cuenca",
+    "tiempo": "02:10"
+  }
+]

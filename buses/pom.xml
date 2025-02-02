@@ -78,7 +78,7 @@
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<mainClass>com.ejemplo.rest.Main</mainClass>
+							<mainClass>com.buses.rest.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -88,7 +88,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.5.0</version>
 				<configuration>
-					<mainClass>com.ejemplo.rest.Main</mainClass>
+					<mainClass>com.buses.rest.Main</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

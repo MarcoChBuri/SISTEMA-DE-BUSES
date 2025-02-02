@@ -1,9 +1,12 @@
 package modelo;
 
+import modelo.enums.Estado_turno;
+
 public class Turno {
     private Integer id_turno;
     private String fecha_salida;
     private Integer numero_turno;
+    private Estado_turno estado_turno;
 
     private Horario horario;
 
@@ -11,10 +14,12 @@ public class Turno {
 
     }
 
-    public Turno(Integer id_turno, String fecha_salida, Integer numero_turno, Horario horario) {
+    public Turno(Integer id_turno, String fecha_salida, Integer numero_turno, Estado_turno estado_turno,
+            Horario horario) {
         this.id_turno = id_turno;
         this.fecha_salida = fecha_salida;
         this.numero_turno = numero_turno;
+        this.estado_turno = estado_turno;
         this.horario = horario;
     }
 
@@ -42,6 +47,14 @@ public class Turno {
         this.numero_turno = numero_turno;
     }
 
+    public Estado_turno getEstado_turno() {
+        return estado_turno;
+    }
+
+    public void setEstado_turno(Estado_turno estado_turno) {
+        this.estado_turno = estado_turno;
+    }
+
     public Horario getHorario() {
         return horario;
     }
@@ -53,7 +66,7 @@ public class Turno {
     @Override
     public String toString() {
         return "id_turno=" + id_turno + ", fecha_salida=" + fecha_salida + ", numero_turno=" + numero_turno
-                + ", horario=" + horario;
+                + ", estado_turno=" + estado_turno + ", horario=" + horario;
     }
 
 }

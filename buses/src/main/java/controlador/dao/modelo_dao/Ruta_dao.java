@@ -1,9 +1,8 @@
 package controlador.dao.modelo_dao;
 
+import controlador.dao.utiles.Sincronizar;
 import controlador.tda.lista.LinkedList;
 import controlador.dao.AdapterDao;
-import controlador.dao.utiles.Sincronizar;
-
 import com.google.gson.Gson;
 import modelo.Ruta;
 
@@ -34,7 +33,7 @@ public class Ruta_dao extends AdapterDao<Ruta> {
     }
 
     public Boolean save() throws Exception {
-        ruta.setId_ruta(getLista_rutas().getSize() + 1);
+        ruta.setId_ruta(obtenerSiguienteId());
         persist(ruta);
         this.lista_rutas = listAll();
         return true;
@@ -46,24 +45,12 @@ public class Ruta_dao extends AdapterDao<Ruta> {
             if (r.getId_ruta().equals(getRuta().getId_ruta())) {
                 merge(getRuta(), i);
                 this.lista_rutas = listAll();
-                Sincronizar.sincronizarRuta(getRuta()); // Añadir este método en Sincronizar
+                Sincronizar.sincronizarRuta(getRuta());
                 return true;
             }
         }
         throw new Exception("No se encontró la ruta");
     }
-
-    // public Boolean update() throws Exception {
-    //     for (int i = 0; i < getLista_rutas().getSize(); i++) {
-    //         Ruta r = getLista_rutas().get(i);
-    //         if (r.getId_ruta().equals(getRuta().getId_ruta())) {
-    //             merge(getRuta(), i);
-    //             this.lista_rutas = listAll();
-    //             return true;
-    //         }
-    //     }
-    //     throw new Exception("No se encontró la ruta con el id: " + ruta.getId_ruta());
-    // }
 
     public Boolean delete(Integer id) throws Exception {
         try {

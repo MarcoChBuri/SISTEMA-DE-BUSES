@@ -4,6 +4,9 @@ package com.buses.rest;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.server.ResourceConfig;
+
+import controlador.dao.modelo_dao.Descuento_dao;
+
 import java.io.IOException;
 import java.io.File;
 import java.net.URI;
@@ -16,6 +19,13 @@ public class Main {
         File dataDir = new File("data");
         if (!dataDir.exists()) {
             dataDir.mkdirs();
+        }
+        try {
+            Descuento_dao descuentoDao = new Descuento_dao();
+            descuentoDao.inicializarSiVacio();
+        }
+        catch (Exception e) {
+            System.err.println("Error al inicializar descuentos: " + e.getMessage());
         }
         final ResourceConfig rc = new ResourceConfig().packages("com.buses.rest")
                 .packages("com.buses.rest.apis");

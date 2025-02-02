@@ -32,7 +32,7 @@ public class Frecuencia_dao extends AdapterDao<Frecuencia> {
     }
 
     public Boolean save() throws Exception {
-        frecuencia.setId_frecuencia(getLista_frecuencias().getSize() + 1);
+        frecuencia.setId_frecuencia(obtenerSiguienteId());
         persist(frecuencia);
         this.lista_frecuencias = listAll();
         return true;
