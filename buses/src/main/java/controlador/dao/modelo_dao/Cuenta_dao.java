@@ -32,69 +32,53 @@ public class Cuenta_dao extends AdapterDao<Cuenta> {
     }
 
     public Boolean save() throws Exception {
-        cuenta.setId_cuenta(getLista_cuentas().getSize() + 1);
-        persist(cuenta);
-        this.lista_cuentas = listAll();
-        return true;
-    }
-
-    public Boolean update() throws Exception {
-        LinkedList<Cuenta> cuentas = getLista_cuentas();
-        if (cuentas == null) {
-            cuentas = new LinkedList<>();
-        }
-        if (cuenta.getId_cuenta() == null) {
+        try {
+            LinkedList<Cuenta> cuentas = getLista_cuentas();
+            if (cuenta == null) {
+                throw new Exception("Cuenta no puede ser null");
+            }
+            if (cuenta.getCorreo() == null || cuenta.getContrasenia() == null
+                    || cuenta.getEstado_cuenta() == null || cuenta.getTipo_cuenta() == null) {
+                throw new Exception("Faltan datos requeridos de la cuenta");
+            }
             cuenta.setId_cuenta(cuentas.getSize() + 1);
             persist(cuenta);
             this.lista_cuentas = listAll();
             return true;
         }
-        boolean found = false;
-        for (int i = 0; i < cuentas.getSize(); i++) {
-            Cuenta c = cuentas.get(i);
-            if (c.getId_cuenta().equals(cuenta.getId_cuenta())) {
-                merge(cuenta, i);
-                this.lista_cuentas = listAll();
-                found = true;
-                break;
-            }
+        catch (Exception e) {
+            throw new Exception("Error al guardar cuenta: " + e.getMessage());
         }
-        if (!found) {
-            cuenta.setId_cuenta(cuentas.getSize() + 1);
-            persist(cuenta);
-            this.lista_cuentas = listAll();
-        }
-        return true;
     }
 
-    // public Boolean update() throws Exception {
-    //     LinkedList<Cuenta> cuentas = getLista_cuentas();
-    //     if (cuentas == null) {
-    //         cuentas = new LinkedList<>();
-    //     }
-    //     if (cuenta.getId_cuenta() == null) {
-    //         cuenta.setId_cuenta(cuentas.getSize() + 1);
-    //         persist(cuenta);
-    //         this.lista_cuentas = listAll();
-    //         return true;
-    //     }
-    //     boolean found = false;
-    //     for (int i = 0; i < cuentas.getSize(); i++) {
-    //         Cuenta c = cuentas.get(i);
-    //         if (c.getId_cuenta().equals(cuenta.getId_cuenta())) {
-    //             merge(cuenta, i);
-    //             this.lista_cuentas = listAll();
-    //             found = true;
-    //             break;
-    //         }
-    //     }
-    //     if (!found) {
-    //         cuenta.setId_cuenta(cuentas.getSize() + 1);
-    //         persist(cuenta);
-    //         this.lista_cuentas = listAll();
-    //     }
-    //     return true;
-    // }
+    public Boolean update() throws Exception {
+        try {
+            if (cuenta == null || cuenta.getId_cuenta() == null) {
+                throw new Exception("Cuenta inválida o ID no especificado");
+            }
+            LinkedList<Cuenta> cuentas = getLista_cuentas();
+            boolean found = false;
+            for (int i = 0; i < cuentas.getSize(); i++) {
+                Cuenta c = cuentas.get(i);
+                if (c.getId_cuenta().equals(cuenta.getId_cuenta())) {
+                    if (cuenta.getContrasenia() == null || cuenta.getContrasenia().isEmpty()) {
+                        cuenta.setContrasenia(c.getContrasenia());
+                    }
+                    merge(cuenta, i);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                throw new Exception("Cuenta no encontrada");
+            }
+            this.lista_cuentas = listAll();
+            return true;
+        }
+        catch (Exception e) {
+            throw new Exception("Error al actualizar la cuenta: " + e.getMessage());
+        }
+    }
 
     public Boolean delete(Integer id) throws Exception {
         try {
