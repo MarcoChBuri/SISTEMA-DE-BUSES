@@ -1,0 +1,42 @@
+[
+  {
+    "id_descuento": 1,
+    "nombre_descuento": "General",
+    "descripcion": "Descuento base aplicado a todos los usuarios",
+    "porcentaje": 0,
+    "estado_descuento": "Activo",
+    "tipo_descuento": "General"
+  },
+  {
+    "id_descuento": 2,
+    "nombre_descuento": "Estudiante",
+    "descripcion": "Descuento aplicado automáticamente para estudiantes",
+    "porcentaje": 30,
+    "estado_descuento": "Activo",
+    "tipo_descuento": "Estudiante"
+  },
+  {
+    "id_descuento": 3,
+    "nombre_descuento": "Menor Edad",
+    "descripcion": "Descuento aplicado automáticamente para menores de edad",
+    "porcentaje": 50,
+    "estado_descuento": "Activo",
+    "tipo_descuento": "Menor_edad"
+  },
+  {
+    "id_descuento": 4,
+    "nombre_descuento": "Tercera Edad",
+    "descripcion": "Descuento aplicado automáticamente para adultos mayores",
+    "porcentaje": 50,
+    "estado_descuento": "Activo",
+    "tipo_descuento": "Tercera_edad"
+  },
+  {
+    "id_descuento": 5,
+    "nombre_descuento": "Discapacidad",
+    "descripcion": "Descuento aplicado automáticamente para personas con discapacidad",
+    "porcentaje": 50,
+    "estado_descuento": "Activo",
+    "tipo_descuento": "Discapacitado"
+  }
+]

@@ -1,7 +1,9 @@
 package controlador.dao.modelo_dao;
 
+import controlador.tda.lista.excepcion.ListEmptyException;
 import controlador.tda.lista.LinkedList;
 import controlador.dao.AdapterDao;
+import modelo.enums.Estado_boleto;
 import com.google.gson.Gson;
 import modelo.Boleto;
 
@@ -32,7 +34,7 @@ public class Boleto_dao extends AdapterDao<Boleto> {
     }
 
     public Boolean save() throws Exception {
-        boleto.setId_boleto(getLista_boletos().getSize() + 1);
+        boleto.setId_boleto(obtenerSiguienteId());
         persist(boleto);
         this.lista_boletos = listAll();
         return true;
@@ -76,5 +78,17 @@ public class Boleto_dao extends AdapterDao<Boleto> {
         catch (Exception e) {
             throw new Exception("Error al eliminar el boleto: " + e.getMessage());
         }
+    }
+
+    public Integer contarBoletosVendidosPorTurno(Integer idTurno)
+            throws IndexOutOfBoundsException, ListEmptyException {
+        Integer contador = 0;
+        for (int i = 0; i < getLista_boletos().getSize(); i++) {
+            Boleto b = getLista_boletos().get(i);
+            if (b.getTurno().getId_turno().equals(idTurno) && b.getEstado_boleto() == Estado_boleto.Vendido) {
+                contador++;
+            }
+        }
+        return contador;
     }
 }

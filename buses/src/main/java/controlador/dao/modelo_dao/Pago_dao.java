@@ -3,6 +3,8 @@ package controlador.dao.modelo_dao;
 import controlador.tda.lista.LinkedList;
 import controlador.dao.AdapterDao;
 import com.google.gson.Gson;
+import modelo.Persona;
+import modelo.Boleto;
 import modelo.Pago;
 
 public class Pago_dao extends AdapterDao<Pago> {
@@ -32,7 +34,7 @@ public class Pago_dao extends AdapterDao<Pago> {
     }
 
     public Boolean save() throws Exception {
-        pago.setId_pago(getLista_pagos().getSize() + 1);
+        pago.setId_pago(obtenerSiguienteId());
         persist(pago);
         this.lista_pagos = listAll();
         return true;
@@ -40,31 +42,57 @@ public class Pago_dao extends AdapterDao<Pago> {
 
     public Boolean update() throws Exception {
         try {
-            if (pago == null) {
-                throw new Exception("Pago no válido");
+            if (pago == null || pago.getId_pago() == null) {
+                throw new Exception("Pago no válido o sin ID");
             }
             LinkedList<Pago> pagos = getLista_pagos();
-            boolean found = false;
-            if (pago.getId_pago() != null) {
-                for (int i = 0; i < pagos.getSize(); i++) {
-                    Pago p = pagos.get(i);
-                    if (p.getId_pago().equals(pago.getId_pago())) {
-                        merge(pago, i);
-                        found = true;
-                        break;
-                    }
+            LinkedList<Persona> personas = new LinkedList<>();
+            LinkedList<Boleto> boletos = new LinkedList<>();
+            AdapterDao<Persona> personaDao = new AdapterDao<>(Persona.class);
+            AdapterDao<Boleto> boletoDao = new AdapterDao<>(Boleto.class);
+            personas = personaDao.listAll();
+            boletos = boletoDao.listAll();
+            boolean pagoEncontrado = false;
+            for (int i = 0; i < pagos.getSize(); i++) {
+                if (pagos.get(i).getId_pago().equals(pago.getId_pago())) {
+                    pagos.update(pago, i);
+                    pagoEncontrado = true;
+                    break;
                 }
             }
-            if (!found) {
-                if (pago.getId_pago() == null) {
-                    pago.setId_pago(pagos.getSize() + 1);
-                }
-                persist(pago);
+            if (!pagoEncontrado) {
+                throw new Exception("Pago no encontrado para actualizar");
             }
-            this.lista_pagos = listAll();
+            boolean personasActualizadas = false;
+            for (int i = 0; i < personas.getSize(); i++) {
+                Persona persona = personas.get(i);
+                if (persona.getMetodo_pago() != null
+                        && persona.getMetodo_pago().getId_pago().equals(pago.getId_pago())) {
+                    persona.setMetodo_pago(pago);
+                    personasActualizadas = true;
+                }
+            }
+            boolean boletosActualizados = false;
+            for (int i = 0; i < boletos.getSize(); i++) {
+                Boleto boleto = boletos.get(i);
+                if (boleto.getPersona() != null && boleto.getPersona().getMetodo_pago() != null
+                        && boleto.getPersona().getMetodo_pago().getId_pago().equals(pago.getId_pago())) {
+                    boleto.getPersona().setMetodo_pago(pago);
+                    boletosActualizados = true;
+                }
+            }
+            saveFile(new Gson().toJson(pagos.toArray()));
+            if (personasActualizadas) {
+                personaDao.saveFile(new Gson().toJson(personas.toArray()));
+            }
+            if (boletosActualizados) {
+                boletoDao.saveFile(new Gson().toJson(boletos.toArray()));
+            }
+            this.lista_pagos = pagos;
             return true;
         }
         catch (Exception e) {
+            e.printStackTrace();
             throw new Exception("Error al actualizar el pago: " + e.getMessage());
         }
     }
@@ -72,28 +100,49 @@ public class Pago_dao extends AdapterDao<Pago> {
     public Boolean delete(Integer id) throws Exception {
         try {
             LinkedList<Pago> pagos = getLista_pagos();
-            if (pagos == null) {
-                pagos = new LinkedList<>();
-            }
+            LinkedList<Persona> personas = new LinkedList<>();
+            LinkedList<Boleto> boletos = new LinkedList<>();
+            AdapterDao<Persona> personaDao = new AdapterDao<>(Persona.class);
+            AdapterDao<Boleto> boletoDao = new AdapterDao<>(Boleto.class);
+            personas = personaDao.listAll();
+            boletos = boletoDao.listAll();
             boolean deleted = false;
             for (int i = 0; i < pagos.getSize(); i++) {
-                Pago p = pagos.get(i);
-                if (p.getId_pago().equals(id)) {
+                if (pagos.get(i).getId_pago().equals(id)) {
                     pagos.delete(i);
                     deleted = true;
                     break;
                 }
             }
-            if (deleted) {
-                Gson gson = new Gson();
-                String json = gson.toJson(pagos);
-                saveFile(json);
-                return true;
+            if (!deleted) {
+                throw new Exception("No se encontró el pago con el id: " + id);
             }
-            throw new Exception("No se encontró el pago con el id: " + id);
+            boolean cambiosRealizados = false;
+            for (int i = 0; i < personas.getSize(); i++) {
+                Persona persona = personas.get(i);
+                if (persona.getMetodo_pago() != null && persona.getMetodo_pago().getId_pago().equals(id)) {
+                    persona.setMetodo_pago(null);
+                    cambiosRealizados = true;
+                }
+            }
+            for (int i = 0; i < boletos.getSize(); i++) {
+                Boleto boleto = boletos.get(i);
+                if (boleto.getPersona() != null && boleto.getPersona().getMetodo_pago() != null
+                        && boleto.getPersona().getMetodo_pago().getId_pago().equals(id)) {
+                    boleto.getPersona().setMetodo_pago(null);
+                    cambiosRealizados = true;
+                }
+            }
+            saveFile(new Gson().toJson(pagos.toArray()));
+            if (cambiosRealizados) {
+                personaDao.saveFile(new Gson().toJson(personas.toArray()));
+                boletoDao.saveFile(new Gson().toJson(boletos.toArray()));
+            }
+            this.lista_pagos = pagos;
+            return true;
         }
         catch (Exception e) {
-            throw e;
+            throw new Exception("Error al eliminar el pago: " + e.getMessage());
         }
     }
 }

@@ -1,357 +1,416 @@
 [
   {
     "id_boleto": 1,
-    "fecha_compra": "07/12/2024",
-    "numero_asiento": 1,
+    "fecha_compra": "06/01/2025",
+    "numero_asiento": 7,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 5,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567789",
+      "nombre": "Parque Lineal",
+      "apellido": "Betorl",
+      "genero": "No_definido",
+      "correo": "nerod@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "02/02/2000",
+      "saldo_disponible": 82.0,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 5,
+        "correo": "nerod@gmail.com",
+        "contrasenia": "toyota45*",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 5,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "2353-2523-5236-5343",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "3333",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 3,
+      "fecha_salida": "11/01/2025",
+      "numero_turno": 3,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 2,
-    "fecha_compra": "07/12/2024",
-    "numero_asiento": 2,
+    "fecha_compra": "06/01/2025",
+    "numero_asiento": 8,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 5,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567789",
+      "nombre": "Parque Lineal",
+      "apellido": "Betorl",
+      "genero": "No_definido",
+      "correo": "nerod@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "02/02/2000",
+      "saldo_disponible": 82.0,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 5,
+        "correo": "nerod@gmail.com",
+        "contrasenia": "toyota45*",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 5,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "2353-2523-5236-5343",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "3333",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 3,
+      "fecha_salida": "11/01/2025",
+      "numero_turno": 3,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 3,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 5,
+    "fecha_compra": "06/01/2025",
+    "numero_asiento": 6,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 5,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567789",
+      "nombre": "Parque Lineal",
+      "apellido": "Betorl",
+      "genero": "No_definido",
+      "correo": "nerod@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "02/02/2000",
+      "saldo_disponible": 82.0,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 5,
+        "correo": "nerod@gmail.com",
+        "contrasenia": "toyota45*",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 5,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "2353-2523-5236-5343",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "3333",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 3,
+      "fecha_salida": "11/01/2025",
+      "numero_turno": 3,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 4,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 7,
+    "fecha_compra": "06/01/2025",
+    "numero_asiento": 19,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 9.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 7,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1103819015",
+      "nombre": "dilan",
+      "apellido": "chamba",
+      "genero": "No_definido",
+      "correo": "dilan@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "05/05/2005",
+      "saldo_disponible": 11998.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 7,
+        "correo": "dilan@gmail.com",
+        "contrasenia": "dilan123.",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 6,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "1234-5672-1365-4789",
+        "titular": "dilan",
+        "fecha_vencimiento": "01/28",
+        "codigo_seguridad": "1234",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 1,
+      "fecha_salida": "10/01/2025",
+      "numero_turno": 1,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 5,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 4,
+    "fecha_compra": "06/01/2025",
+    "numero_asiento": 7,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 1.5,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 7,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1103819015",
+      "nombre": "dilan",
+      "apellido": "chamba",
+      "genero": "No_definido",
+      "correo": "dilan@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "05/05/2005",
+      "saldo_disponible": 11998.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 7,
+        "correo": "dilan@gmail.com",
+        "contrasenia": "dilan123.",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 6,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "1234-5672-1365-4789",
+        "titular": "dilan",
+        "fecha_vencimiento": "01/28",
+        "codigo_seguridad": "1234",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
       "horario": {
         "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
         "estado_horario": "Disponible",
         "ruta": {
           "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
           "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
           "bus": {
             "id_bus": 4,
             "numero_bus": 4,
@@ -363,445 +422,522 @@
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 6,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 8,
+    "fecha_compra": "08/01/2025",
+    "numero_asiento": 27,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 5,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567789",
+      "nombre": "Parque Lineal",
+      "apellido": "Betorl",
+      "genero": "No_definido",
+      "correo": "nerod@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "02/02/2000",
+      "saldo_disponible": 82.0,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 5,
+        "correo": "nerod@gmail.com",
+        "contrasenia": "toyota45*",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 5,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "2353-2523-5236-5343",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "3333",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 1,
+      "fecha_salida": "10/01/2025",
+      "numero_turno": 1,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 7,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 9,
+    "fecha_compra": "08/01/2025",
+    "numero_asiento": 1,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 2,
-      "nombre": "David",
-      "apellido": "Armijos",
-      "direccion": "calle sucre",
-      "fecha_nacimiento": "01/12/2000",
-      "telefono": "0988776655",
-      "genero": "Masculino",
-      "correo": "d@a.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1122334455",
+      "id_persona": 5,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567789",
+      "nombre": "Parque Lineal",
+      "apellido": "Betorl",
+      "genero": "No_definido",
+      "correo": "nerod@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "02/02/2000",
+      "saldo_disponible": 82.0,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 1,
-        "correo": "d@a.com",
-        "contrasenia": "1",
+        "id_cuenta": 5,
+        "correo": "nerod@gmail.com",
+        "contrasenia": "toyota45*",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 2,
+        "id_pago": 5,
         "saldo": 0.0,
-        "numero_tarjeta": "2311111111111111",
-        "titular": "david",
-        "fecha_vencimiento": "11/22",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "2353-2523-5236-5343",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "3333",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
       "id_turno": 4,
-      "fecha_salida": "13/12/2024",
+      "fecha_salida": "12/01/2025",
       "numero_turno": 4,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 8,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 13,
+    "fecha_compra": "12/01/2025",
+    "numero_asiento": 2,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 2,
-      "nombre": "David",
-      "apellido": "Armijos",
-      "direccion": "calle sucre",
-      "fecha_nacimiento": "01/12/2000",
-      "telefono": "0988776655",
-      "genero": "Masculino",
-      "correo": "d@a.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1122334455",
+      "id_persona": 4,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150000008",
+      "nombre": "asdas",
+      "apellido": "asd",
+      "genero": "No_definido",
+      "correo": "x@x.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "01/12/2000",
+      "saldo_disponible": 148.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 1,
-        "correo": "d@a.com",
-        "contrasenia": "1",
+        "id_cuenta": 4,
+        "correo": "x@x.com",
+        "contrasenia": "Abc1234@",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 2,
+        "id_pago": 4,
         "saldo": 0.0,
-        "numero_tarjeta": "2311111111111111",
-        "titular": "david",
-        "fecha_vencimiento": "11/22",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "1233-3333-3333-3333",
+        "titular": "asd",
+        "fecha_vencimiento": "12/29",
+        "codigo_seguridad": "123",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
       "id_turno": 4,
-      "fecha_salida": "13/12/2024",
+      "fecha_salida": "12/01/2025",
       "numero_turno": 4,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 9,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 17,
+    "fecha_compra": "12/01/2025",
+    "numero_asiento": 3,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 2,
-      "nombre": "David",
-      "apellido": "Armijos",
-      "direccion": "calle sucre",
-      "fecha_nacimiento": "01/12/2000",
-      "telefono": "0988776655",
-      "genero": "Masculino",
-      "correo": "d@a.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1122334455",
+      "id_persona": 4,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150000008",
+      "nombre": "asdas",
+      "apellido": "asd",
+      "genero": "No_definido",
+      "correo": "x@x.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "01/12/2000",
+      "saldo_disponible": 148.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 1,
-        "correo": "d@a.com",
-        "contrasenia": "1",
+        "id_cuenta": 4,
+        "correo": "x@x.com",
+        "contrasenia": "Abc1234@",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 2,
+        "id_pago": 4,
         "saldo": 0.0,
-        "numero_tarjeta": "2311111111111111",
-        "titular": "david",
-        "fecha_vencimiento": "11/22",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "1233-3333-3333-3333",
+        "titular": "asd",
+        "fecha_vencimiento": "12/29",
+        "codigo_seguridad": "123",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
       "id_turno": 4,
-      "fecha_salida": "13/12/2024",
+      "fecha_salida": "12/01/2025",
       "numero_turno": 4,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 10,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 12,
+    "fecha_compra": "12/01/2025",
+    "numero_asiento": 4,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 10.0,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 4,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150000008",
+      "nombre": "asdas",
+      "apellido": "asd",
+      "genero": "No_definido",
+      "correo": "x@x.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "01/12/2000",
+      "saldo_disponible": 148.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
+        "id_cuenta": 4,
         "correo": "x@x.com",
-        "contrasenia": "1",
+        "contrasenia": "Abc1234@",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 4,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
+        "numero_tarjeta": "1233-3333-3333-3333",
+        "titular": "asd",
+        "fecha_vencimiento": "12/29",
+        "codigo_seguridad": "123",
         "opcion_pago": "Tarjeta_credito"
       }
     },
     "turno": {
       "id_turno": 4,
-      "fecha_salida": "13/12/2024",
+      "fecha_salida": "12/01/2025",
       "numero_turno": 4,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "id_horario": 1,
+        "hora_salida": "00:00",
+        "hora_llegada": "02:24",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "id_ruta": 1,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 10.0,
+          "distancia": 120,
+          "tiempo_estimado": "2h 24min",
           "estado_ruta": "Disponible",
           "bus": {
-            "id_bus": 4,
-            "numero_bus": 4,
-            "placa": "BIPT-4567",
-            "marca": "Volkswagen",
-            "modelo": "2010",
+            "id_bus": 1,
+            "numero_bus": 1,
+            "placa": "BIP-1234",
+            "marca": "Toyota",
+            "modelo": "2020",
             "capacidad_pasajeros": 30,
-            "Velocidad": 45,
+            "Velocidad": 50,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 11,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 16,
+    "fecha_compra": "14/01/2025",
+    "numero_asiento": 10,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 1.5,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 8,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 7,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
       "horario": {
         "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
         "estado_horario": "Disponible",
         "ruta": {
           "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
           "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
           "bus": {
             "id_bus": 4,
             "numero_bus": 4,
@@ -813,70 +949,97 @@
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 12,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 20,
+    "fecha_compra": "17/01/2025",
+    "numero_asiento": 8,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 1.5,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 8,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 7,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
       "horario": {
         "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
         "estado_horario": "Disponible",
         "ruta": {
           "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
           "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
           "bus": {
             "id_bus": 4,
             "numero_bus": 4,
@@ -888,70 +1051,97 @@
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 13,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 24,
+    "fecha_compra": "17/01/2025",
+    "numero_asiento": 8,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 1.5,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 8,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 7,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
       "horario": {
         "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
         "estado_horario": "Disponible",
         "ruta": {
           "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
           "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
           "bus": {
             "id_bus": 4,
             "numero_bus": 4,
@@ -963,70 +1153,97 @@
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 14,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 28,
+    "fecha_compra": "17/01/2025",
+    "numero_asiento": 4,
     "cantidad_boleto": 1,
-    "precio_final": 8.5,
+    "precio_final": 1.5,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 3,
-      "nombre": "x",
-      "apellido": "x",
-      "direccion": "Loja ecuador",
-      "fecha_nacimiento": "01/12/2024",
-      "telefono": "1",
-      "genero": "Masculino",
-      "correo": "x@x.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1",
+      "id_persona": 8,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 3,
-        "correo": "x@x.com",
-        "contrasenia": "1",
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 3,
+        "id_pago": 7,
         "saldo": 0.0,
-        "numero_tarjeta": "1111111111111111",
-        "titular": "x",
-        "fecha_vencimiento": "11/25",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 4,
-      "fecha_salida": "13/12/2024",
-      "numero_turno": 4,
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
       "horario": {
         "id_horario": 4,
-        "hora_salida": "08:00",
-        "hora_llegada": "09:40",
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
         "estado_horario": "Disponible",
         "ruta": {
           "id_ruta": 4,
-          "origen": "Cuenca",
-          "destino": "Loja",
-          "precio_unitario": 8.5,
-          "distancia": 75,
-          "tiempo_estimado": "1h 40min",
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
           "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
           "bus": {
             "id_bus": 4,
             "numero_bus": 4,
@@ -1038,165 +1255,1349 @@
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 15,
-    "fecha_compra": "08/12/2024",
-    "numero_asiento": 1,
+    "fecha_compra": "17/01/2025",
+    "numero_asiento": 16,
     "cantidad_boleto": 1,
-    "precio_final": 7.0,
+    "precio_final": 1.5,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 2,
-      "nombre": "David",
-      "apellido": "Armijos",
-      "direccion": "calle sucre",
-      "fecha_nacimiento": "01/12/2000",
-      "telefono": "0988776655",
-      "genero": "Masculino",
-      "correo": "d@a.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1122334455",
+      "id_persona": 8,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 1,
-        "correo": "d@a.com",
-        "contrasenia": "1",
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 2,
+        "id_pago": 7,
         "saldo": 0.0,
-        "numero_tarjeta": "2311111111111111",
-        "titular": "david",
-        "fecha_vencimiento": "11/22",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 3,
-      "fecha_salida": "12/12/2024",
-      "numero_turno": 3,
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 3,
-        "hora_salida": "06:00",
-        "hora_llegada": "07:22",
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 3,
-          "origen": "Loja",
-          "destino": "Cuenca",
-          "precio_unitario": 7.0,
-          "distancia": 75,
-          "tiempo_estimado": "1h 22min",
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
           "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
           "bus": {
-            "id_bus": 3,
-            "numero_bus": 3,
-            "placa": "BIPT-3456",
-            "marca": "Mercedez",
-            "modelo": "2022",
-            "capacidad_pasajeros": 40,
-            "Velocidad": 55,
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   },
   {
     "id_boleto": 16,
-    "fecha_compra": "08/12/2024",
+    "fecha_compra": "17/01/2025",
     "numero_asiento": 2,
     "cantidad_boleto": 1,
-    "precio_final": 7.0,
+    "precio_final": 1.5,
     "estado_boleto": "Vendido",
     "persona": {
-      "id_persona": 2,
-      "nombre": "David",
-      "apellido": "Armijos",
-      "direccion": "calle sucre",
-      "fecha_nacimiento": "01/12/2000",
-      "telefono": "0988776655",
-      "genero": "Masculino",
-      "correo": "d@a.com",
-      "saldo_disponible": 0.0,
-      "numero_identificacion": "1122334455",
+      "id_persona": 8,
       "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
       "cuenta": {
-        "id_cuenta": 1,
-        "correo": "d@a.com",
-        "contrasenia": "1",
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
         "estado_cuenta": "Activo",
         "tipo_cuenta": "Cliente"
       },
       "metodo_pago": {
-        "id_pago": 2,
+        "id_pago": 7,
         "saldo": 0.0,
-        "numero_tarjeta": "2311111111111111",
-        "titular": "david",
-        "fecha_vencimiento": "11/22",
-        "codigo_seguridad": "111",
-        "opcion_pago": "Tarjeta_credito"
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
       }
     },
     "turno": {
-      "id_turno": 3,
-      "fecha_salida": "12/12/2024",
-      "numero_turno": 3,
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
       "horario": {
-        "id_horario": 3,
-        "hora_salida": "06:00",
-        "hora_llegada": "07:22",
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
         "estado_horario": "Disponible",
         "ruta": {
-          "id_ruta": 3,
-          "origen": "Loja",
-          "destino": "Cuenca",
-          "precio_unitario": 7.0,
-          "distancia": 75,
-          "tiempo_estimado": "1h 22min",
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
           "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
           "bus": {
-            "id_bus": 3,
-            "numero_bus": 3,
-            "placa": "BIPT-3456",
-            "marca": "Mercedez",
-            "modelo": "2022",
-            "capacidad_pasajeros": 40,
-            "Velocidad": 55,
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
             "estado_bus": "Activo",
             "cooperativa": {
               "id_cooperativa": 1,
-              "nombre": "Cooperativa Loja",
-              "ruc": "1100112233",
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
               "direccion": "10 de agosto",
-              "telefono": "0987654321",
+              "telefono": "098 765 4321",
               "correo_empresarial": "cooperativa.loja@gmail.com"
             }
           }
         }
       }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 17,
+    "fecha_compra": "17/01/2025",
+    "numero_asiento": 5,
+    "cantidad_boleto": 1,
+    "precio_final": 1.5,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 8,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 7,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
+      }
+    },
+    "turno": {
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 1,
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
+              "direccion": "10 de agosto",
+              "telefono": "098 765 4321",
+              "correo_empresarial": "cooperativa.loja@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 18,
+    "fecha_compra": "17/01/2025",
+    "numero_asiento": 19,
+    "cantidad_boleto": 1,
+    "precio_final": 1.5,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 8,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 7,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
+      }
+    },
+    "turno": {
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 1,
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
+              "direccion": "10 de agosto",
+              "telefono": "098 765 4321",
+              "correo_empresarial": "cooperativa.loja@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 19,
+    "fecha_compra": "20/01/2025",
+    "numero_asiento": 11,
+    "cantidad_boleto": 1,
+    "precio_final": 1.5,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 8,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 7,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
+      }
+    },
+    "turno": {
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 1,
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
+              "direccion": "10 de agosto",
+              "telefono": "098 765 4321",
+              "correo_empresarial": "cooperativa.loja@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 20,
+    "fecha_compra": "20/01/2025",
+    "numero_asiento": 1,
+    "cantidad_boleto": 1,
+    "precio_final": 1.5,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 8,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 7,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
+      }
+    },
+    "turno": {
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 1,
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
+              "direccion": "10 de agosto",
+              "telefono": "098 765 4321",
+              "correo_empresarial": "cooperativa.loja@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 21,
+    "fecha_compra": "20/01/2025",
+    "numero_asiento": 18,
+    "cantidad_boleto": 1,
+    "precio_final": 1.5,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 8,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 7,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
+      }
+    },
+    "turno": {
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 1,
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
+              "direccion": "10 de agosto",
+              "telefono": "098 765 4321",
+              "correo_empresarial": "cooperativa.loja@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 22,
+    "fecha_compra": "23/01/2025",
+    "numero_asiento": 15,
+    "cantidad_boleto": 1,
+    "precio_final": 1.5,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 8,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 7,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
+      }
+    },
+    "turno": {
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 1,
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
+              "direccion": "10 de agosto",
+              "telefono": "098 765 4321",
+              "correo_empresarial": "cooperativa.loja@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 23,
+    "fecha_compra": "23/01/2025",
+    "numero_asiento": 20,
+    "cantidad_boleto": 1,
+    "precio_final": 1.5,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 8,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1234567890",
+      "nombre": "josue",
+      "apellido": "chiliguano",
+      "genero": "No_definido",
+      "correo": "mama\u0027@gmail.com",
+      "telefono": "",
+      "direccion": "",
+      "fecha_nacimiento": "04/10/2005",
+      "saldo_disponible": 80.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 8,
+        "correo": "mama\u0027@gmail.com",
+        "contrasenia": "1720500139M",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 7,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-6789-8765-4345",
+        "titular": "yo",
+        "fecha_vencimiento": "12/30",
+        "codigo_seguridad": "124",
+        "opcion_pago": "Tarjeta_debito"
+      }
+    },
+    "turno": {
+      "id_turno": 5,
+      "fecha_salida": "12/12/2025",
+      "numero_turno": 5,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 4,
+        "hora_salida": "12:00",
+        "hora_llegada": "13:10",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 4,
+          "origen": "loja",
+          "destino": "catamayo",
+          "precio_unitario": 1.5,
+          "distancia": 45,
+          "tiempo_estimado": "1h 10min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 3,
+                "lugar_escala": "villonaco",
+                "tiempo": "00:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 4,
+            "numero_bus": 4,
+            "placa": "BIPT-4567",
+            "marca": "Volkswagen",
+            "modelo": "2010",
+            "capacidad_pasajeros": 30,
+            "Velocidad": 45,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 1,
+              "nombre_cooperativa": "Cooperativa Loja",
+              "ruc": "1791234567899",
+              "direccion": "10 de agosto",
+              "telefono": "098 765 4321",
+              "correo_empresarial": "cooperativa.loja@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 25,
+    "fecha_compra": "01/02/2025",
+    "numero_asiento": 1,
+    "cantidad_boleto": 1,
+    "precio_final": 11.0,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 9,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567747",
+      "nombre": "Luis",
+      "apellido": "Armijos",
+      "genero": "Masculino",
+      "correo": "luillis@gmail.com",
+      "telefono": "098 762 6289",
+      "direccion": "Andrés Bello, Los Apuros, Loja, 110110, Ecuador",
+      "fecha_nacimiento": "14/02/1950",
+      "saldo_disponible": 4.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 9,
+        "correo": "luillis@gmail.com",
+        "contrasenia": "Remolacha34*",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 8,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-2345-2345-2345",
+        "titular": "Luis",
+        "fecha_vencimiento": "12/28",
+        "codigo_seguridad": "1212",
+        "opcion_pago": "Tarjeta_credito"
+      }
+    },
+    "turno": {
+      "id_turno": 6,
+      "fecha_salida": "01/03/2025",
+      "numero_turno": 6,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 5,
+        "hora_salida": "07:00",
+        "hora_llegada": "17:30",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 5,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 11.0,
+          "distancia": 500,
+          "tiempo_estimado": "10h 30min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 5,
+            "numero_bus": 5,
+            "placa": "BSD-1293",
+            "marca": "Mazda",
+            "modelo": "2020",
+            "capacidad_pasajeros": 40,
+            "Velocidad": 60,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 5,
+              "nombre_cooperativa": "Cooperativa San Luis",
+              "ruc": "1189371635123",
+              "direccion": "Loja, 110105, Ecuador",
+              "telefono": "098 172 6317",
+              "correo_empresarial": "sanluiscoop@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 26,
+    "fecha_compra": "01/02/2025",
+    "numero_asiento": 2,
+    "cantidad_boleto": 1,
+    "precio_final": 11.0,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 9,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567747",
+      "nombre": "Luis",
+      "apellido": "Armijos",
+      "genero": "Masculino",
+      "correo": "luillis@gmail.com",
+      "telefono": "098 762 6289",
+      "direccion": "Andrés Bello, Los Apuros, Loja, 110110, Ecuador",
+      "fecha_nacimiento": "14/02/1950",
+      "saldo_disponible": 4.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 9,
+        "correo": "luillis@gmail.com",
+        "contrasenia": "Remolacha34*",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 8,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-2345-2345-2345",
+        "titular": "Luis",
+        "fecha_vencimiento": "12/28",
+        "codigo_seguridad": "1212",
+        "opcion_pago": "Tarjeta_credito"
+      }
+    },
+    "turno": {
+      "id_turno": 6,
+      "fecha_salida": "01/03/2025",
+      "numero_turno": 6,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 5,
+        "hora_salida": "07:00",
+        "hora_llegada": "17:30",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 5,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 11.0,
+          "distancia": 500,
+          "tiempo_estimado": "10h 30min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 5,
+            "numero_bus": 5,
+            "placa": "BSD-1293",
+            "marca": "Mazda",
+            "modelo": "2020",
+            "capacidad_pasajeros": 40,
+            "Velocidad": 60,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 5,
+              "nombre_cooperativa": "Cooperativa San Luis",
+              "ruc": "1189371635123",
+              "direccion": "Loja, 110105, Ecuador",
+              "telefono": "098 172 6317",
+              "correo_empresarial": "sanluiscoop@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 24,
+    "fecha_compra": "01/02/2025",
+    "numero_asiento": 3,
+    "cantidad_boleto": 1,
+    "precio_final": 11.0,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 9,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567747",
+      "nombre": "Luis",
+      "apellido": "Armijos",
+      "genero": "Masculino",
+      "correo": "luillis@gmail.com",
+      "telefono": "098 762 6289",
+      "direccion": "Andrés Bello, Los Apuros, Loja, 110110, Ecuador",
+      "fecha_nacimiento": "14/02/1950",
+      "saldo_disponible": 4.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 9,
+        "correo": "luillis@gmail.com",
+        "contrasenia": "Remolacha34*",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 8,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-2345-2345-2345",
+        "titular": "Luis",
+        "fecha_vencimiento": "12/28",
+        "codigo_seguridad": "1212",
+        "opcion_pago": "Tarjeta_credito"
+      }
+    },
+    "turno": {
+      "id_turno": 6,
+      "fecha_salida": "01/03/2025",
+      "numero_turno": 6,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 5,
+        "hora_salida": "07:00",
+        "hora_llegada": "17:30",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 5,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 11.0,
+          "distancia": 500,
+          "tiempo_estimado": "10h 30min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 5,
+            "numero_bus": 5,
+            "placa": "BSD-1293",
+            "marca": "Mazda",
+            "modelo": "2020",
+            "capacidad_pasajeros": 40,
+            "Velocidad": 60,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 5,
+              "nombre_cooperativa": "Cooperativa San Luis",
+              "ruc": "1189371635123",
+              "direccion": "Loja, 110105, Ecuador",
+              "telefono": "098 172 6317",
+              "correo_empresarial": "sanluiscoop@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
+    }
+  },
+  {
+    "id_boleto": 27,
+    "fecha_compra": "01/02/2025",
+    "numero_asiento": 4,
+    "cantidad_boleto": 1,
+    "precio_final": 11.0,
+    "estado_boleto": "Vendido",
+    "persona": {
+      "id_persona": 9,
+      "tipo_identificacion": "Cedula",
+      "numero_identificacion": "1150567747",
+      "nombre": "Luis",
+      "apellido": "Armijos",
+      "genero": "Masculino",
+      "correo": "luillis@gmail.com",
+      "telefono": "098 762 6289",
+      "direccion": "Andrés Bello, Los Apuros, Loja, 110110, Ecuador",
+      "fecha_nacimiento": "14/02/1950",
+      "saldo_disponible": 4.5,
+      "tipo_tarifa": "General",
+      "cuenta": {
+        "id_cuenta": 9,
+        "correo": "luillis@gmail.com",
+        "contrasenia": "Remolacha34*",
+        "estado_cuenta": "Activo",
+        "tipo_cuenta": "Cliente"
+      },
+      "metodo_pago": {
+        "id_pago": 8,
+        "saldo": 0.0,
+        "numero_tarjeta": "2345-2345-2345-2345",
+        "titular": "Luis",
+        "fecha_vencimiento": "12/28",
+        "codigo_seguridad": "1212",
+        "opcion_pago": "Tarjeta_credito"
+      }
+    },
+    "turno": {
+      "id_turno": 6,
+      "fecha_salida": "01/03/2025",
+      "numero_turno": 6,
+      "estado_turno": "Disponible",
+      "horario": {
+        "id_horario": 5,
+        "hora_salida": "07:00",
+        "hora_llegada": "17:30",
+        "estado_horario": "Disponible",
+        "ruta": {
+          "id_ruta": 5,
+          "origen": "Loja",
+          "destino": "Quito",
+          "precio_unitario": 11.0,
+          "distancia": 500,
+          "tiempo_estimado": "10h 30min",
+          "estado_ruta": "Disponible",
+          "escalas": {
+            "header": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "last": {
+              "info": {
+                "id_escala": 4,
+                "lugar_escala": "Cuenca",
+                "tiempo": "02:10"
+              }
+            },
+            "size": 1
+          },
+          "bus": {
+            "id_bus": 5,
+            "numero_bus": 5,
+            "placa": "BSD-1293",
+            "marca": "Mazda",
+            "modelo": "2020",
+            "capacidad_pasajeros": 40,
+            "Velocidad": 60,
+            "estado_bus": "Activo",
+            "cooperativa": {
+              "id_cooperativa": 5,
+              "nombre_cooperativa": "Cooperativa San Luis",
+              "ruc": "1189371635123",
+              "direccion": "Loja, 110105, Ecuador",
+              "telefono": "098 172 6317",
+              "correo_empresarial": "sanluiscoop@gmail.com"
+            }
+          }
+        }
+      }
+    },
+    "descuento": {
+      "id_descuento": 1,
+      "nombre_descuento": "General",
+      "descripcion": "Descuento base aplicado a todos los usuarios",
+      "porcentaje": 0,
+      "estado_descuento": "Activo",
+      "tipo_descuento": "General"
     }
   }
 ]

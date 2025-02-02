@@ -1,11 +1,16 @@
 package com.buses.rest.apis;
 
+import controlador.servicios.Controlador_descuento;
 import controlador.servicios.Controlador_persona;
 import controlador.servicios.Controlador_boleto;
 import controlador.servicios.Controlador_turno;
+import controlador.dao.modelo_dao.Turno_dao;
+import controlador.tda.lista.LinkedList;
+import modelo.enums.Estado_descuento;
+import modelo.enums.Tipo_descuento;
+import javax.ws.rs.core.MediaType;
 import java.text.SimpleDateFormat;
 import modelo.enums.Estado_boleto;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.PathParam;
 import java.util.Collections;
@@ -15,8 +20,10 @@ import java.util.ArrayList;
 import javax.ws.rs.DELETE;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Arrays;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import modelo.Descuento;
 import javax.ws.rs.PUT;
 import javax.ws.rs.GET;
 import modelo.Persona;
@@ -70,37 +77,50 @@ public class Boleto_api {
         Controlador_boleto cb = new Controlador_boleto();
         Controlador_persona cp = new Controlador_persona();
         Controlador_turno ct = new Controlador_turno();
+        Controlador_descuento cd = new Controlador_descuento();
         try {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaCompra = formatoFecha.format(new Date());
+            List<Boleto> boletosCreados = new ArrayList<>();
+            HashMap<String, Object> personaMap = (HashMap<String, Object>) map.get("persona");
+            HashMap<String, Object> turnoMap = (HashMap<String, Object>) map.get("turno");
+            Integer personaId = Integer.parseInt(personaMap.get("id_persona").toString());
+            Integer turnoId = Integer.parseInt(turnoMap.get("id_turno").toString());
+            Persona persona = cp.get(personaId);
+            Turno turno = ct.get(turnoId);
+            List<Integer> asientos = (List<Integer>) map.get("asientos");
+            float precioUnitarioOriginal = Float.parseFloat(map.get("precio_unitario").toString());
+            float precioUnitario = precioUnitarioOriginal;
+            Descuento descuentoAplicable = obtenerMejorDescuento(persona, cd.Lista_descuentos());
+            if (descuentoAplicable != null
+                    && descuentoAplicable.getEstado_descuento() == Estado_descuento.Activo) {
+                float porcentajeDescuento = descuentoAplicable.getPorcentaje() / 100f;
+                precioUnitario = precioUnitario * (1 - porcentajeDescuento);
+            }
+            float costoTotal = precioUnitario * asientos.size();
+            int capacidadBus = turno.getHorario().getRuta().getBus().getCapacidad_pasajeros();
             if (!map.containsKey("asientos") || !(map.get("asientos") instanceof java.util.List)) {
                 response.put("msg", "Debe especificar los números de asiento");
                 return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
             }
-            List<Integer> asientos = (List<Integer>) map.get("asientos");
-            float precioUnitario = Float.parseFloat(map.get("precio_unitario").toString());
             if (asientos.size() != new HashSet<>(asientos).size()) {
                 response.put("msg", "No se permiten asientos duplicados");
                 return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
             }
-            HashMap<String, Object> personaMap = (HashMap<String, Object>) map.get("persona");
-            Integer personaId = Integer.parseInt(personaMap.get("id_persona").toString());
-            Persona persona = cp.get(personaId);
-            HashMap<String, Object> turnoMap = (HashMap<String, Object>) map.get("turno");
-            Integer turnoId = Integer.parseInt(turnoMap.get("id_turno").toString());
-            Turno turno = ct.get(turnoId);
             if (persona == null || turno == null) {
                 response.put("msg", "Persona o turno no encontrados");
                 return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
             }
-            int capacidadBus = turno.getHorario().getRuta().getBus().getCapacidad_pasajeros();
+            if (persona.getSaldo_disponible() < costoTotal) {
+                response.put("msg", "Saldo insuficiente para comprar los boletos");
+                return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+            }
             for (Integer asiento : asientos) {
                 if (asiento < 1 || asiento > capacidadBus) {
                     response.put("msg", "Número de asiento inválido: " + asiento);
                     return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
                 }
             }
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaCompra = formatoFecha.format(new Date());
-            List<Boleto> boletosCreados = new ArrayList<>();
             for (Integer asiento : asientos) {
                 Boleto boleto = new Boleto();
                 boleto.setFecha_compra(fechaCompra);
@@ -110,6 +130,9 @@ public class Boleto_api {
                 boleto.setEstado_boleto(Estado_boleto.Vendido);
                 boleto.setPersona(persona);
                 boleto.setTurno(turno);
+                if (descuentoAplicable != null) {
+                    boleto.setDescuento(descuentoAplicable);
+                }
                 cb.setBoleto(boleto);
                 if (cb.save()) {
                     boletosCreados.add(boleto);
@@ -122,9 +145,30 @@ public class Boleto_api {
                     return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
                 }
             }
+            float nuevoSaldo = persona.getSaldo_disponible() - costoTotal;
+            persona.setSaldo_disponible(nuevoSaldo);
+            cp.setPersona(persona);
+            if (!cp.update()) {
+                for (Boleto boletoCreado : boletosCreados) {
+                    cb.delete(boletoCreado.getId_boleto());
+                }
+                response.put("msg", "Error al actualizar el saldo");
+                return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+            }
+            if (!boletosCreados.isEmpty()) {
+                Turno_dao turnoDao = new Turno_dao();
+                Integer idTurno = boletosCreados.get(0).getTurno().getId_turno();
+                turnoDao.verificarYActualizarEstadoTurno(idTurno);
+            }
             response.put("msg", "Boletos guardados exitosamente");
             response.put("boletos", boletosCreados);
-            response.put("total", precioUnitario * asientos.size());
+            response.put("total", costoTotal);
+            response.put("saldo_restante", nuevoSaldo);
+            if (descuentoAplicable != null) {
+                response.put("descuento_aplicado", descuentoAplicable);
+                response.put("precio_original", precioUnitarioOriginal * asientos.size());
+                response.put("ahorro", (precioUnitarioOriginal * asientos.size()) - costoTotal);
+            }
             return Response.ok(response).build();
         }
         catch (Exception e) {
@@ -212,6 +256,111 @@ public class Boleto_api {
         catch (Exception e) {
             response.put("msg", "Error: " + e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+        }
+    }
+
+    @Path("/ordenar/{atributo}/{orden}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response ordenarBoletos(@PathParam("atributo") String atributo, @PathParam("orden") String orden) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Controlador_boleto cb = new Controlador_boleto();
+            LinkedList<Boleto> lista = cb.Lista_boletos();
+            if (!Arrays.asList("fecha_compra", "turno.fecha_salida", "turno.horario.hora_salida",
+                    "numero_asiento", "precio_final", "persona.nombre_completo", "turno.numero_turno",
+                    "turno.horario.ruta.origen", "turno.horario.ruta.destino", "turno.horario.ruta.bus.placa",
+                    "turno.horario.ruta.bus.cooperativa.nombre_cooperativa", "estado_boleto")
+                    .contains(atributo)) {
+                response.put("mensaje", "Atributo de ordenamiento no válido");
+                return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+            }
+            lista.quickSort(atributo, orden.equalsIgnoreCase("asc"));
+            response.put("mensaje", "Lista ordenada correctamente");
+            response.put("boletos", lista.toArray());
+            return Response.ok(response).build();
+        }
+        catch (Exception e) {
+            response.put("mensaje", "Error al ordenar boletos: " + e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+        }
+    }
+
+    @Path("/buscar/{atributo}/{criterio}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response buscarBoletos(@PathParam("atributo") String atributo,
+            @PathParam("criterio") String criterio) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Controlador_boleto cb = new Controlador_boleto();
+            LinkedList<Boleto> lista = cb.Lista_boletos();
+            LinkedList<Boleto> resultados = lista.binarySearch(criterio, atributo);
+            response.put("mensaje", "Búsqueda realizada");
+            response.put("boletos", resultados.toArray());
+            return Response.ok(response).build();
+        }
+        catch (Exception e) {
+            response.put("mensaje", "Error en la búsqueda");
+            response.put("error", e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response).build();
+        }
+    }
+
+    private Descuento obtenerMejorDescuento(Persona persona, LinkedList<Descuento> descuentos)
+            throws Exception {
+        Descuento descuentoBase = null;
+        Descuento descuentoPromocional = null;
+        for (int i = 0; i < descuentos.getSize(); i++) {
+            Descuento descuento = descuentos.get(i);
+            if (descuento.getEstado_descuento() != Estado_descuento.Activo) {
+                continue;
+            }
+            if (descuento.getTipo_descuento().toString().equals(persona.getTipo_tarifa().toString())) {
+                descuentoBase = descuento;
+            }
+            else if (descuento.getTipo_descuento() == Tipo_descuento.Promocional
+                    && esDescuentoVigente(descuento)) {
+                if (descuentoPromocional == null
+                        || descuento.getPorcentaje() > descuentoPromocional.getPorcentaje()) {
+                    descuentoPromocional = descuento;
+                }
+            }
+        }
+        if (descuentoBase != null && descuentoPromocional != null) {
+            return combinarDescuentos(descuentoBase, descuentoPromocional);
+        }
+        return descuentoBase != null ? descuentoBase : descuentoPromocional;
+    }
+
+    private Descuento combinarDescuentos(Descuento descuentoBase, Descuento descuentoPromocional) {
+        Descuento descuentoCombinado = new Descuento();
+        descuentoCombinado.setId_descuento(descuentoBase.getId_descuento());
+        descuentoCombinado.setNombre_descuento(
+                descuentoBase.getNombre_descuento() + " + " + descuentoPromocional.getNombre_descuento());
+        descuentoCombinado.setDescripcion("Descuento combinado");
+        descuentoCombinado.setTipo_descuento(descuentoBase.getTipo_descuento());
+        int porcentajeCombinado = descuentoBase.getPorcentaje() + descuentoPromocional.getPorcentaje();
+        descuentoCombinado.setPorcentaje(Math.min(porcentajeCombinado, 100)); // Máximo 100%
+        descuentoCombinado.setEstado_descuento(Estado_descuento.Activo);
+        descuentoCombinado.setFecha_inicio(descuentoPromocional.getFecha_inicio());
+        descuentoCombinado.setFecha_fin(descuentoPromocional.getFecha_fin());
+        return descuentoCombinado;
+    }
+
+    private boolean esDescuentoVigente(Descuento descuento) {
+        if (descuento.getFecha_inicio() == null || descuento.getFecha_fin() == null) {
+            return false;
+        }
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaActual = new Date();
+            Date fechaInicio = sdf.parse(descuento.getFecha_inicio());
+            Date fechaFin = sdf.parse(descuento.getFecha_fin());
+            return fechaActual.after(fechaInicio) && fechaActual.before(fechaFin);
+        }
+        catch (Exception e) {
+            return false;
         }
     }
 }

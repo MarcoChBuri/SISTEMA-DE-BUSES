@@ -12,13 +12,15 @@ public class Boleto {
 
     private Persona persona;
     private Turno turno;
+    private Descuento descuento;
 
     public Boleto() {
 
     }
 
     public Boleto(Integer id_boleto, String fecha_compra, Integer numero_asiento, Integer cantidad_boleto,
-            float precio_final, Estado_boleto estado_boleto, Persona persona, Turno turno) {
+            float precio_final, Estado_boleto estado_boleto, Persona persona, Turno turno,
+            Descuento descuento) {
         this.id_boleto = id_boleto;
         this.fecha_compra = fecha_compra;
         this.numero_asiento = numero_asiento;
@@ -27,6 +29,7 @@ public class Boleto {
         this.estado_boleto = estado_boleto;
         this.persona = persona;
         this.turno = turno;
+        this.descuento = descuento;
     }
 
     public Integer getId_boleto() {
@@ -93,11 +96,20 @@ public class Boleto {
         this.turno = turno;
     }
 
+    public Descuento getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Descuento descuento) {
+        this.descuento = descuento;
+    }
+
     @Override
     public String toString() {
         return "id_boleto=" + id_boleto + ", fecha_compra=" + fecha_compra + ", numero_asiento="
                 + numero_asiento + ", cantidad_boleto=" + cantidad_boleto + ", precio_final=" + precio_final
-                + ", estado_boleto=" + estado_boleto + ", persona=" + persona + ", turno=" + turno;
+                + ", estado_boleto=" + estado_boleto + ", persona=" + persona + ", turno=" + turno
+                + ", descuento=" + descuento;
     }
 
 }
