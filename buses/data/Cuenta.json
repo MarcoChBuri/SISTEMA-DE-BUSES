@@ -1,0 +1,30 @@
+[
+  {
+    "id_cuenta": 1,
+    "correo": "a@b.com",
+    "contrasenia": "1",
+    "estado_cuenta": "Activo",
+    "tipo_cuenta": "Administrador"
+  },
+  {
+    "id_cuenta": 2,
+    "correo": "d@a.com",
+    "contrasenia": "1",
+    "estado_cuenta": "Activo",
+    "tipo_cuenta": "Cliente"
+  },
+  {
+    "id_cuenta": 3,
+    "correo": "x@x.com",
+    "contrasenia": "1",
+    "estado_cuenta": "Activo",
+    "tipo_cuenta": "Cliente"
+  },
+  {
+    "id_cuenta": 4,
+    "correo": "123@1.com",
+    "contrasenia": "1",
+    "estado_cuenta": "Activo",
+    "tipo_cuenta": "Cliente"
+  }
+]

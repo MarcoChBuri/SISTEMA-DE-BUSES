@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Panel de Control - SISTEMA BUS</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #7AB730;
+            --secondary: #f4faec;
+            --dark: #212121;
+            --light: #FFFFFF;
+            --font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: #F3F3F3;
+        }
+
+        .sidebar {
+            background-color: var(--dark);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header h4 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            padding: 12px 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .card-body h4.text-dark {
+            color: #212529 !important;
+            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-body p.text-muted {
+            color: #6c757d !important;
+            font-size: 1rem;
+        }
+
+        .modal-header {
+            border-bottom: 0;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+        }
+
+        .badge {
+            padding: 0.5em 0.75em;
+            font-weight: 500;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cursor-pointer:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-menu {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .card-menu:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-menu .card-body {
+            padding: 2rem;
+        }
+
+        .card-menu i {
+            transition: all 0.3s;
+        }
+
+        .card-menu:hover i {
+            transform: scale(1.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #638f28;
+            border-color: #638f28;
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        h2,
+        h4 {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        p {
+            color: #656565;
+        }
+
+        .card-menu p {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(122, 183, 48, 0.25);
+        }
+
+        .table {
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .table th {
+            border-top: none;
+            font-weight: 600;
+            padding: 15px;
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .btn i {
+            margin-right: 5px;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .cursor-pointer:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 991.98px) {
+            .sidebar {
+                width: 100%;
+                position: static;
+                min-height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 bg-dark min-vh-100">
+                <div class="position-sticky">
+                    <div class="p-3 text-white">
+                        <h4>SISTEMA BUS</h4>
+                        <p>Panel de Control</p>
+                    </div>
+                    <ul class="nav flex-column mb-2">
+                        <li>
+                            <a class="nav-link text-white" href="/dashboard"><i class="fas fa-home mr-2"></i>Inicio</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="/perfil"><i class="fas fa-user mr-2"></i>Mi Perfil</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_cooperativa') }}"><i
+                                    class="fas fa-building mr-2"></i>Cooperativas</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_bus') }}"><i
+                                    class="fas fa-bus mr-2"></i>Buses</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_ruta') }}"><i
+                                    class="fas fa-route mr-2"></i>Rutas</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_horario') }}"><i
+                                    class="fas fa-clock mr-2"></i>Horarios</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_frecuencia') }}"><i
+                                    class="fas fa-calendar-alt mr-2"></i>Frecuencias</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_turno') }}"><i
+                                    class="fas fa-exchange-alt mr-2"></i>Turnos</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_persona') }}"><i
+                                    class="fas fa-users mr-2"></i>Personas</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.lista_boleto') }}"><i
+                                    class="fas fa-ticket-alt mr-2"></i>Boletos</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-white" href="{{ url_for('router.cerrar_sesion') }}"><i
+                                    class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-10 p-4">
+                <!-- Sección de Bienvenida -->
+                <div class="text-center mb-4">
+                    <h1>Panel de Control <span class="text-primary">Administrativo</span></h1>
+                    <p>Gestión centralizada del sistema de transporte</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card border-primary mb-3 cursor-pointer" onclick="mostrarDetallesUsuarios()">
+                            <div class="card-body text-center">
+                                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                                <h4 class="text-dark">{{ stats.total_usuarios if stats else 0 }}</h4>
+                                <p class="text-muted mb-0">Usuarios Registrados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card border-success mb-3 cursor-pointer" onclick="mostrarDetallesBoletos()">
+                            <div class="card-body text-center">
+                                <i class="fas fa-ticket-alt fa-3x text-success mb-3"></i>
+                                <h4 class="text-dark">{{ stats.total_ventas if stats else 0 }}</h4>
+                                <p class="text-muted mb-0">Boletos Vendidos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card border-info mb-3 cursor-pointer" onclick="mostrarDetallesBuses()">
+                            <div class="card-body text-center">
+                                <i class="fas fa-bus fa-3x text-info mb-3"></i>
+                                <h4 class="text-dark">{{ stats.total_buses if stats else 0 }}</h4>
+                                <p class="text-muted mb-0">Buses Activos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card border-warning mb-3 cursor-pointer" onclick="mostrarDetallesRutas()">
+                            <div class="card-body text-center">
+                                <i class="fas fa-route fa-3x text-warning mb-3"></i>
+                                <h4 class="text-dark">{{ stats.total_rutas if stats else 0 }}</h4>
+                                <p class="text-muted mb-0">Rutas Disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Sections -->
+                <div class="row">
+                    <!-- Últimas Ventas -->
+                    <div class="col-lg-8 mb-4">
+                        <div class="card">
+                            <div
+                                class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Últimas Ventas</h5>
+                                <span class="badge badge-light">Hoy</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Cliente</th>
+                                                <th>Ruta</th>
+                                                <th>Fecha</th>
+                                                <th>Estado</th>
+                                                <th>Precio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for venta in ultimas_ventas %}
+                                            <tr>
+                                                <td>#{{ venta.id }}</td>
+                                                <td>{{ venta.cliente }}</td>
+                                                <td>{{ venta.ruta }}</td>
+                                                <td>{{ venta.fecha }}</td>
+                                                <td><span class="badge badge-success">{{ venta.estado }}</span></td>
+                                                <td>${{ venta.precio }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Lateral Derecho -->
+                    <div class="col-lg-4">
+                        <!-- Próximas Salidas -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Próximas Salidas</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    {% for salida in proximas_salidas %}
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">{{ salida.ruta }}</h6>
+                                            <small>{{ salida.hora }}</small>
+                                        </div>
+                                        <small class="text-muted">Bus #{{ salida.bus }} - {{ salida.asientos_disponibles
+                                            }} asientos disponibles</small>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estado de Buses -->
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">Estado de Buses</h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    {% for bus in estado_buses %}
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">Bus #{{ bus.numero }}</h6>
+                                            <span class="badge badge-{{ bus.estado_clase }}">{{ bus.estado }}</span>
+                                        </div>
+                                        <small class="text-muted">{{ bus.ruta }}</small>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Usuarios Registrados -->
+    <div class="modal fade" id="usuariosModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-users mr-2"></i>Usuarios Registrados</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Tipo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usuariosTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Boletos Vendidos -->
+    <div class="modal fade" id="boletosModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="fas fa-ticket-alt mr-2"></i>Boletos Vendidos</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID Boleto</th>
+                                    <th>Cliente</th>
+                                    <th>Ruta</th>
+                                    <th>Fecha</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="boletosTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Buses Activos -->
+    <div class="modal fade" id="busesModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="fas fa-bus mr-2"></i>Buses Activos</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Placa</th>
+                                    <th>Cooperativa</th>
+                                    <th>Estado</th>
+                                    <th>Ruta Actual</th>
+                                </tr>
+                            </thead>
+                            <tbody id="busesTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Rutas Disponibles -->
+    <div class="modal fade" id="rutasModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title"><i class="fas fa-route mr-2"></i>Rutas Disponibles</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Origen</th>
+                                    <th>Destino</th>
+                                    <th>Bus Asignado</th>
+                                    <th>Horarios</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rutasTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function mostrarDetallesUsuarios() {
+            fetch('/api/persona/lista')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('usuariosTableBody');
+                    tbody.innerHTML = '';
+                    data.personas.forEach(persona => {
+                        tbody.innerHTML += `
+                    <tr>
+                        <td>${persona.id_persona}</td>
+                        <td>${persona.nombres} ${persona.apellidos}</td>
+                        <td>${persona.correo}</td>
+                        <td>${persona.cuenta?.tipo_cuenta || 'Cliente'}</td>
+                        <td><span class="badge badge-${persona.cuenta?.estado_cuenta === 'Activo' ? 'success' : 'danger'}">${persona.cuenta?.estado_cuenta || 'Inactivo'}</span></td>
+                    </tr>
+                `;
+                    });
+                    $('#usuariosModal').modal('show');
+                });
+        }
+
+        function mostrarDetallesBoletos() {
+            fetch('/api/boleto/lista')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('boletosTableBody');
+                    tbody.innerHTML = '';
+                    data.boletos.forEach(boleto => {
+                        tbody.innerHTML += `
+                    <tr>
+                        <td>${boleto.id_boleto}</td>
+                        <td>${boleto.persona?.nombres} ${boleto.persona?.apellidos}</td>
+                        <td>${boleto.turno?.horario?.ruta?.origen} - ${boleto.turno?.horario?.ruta?.destino}</td>
+                        <td>${boleto.fecha_compra}</td>
+                        <td>$${boleto.precio_final}</td>
+                    </tr>
+                `;
+                    });
+                    $('#boletosModal').modal('show');
+                });
+        }
+
+        function mostrarDetallesBuses() {
+            fetch('/api/bus/lista')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('busesTableBody');
+                    tbody.innerHTML = '';
+                    data.buses.forEach(bus => {
+                        tbody.innerHTML += `
+                    <tr>
+                        <td>${bus.numero_bus}</td>
+                        <td>${bus.placa}</td>
+                        <td>${bus.cooperativa?.nombre}</td>
+                        <td><span class="badge badge-${bus.estado_bus === 'Activo' ? 'success' : 'warning'}">${bus.estado_bus}</span></td>
+                        <td>${bus.ruta?.origen || 'No asignada'}</td>
+                    </tr>
+                `;
+                    });
+                    $('#busesModal').modal('show');
+                });
+        }
+
+        function mostrarDetallesRutas() {
+            fetch('/api/ruta/lista')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('rutasTableBody');
+                    tbody.innerHTML = '';
+                    data.rutas.forEach(ruta => {
+                        tbody.innerHTML += `
+                    <tr>
+                        <td>${ruta.origen}</td>
+                        <td>${ruta.destino}</td>
+                        <td>${ruta.bus?.numero_bus || 'Sin asignar'}</td>
+                        <td>${ruta.horarios?.map(h => h.hora_salida).join(', ') || 'No disponible'}</td>
+                        <td><span class="badge badge-${ruta.estado_ruta === 'Activo' ? 'success' : 'warning'}">${ruta.estado_ruta}</span></td>
+                    </tr>
+                `;
+                    });
+                    $('#rutasModal').modal('show');
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.cursor-pointer');
+            cards.forEach(card => {
+                card.style.cursor = 'pointer';
+                card.style.transition = 'transform 0.3s ease';
+            });
+        });
+    </script>
+
+</body>
+
+</html>

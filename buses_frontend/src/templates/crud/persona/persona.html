@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Lista de Personas</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style_crud.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-4 align-items-center">
+                    <div class="col">
+                        <h2 class="mb-0"><i class="fas fa-users me-2"></i>Lista de Personas</h2>
+                    </div>
+                    <div class="col text-end">
+                        <a href="{{ url_for('router.crear_persona') }}" class="btn btn-primary px-4">
+                            <i class="fas fa-plus me-2"></i>Nueva Persona
+                        </a>
+                    </div>
+                </div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Tipo Identificación</th>
+                                <th>Número Identificación</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Género</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Método Pago</th>
+                                <th>Usuario</th>
+                                <th>Tipo Cuenta</th>
+                                <th>Estado Cuenta</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for persona in lista %}
+                            <tr>
+                                <td>{{ persona.id_persona }}</td>
+                                <td>{{ persona.nombre }}</td>
+                                <td>{{ persona.apellido }}</td>
+                                <td>{{ persona.tipo_identificacion }}</td>
+                                <td>{{ persona.numero_identificacion }}</td>
+                                <td>{{ persona.fecha_nacimiento }}</td>
+                                <td>{{ persona.genero }}</td>
+                                <td>{{ persona.telefono }}</td>
+                                <td>{{ persona.correo }}</td>
+                                <td>{{ persona.metodo_pago }}</td>
+                                <td>{{ persona.cuenta.correo }}</td>
+                                <td>{{ persona.cuenta.tipo_cuenta }}</td>
+                                <td>
+                                    <span
+                                        class="badge bg-{{ 'success' if persona.cuenta.estado_cuenta == 'Activo' else 'warning' if persona.cuenta.estado_cuenta == 'Suspendido' else 'danger' }}">
+                                        {{ persona.cuenta.estado_cuenta }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-grupo">
+                                        <a href="{{ url_for('router.editar_persona', id=persona.id_persona) }}"
+                                            class="btn btn-sm btn-info me-1" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="{{ url_for('router.eliminar_persona', id=persona.id_persona) }}"
+                                            method="POST" class="d-inline"
+                                            onsubmit="return confirm('¿Está seguro de eliminar esta persona?')">
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
