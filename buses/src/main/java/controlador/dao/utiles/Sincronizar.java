@@ -6,60 +6,135 @@ import com.google.gson.Gson;
 import modelo.*;
 
 public class Sincronizar {
-    public static void sincronizarCooperativa(Cooperativa cooperativa) throws Exception {
-        Bus_dao busDao = new Bus_dao();
-        actualizarBusesDeCooperativa(busDao, cooperativa);
-        sincronizarEntidadesRelacionadasCooperativa(cooperativa.getId_cooperativa());
+    private static boolean actualizandose = false;
+
+    public static synchronized void sincronizarCooperativa(Cooperativa cooperativa) throws Exception {
+        if (actualizandose)
+            return;
+        try {
+            actualizandose = true;
+            Bus_dao busDao = new Bus_dao();
+            actualizarBusesDeCooperativa(busDao, cooperativa);
+            sincronizarEntidadesRelacionadasCooperativa(cooperativa.getId_cooperativa());
+        }
+        finally {
+            actualizandose = false;
+        }
     }
 
-    public static void sincronizarBus(Bus bus) throws Exception {
-        Ruta_dao rutaDao = new Ruta_dao();
-        actualizarRutasDeBus(rutaDao, bus);
-        sincronizarEntidadesRelacionadasBus(bus.getId_bus());
+    public static synchronized void sincronizarBus(Bus bus) throws Exception {
+        if (actualizandose)
+            return;
+        try {
+            actualizandose = true;
+            Ruta_dao rutaDao = new Ruta_dao();
+            actualizarRutasDeBus(rutaDao, bus);
+            sincronizarEntidadesRelacionadasBus(bus.getId_bus());
+        }
+        finally {
+            actualizandose = false;
+        }
     }
 
-    public static void sincronizarRuta(Ruta ruta) throws Exception {
-        Horario_dao horarioDao = new Horario_dao();
-        actualizarHorariosDeRuta(horarioDao, ruta);
-        sincronizarEntidadesRelacionadasRuta(ruta.getId_ruta());
+    public static synchronized void sincronizarRuta(Ruta ruta) throws Exception {
+        if (actualizandose)
+            return;
+        try {
+            actualizandose = true;
+            Horario_dao horarioDao = new Horario_dao();
+            actualizarHorariosDeRuta(horarioDao, ruta);
+            sincronizarEntidadesRelacionadasRuta(ruta.getId_ruta());
+        }
+        finally {
+            actualizandose = false;
+        }
     }
 
-    public static void sincronizarHorario(Horario horario) throws Exception {
-        Turno_dao turnoDao = new Turno_dao();
-        Frecuencia_dao frecuenciaDao = new Frecuencia_dao();
-        actualizarTurnosDeHorario(turnoDao, horario);
-        actualizarFrecuenciasDeHorario(frecuenciaDao, horario);
-        sincronizarEntidadesRelacionadasHorario(horario.getId_horario());
-    }
-
-    public static void sincronizarTurno(Turno turno) throws Exception {
-        Boleto_dao boletoDao = new Boleto_dao();
-        actualizarBoletosDelTurno(boletoDao, turno);
-    }
-
-    public static void sincronizarPersona(Persona persona) throws Exception {
-        if (persona.getCuenta() != null) {
-            Cuenta_dao cuentaDao = new Cuenta_dao();
-            cuentaDao.setCuenta(persona.getCuenta());
-            if (persona.getCuenta().getId_cuenta() == null) {
-                persona.getCuenta().setId_cuenta(cuentaDao.getLista_cuentas().getSize() + 1);
+    public static synchronized void sincronizarEscalaEliminada(Integer idEscala) throws Exception {
+        if (actualizandose)
+            return;
+        try {
+            actualizandose = true;
+            Escala_dao escalaDao = new Escala_dao();
+            escalaDao.delete(idEscala);
+            Ruta_dao rutaDao = new Ruta_dao();
+            LinkedList<Ruta> rutas = rutaDao.getLista_rutas();
+            boolean actualizado = false;
+            for (int i = 0; i < rutas.getSize(); i++) {
+                Ruta ruta = rutas.get(i);
+                LinkedList<Escala> escalas = ruta.getEscalas();
+                if (escalas != null) {
+                    for (int j = 0; j < escalas.getSize(); j++) {
+                        if (escalas.get(j).getId_escala().equals(idEscala)) {
+                            escalas.delete(j);
+                            if (escalas.isEmpty()) {
+                                ruta.setEscalas(null);
+                            }
+                            actualizado = true;
+                            break;
+                        }
+                    }
+                }
             }
-            cuentaDao.update();
-        }
-        if (persona.getMetodo_pago() != null) {
-            Pago_dao pagoDao = new Pago_dao();
-            pagoDao.setPago(persona.getMetodo_pago());
-            if (persona.getMetodo_pago().getId_pago() == null) {
-                persona.getMetodo_pago().setId_pago(pagoDao.getLista_pagos().getSize() + 1);
+            if (actualizado) {
+                rutaDao.saveFile(new Gson().toJson(rutas.toArray()));
             }
-            pagoDao.update();
         }
-        Persona_dao personaDao = new Persona_dao();
-        personaDao.setPersona(persona);
-        if (persona.getId_persona() == null) {
-            persona.setId_persona(personaDao.getLista_personas().getSize() + 1);
+        finally {
+            actualizandose = false;
         }
-        personaDao.update();
+    }
+
+    public static synchronized void sincronizarHorario(Horario horario) throws Exception {
+        if (actualizandose)
+            return;
+        try {
+            actualizandose = true;
+            Turno_dao turnoDao = new Turno_dao();
+            Frecuencia_dao frecuenciaDao = new Frecuencia_dao();
+            actualizarTurnosDeHorario(turnoDao, horario);
+            actualizarFrecuenciasDeHorario(frecuenciaDao, horario);
+            sincronizarEntidadesRelacionadasHorario(horario.getId_horario());
+        }
+        finally {
+            actualizandose = false;
+        }
+    }
+
+    public static synchronized void sincronizarTurno(Turno turno) throws Exception {
+        if (actualizandose)
+            return;
+        try {
+            actualizandose = true;
+            Boleto_dao boletoDao = new Boleto_dao();
+            actualizarBoletosDelTurno(boletoDao, turno);
+        }
+        finally {
+            actualizandose = false;
+        }
+    }
+
+    public static synchronized void sincronizarPersona(Persona persona) throws Exception {
+        if (actualizandose)
+            return;
+        try {
+            actualizandose = true;
+            if (persona.getCuenta() != null) {
+                Cuenta_dao cuentaDao = new Cuenta_dao();
+                cuentaDao.setCuenta(persona.getCuenta());
+                cuentaDao.update();
+            }
+            if (persona.getMetodo_pago() != null) {
+                Pago_dao pagoDao = new Pago_dao();
+                pagoDao.setPago(persona.getMetodo_pago());
+                pagoDao.update();
+            }
+            Boleto_dao boletoDao = new Boleto_dao();
+            actualizarBoletosDePersona(boletoDao, persona);
+        }
+        finally {
+            actualizandose = false;
+        }
     }
 
     private static void actualizarBusesDeCooperativa(Bus_dao busDao, Cooperativa cooperativa)
@@ -154,7 +229,6 @@ public class Sincronizar {
         }
     }
 
-    @SuppressWarnings("unused")
     private static void actualizarBoletosDePersona(Boleto_dao boletoDao, Persona persona) throws Exception {
         LinkedList<Boleto> boletos = boletoDao.getLista_boletos();
         boolean actualizado = false;
