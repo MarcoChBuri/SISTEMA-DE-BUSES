@@ -1,0 +1,42 @@
+[
+  {
+    "id_cooperativa": 1,
+    "nombre_cooperativa": "Cooperativa Loja",
+    "ruc": "1791234567899",
+    "direccion": "10 de agosto",
+    "telefono": "098 765 4321",
+    "correo_empresarial": "cooperativa.loja@gmail.com"
+  },
+  {
+    "id_cooperativa": 2,
+    "nombre_cooperativa": "Cooperativa Quito",
+    "ruc": "1798745632114",
+    "direccion": "Av. garcia moreno",
+    "telefono": "(02) 23 45678",
+    "correo_empresarial": "cooperativa.quito@gmail.com"
+  },
+  {
+    "id_cooperativa": 3,
+    "nombre_cooperativa": "Cooperativa cuenca",
+    "ruc": "1978524113662",
+    "direccion": "24 de diciembre",
+    "telefono": "098 746 5312",
+    "correo_empresarial": "cooperativa.cuenca@gmail.com"
+  },
+  {
+    "id_cooperativa": 4,
+    "nombre_cooperativa": "Cooperativa guayaquil",
+    "ruc": "1791724186001",
+    "direccion": "Francisco e ibarra",
+    "telefono": "(02) 54 69871",
+    "correo_empresarial": "cooperativa.guayaquil@gmail.com"
+  },
+  {
+    "id_cooperativa": 5,
+    "nombre_cooperativa": "Cooperativa San Luis",
+    "ruc": "1189371635123",
+    "direccion": "Loja, 110105, Ecuador",
+    "telefono": "098 172 6317",
+    "correo_empresarial": "sanluiscoop@gmail.com"
+  }
+]
