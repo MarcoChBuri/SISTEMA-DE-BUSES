@@ -1,0 +1,287 @@
+[
+  {
+    "id_turno": 1,
+    "fecha_salida": "10/01/2025",
+    "numero_turno": 1,
+    "estado_turno": "Disponible",
+    "horario": {
+      "id_horario": 1,
+      "hora_salida": "00:00",
+      "hora_llegada": "02:24",
+      "estado_horario": "Disponible",
+      "ruta": {
+        "id_ruta": 1,
+        "origen": "Loja",
+        "destino": "Quito",
+        "precio_unitario": 10.0,
+        "distancia": 120,
+        "tiempo_estimado": "2h 24min",
+        "estado_ruta": "Disponible",
+        "bus": {
+          "id_bus": 1,
+          "numero_bus": 1,
+          "placa": "BIP-1234",
+          "marca": "Toyota",
+          "modelo": "2020",
+          "capacidad_pasajeros": 30,
+          "Velocidad": 50,
+          "estado_bus": "Activo",
+          "cooperativa": {
+            "id_cooperativa": 1,
+            "nombre_cooperativa": "Cooperativa Loja",
+            "ruc": "1791234567899",
+            "direccion": "10 de agosto",
+            "telefono": "098 765 4321",
+            "correo_empresarial": "cooperativa.loja@gmail.com"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id_turno": 2,
+    "fecha_salida": "10/01/2025",
+    "numero_turno": 2,
+    "estado_turno": "Disponible",
+    "horario": {
+      "id_horario": 2,
+      "hora_salida": "00:00",
+      "hora_llegada": "02:21",
+      "estado_horario": "Disponible",
+      "ruta": {
+        "id_ruta": 3,
+        "origen": "Loja",
+        "destino": "Quito",
+        "precio_unitario": 9.0,
+        "distancia": 120,
+        "tiempo_estimado": "2h 21min",
+        "estado_ruta": "Disponible",
+        "escalas": {
+          "header": {
+            "info": {
+              "id_escala": 1,
+              "lugar_escala": "Escala",
+              "tiempo": "00:10"
+            }
+          },
+          "last": {
+            "info": {
+              "id_escala": 1,
+              "lugar_escala": "Escala",
+              "tiempo": "00:10"
+            }
+          },
+          "size": 1
+        },
+        "bus": {
+          "id_bus": 3,
+          "numero_bus": 3,
+          "placa": "BIPT-3456",
+          "marca": "Mercedez",
+          "modelo": "2022",
+          "capacidad_pasajeros": 40,
+          "Velocidad": 55,
+          "estado_bus": "Activo",
+          "cooperativa": {
+            "id_cooperativa": 1,
+            "nombre_cooperativa": "Cooperativa Loja",
+            "ruc": "1791234567899",
+            "direccion": "10 de agosto",
+            "telefono": "098 765 4321",
+            "correo_empresarial": "cooperativa.loja@gmail.com"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id_turno": 3,
+    "fecha_salida": "11/01/2025",
+    "numero_turno": 3,
+    "estado_turno": "Disponible",
+    "horario": {
+      "id_horario": 1,
+      "hora_salida": "00:00",
+      "hora_llegada": "02:24",
+      "estado_horario": "Disponible",
+      "ruta": {
+        "id_ruta": 1,
+        "origen": "Loja",
+        "destino": "Quito",
+        "precio_unitario": 10.0,
+        "distancia": 120,
+        "tiempo_estimado": "2h 24min",
+        "estado_ruta": "Disponible",
+        "bus": {
+          "id_bus": 1,
+          "numero_bus": 1,
+          "placa": "BIP-1234",
+          "marca": "Toyota",
+          "modelo": "2020",
+          "capacidad_pasajeros": 30,
+          "Velocidad": 50,
+          "estado_bus": "Activo",
+          "cooperativa": {
+            "id_cooperativa": 1,
+            "nombre_cooperativa": "Cooperativa Loja",
+            "ruc": "1791234567899",
+            "direccion": "10 de agosto",
+            "telefono": "098 765 4321",
+            "correo_empresarial": "cooperativa.loja@gmail.com"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id_turno": 4,
+    "fecha_salida": "12/01/2025",
+    "numero_turno": 4,
+    "estado_turno": "Disponible",
+    "horario": {
+      "id_horario": 1,
+      "hora_salida": "00:00",
+      "hora_llegada": "02:24",
+      "estado_horario": "Disponible",
+      "ruta": {
+        "id_ruta": 1,
+        "origen": "Loja",
+        "destino": "Quito",
+        "precio_unitario": 10.0,
+        "distancia": 120,
+        "tiempo_estimado": "2h 24min",
+        "estado_ruta": "Disponible",
+        "bus": {
+          "id_bus": 1,
+          "numero_bus": 1,
+          "placa": "BIP-1234",
+          "marca": "Toyota",
+          "modelo": "2020",
+          "capacidad_pasajeros": 30,
+          "Velocidad": 50,
+          "estado_bus": "Activo",
+          "cooperativa": {
+            "id_cooperativa": 1,
+            "nombre_cooperativa": "Cooperativa Loja",
+            "ruc": "1791234567899",
+            "direccion": "10 de agosto",
+            "telefono": "098 765 4321",
+            "correo_empresarial": "cooperativa.loja@gmail.com"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id_turno": 5,
+    "fecha_salida": "12/12/2025",
+    "numero_turno": 5,
+    "estado_turno": "Disponible",
+    "horario": {
+      "id_horario": 4,
+      "hora_salida": "12:00",
+      "hora_llegada": "13:10",
+      "estado_horario": "Disponible",
+      "ruta": {
+        "id_ruta": 4,
+        "origen": "loja",
+        "destino": "catamayo",
+        "precio_unitario": 1.5,
+        "distancia": 45,
+        "tiempo_estimado": "1h 10min",
+        "estado_ruta": "Disponible",
+        "escalas": {
+          "header": {
+            "info": {
+              "id_escala": 3,
+              "lugar_escala": "villonaco",
+              "tiempo": "00:10"
+            }
+          },
+          "last": {
+            "info": {
+              "id_escala": 3,
+              "lugar_escala": "villonaco",
+              "tiempo": "00:10"
+            }
+          },
+          "size": 1
+        },
+        "bus": {
+          "id_bus": 4,
+          "numero_bus": 4,
+          "placa": "BIPT-4567",
+          "marca": "Volkswagen",
+          "modelo": "2010",
+          "capacidad_pasajeros": 30,
+          "Velocidad": 45,
+          "estado_bus": "Activo",
+          "cooperativa": {
+            "id_cooperativa": 1,
+            "nombre_cooperativa": "Cooperativa Loja",
+            "ruc": "1791234567899",
+            "direccion": "10 de agosto",
+            "telefono": "098 765 4321",
+            "correo_empresarial": "cooperativa.loja@gmail.com"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id_turno": 6,
+    "fecha_salida": "01/03/2025",
+    "numero_turno": 6,
+    "estado_turno": "Disponible",
+    "horario": {
+      "id_horario": 5,
+      "hora_salida": "07:00",
+      "hora_llegada": "17:30",
+      "estado_horario": "Disponible",
+      "ruta": {
+        "id_ruta": 5,
+        "origen": "Loja",
+        "destino": "Quito",
+        "precio_unitario": 11.0,
+        "distancia": 500,
+        "tiempo_estimado": "10h 30min",
+        "estado_ruta": "Disponible",
+        "escalas": {
+          "header": {
+            "info": {
+              "id_escala": 4,
+              "lugar_escala": "Cuenca",
+              "tiempo": "02:10"
+            }
+          },
+          "last": {
+            "info": {
+              "id_escala": 4,
+              "lugar_escala": "Cuenca",
+              "tiempo": "02:10"
+            }
+          },
+          "size": 1
+        },
+        "bus": {
+          "id_bus": 5,
+          "numero_bus": 5,
+          "placa": "BSD-1293",
+          "marca": "Mazda",
+          "modelo": "2020",
+          "capacidad_pasajeros": 40,
+          "Velocidad": 60,
+          "estado_bus": "Activo",
+          "cooperativa": {
+            "id_cooperativa": 5,
+            "nombre_cooperativa": "Cooperativa San Luis",
+            "ruc": "1189371635123",
+            "direccion": "Loja, 110105, Ecuador",
+            "telefono": "098 172 6317",
+            "correo_empresarial": "sanluiscoop@gmail.com"
+          }
+        }
+      }
+    }
+  }
+]

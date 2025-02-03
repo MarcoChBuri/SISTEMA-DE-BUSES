@@ -1,0 +1,74 @@
+[
+  {
+    "id_pago": 3,
+    "saldo": 0.0,
+    "numero_tarjeta": "1111-1111-1111-2222",
+    "titular": "Dos",
+    "fecha_vencimiento": "12/29",
+    "codigo_seguridad": "123",
+    "opcion_pago": "Tarjeta_debito"
+  },
+  {
+    "id_pago": 2,
+    "saldo": 0.0,
+    "numero_tarjeta": "1111-1111-1111-1111",
+    "titular": "asd",
+    "fecha_vencimiento": "12/29",
+    "codigo_seguridad": "123",
+    "opcion_pago": "Tarjeta_credito"
+  },
+  {
+    "id_pago": 1,
+    "saldo": 10.0,
+    "numero_tarjeta": "1232-2222-2222-2222",
+    "titular": "asdasd",
+    "fecha_vencimiento": "12/29",
+    "codigo_seguridad": "123",
+    "opcion_pago": "Tarjeta_credito"
+  },
+  {
+    "id_pago": 4,
+    "saldo": 0.0,
+    "numero_tarjeta": "1233-3333-3333-3333",
+    "titular": "asd",
+    "fecha_vencimiento": "12/29",
+    "codigo_seguridad": "123",
+    "opcion_pago": "Tarjeta_credito"
+  },
+  {
+    "id_pago": 5,
+    "saldo": 0.0,
+    "numero_tarjeta": "2353-2523-5236-5343",
+    "titular": "yo",
+    "fecha_vencimiento": "12/30",
+    "codigo_seguridad": "3333",
+    "opcion_pago": "Tarjeta_credito"
+  },
+  {
+    "id_pago": 6,
+    "saldo": 0.0,
+    "numero_tarjeta": "1234-5672-1365-4789",
+    "titular": "dilan",
+    "fecha_vencimiento": "01/28",
+    "codigo_seguridad": "1234",
+    "opcion_pago": "Tarjeta_debito"
+  },
+  {
+    "id_pago": 7,
+    "saldo": 0.0,
+    "numero_tarjeta": "2345-6789-8765-4345",
+    "titular": "yo",
+    "fecha_vencimiento": "12/30",
+    "codigo_seguridad": "124",
+    "opcion_pago": "Tarjeta_debito"
+  },
+  {
+    "id_pago": 8,
+    "saldo": 0.0,
+    "numero_tarjeta": "2345-2345-2345-2345",
+    "titular": "Luis",
+    "fecha_vencimiento": "12/28",
+    "codigo_seguridad": "1212",
+    "opcion_pago": "Tarjeta_credito"
+  }
+]
