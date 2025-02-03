@@ -1,0 +1,547 @@
+.sidebar {
+    background-color: var(--dark);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h4 {
+    color: var(--primary);
+    margin: 0;
+}
+
+.main-content {
+    padding: 30px;
+}
+
+.card-body h4.text-dark {
+    color: #212529 !important;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-body p.text-muted {
+    color: #6c757d !important;
+    font-size: 1rem;
+}
+
+#viajesModal .modal-header {
+    background: var(--primary);
+    color: white;
+}
+
+#viajesModal .table thead {
+    background-color: #f8f9fa;
+}
+
+#destinosModal .modal-header {
+    background: #28a745;
+    color: white;
+}
+
+#destinosModal .list-group-item i {
+    color: #28a745;
+}
+
+#boletosModal .modal-header {
+    background: #17a2b8;
+    color: white;
+}
+
+#boletosModal .table thead {
+    background-color: #f8f9fa;
+}
+
+#boletosModal .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+#rutasModal .modal-header {
+    background: #ffc107;
+    color: #212529;
+}
+
+#rutasModal .list-group-item i.fa-check-circle {
+    color: #28a745;
+}
+
+#rutasModal .list-group-item i.fa-clock {
+    color: #17a2b8;
+}
+
+#cancelarBoletoModal .modal-header {
+    background: #dc3545;
+    color: white;
+}
+
+.modal .modal-header {
+    border-bottom: none;
+}
+
+.modal .close {
+    color: inherit;
+    text-shadow: none;
+    opacity: 0.8;
+}
+
+.modal .close:hover {
+    opacity: 1;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.modal .btn:hover {
+    transform: translateY(-1px);
+}
+
+.modal .table thead th {
+    border-top: none;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    background-color: #f8f9fa;
+}
+
+.modal .modal-body {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.modal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal .modal-body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.card[data-target="#viajesModal"] {
+    border-color: var(--primary) !important;
+}
+
+.card[data-target="#destinosModal"] {
+    border-color: #28a745 !important;
+}
+
+.card[data-target="#boletosModalVendidos"] {
+    border-color: #28a745 !important;
+}
+
+.card[data-target="#boletosModal"] {
+    border-color: #17a2b8 !important;
+}
+
+.card[data-target="#rutasModal"] {
+    border-color: #ffc107 !important;
+}
+
+.card[data-target="#viajesModal"] i {
+    color: var(--primary);
+}
+
+.card[data-target="#destinosModal"] i {
+    color: #28a745;
+}
+
+.card[data-target="#boletosModal"] i {
+    color: #17a2b8;
+}
+
+.card[data-target="#rutasModal"] i {
+    color: #ffc107;
+}
+
+.modal-detalle .modal-content {
+    border-radius: 0;
+    border: none;
+}
+
+.modal-detalle .modal-header {
+    background: var(--primary);
+    color: white;
+    border-bottom: none;
+}
+
+.modal-detalle .modal-title {
+    font-weight: 600;
+}
+
+.modal-detalle .close {
+    color: white;
+    opacity: 1;
+}
+
+.detalle-section {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.detalle-section h6 {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.detalle-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.detalle-info i {
+    color: var(--primary);
+    margin-right: 10px;
+    width: 20px;
+}
+
+.btn-descargar {
+    background: var(--primary);
+    color: white;
+    padding: 8px 25px;
+    border-radius: 0;
+    font-weight: 500;
+}
+
+.btn-descargar:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: #638f28;
+    border-color: #638f28;
+}
+
+.proximos-viajes-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) #f0f0f0;
+}
+
+.proximos-viajes-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.proximos-viajes-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+}
+
+.proximos-viajes-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 3px;
+}
+
+.proximos-extra {
+    display: none;
+}
+
+.proximos-viajes-container.show-all .proximos-extra {
+    display: flex;
+}
+
+.card-menu {
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.card-menu:hover {
+    transform: translateY(-5px);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cursor-pointer:hover {
+    transform: translateY(-5px);
+}
+
+.pt-5a,
+.py-5a {
+    padding-top: 1rem !important;
+}
+
+.col-lg-2.bg-light {
+    background-color: var(--light) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-heading h4 {
+    color: var(--primary);
+}
+
+.sidebar-heading p {
+    color: var(--dark);
+}
+
+.nav.flex-column .nav-link {
+    color: var(--dark) !important;
+}
+
+.nav.flex-column .nav-link:hover {
+    background-color: var(--secondary);
+    color: var(--primary) !important;
+}
+
+.nav.flex-column .nav-link.active {
+    background-color: var(--secondary);
+    color: var(--primary) !important;
+}
+
+.nav.flex-column .nav-link i {
+    color: var(--primary);
+}
+
+.avatar-initials {
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.dropdown-menu {
+    border: none;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.25rem;
+    color: var(--dark);
+}
+
+.dropdown-item:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.dropdown-item i {
+    width: 20px;
+    color: var(--primary);
+}
+
+.nav-item.dropdown .nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-divider {
+    border-top: 1px solid rgba(0, 0, 0, .05);
+}
+
+#userDropdown {
+    color: var(--dark);
+}
+
+#userDropdown:hover {
+    color: var(--primary);
+}
+
+.modal-detalle .modal-content {
+    border-radius: 12px;
+    border: none;
+}
+
+.modal-detalle .modal-header {
+    background: linear-gradient(145deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    padding: 1.25rem 1.25rem;
+}
+
+.modal-detalle .modal-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-detalle .close {
+    color: white;
+    opacity: 1;
+    text-shadow: none;
+}
+
+.modal-detalle .modal-body {
+    padding: 1.25rem;
+}
+
+.detalle-section {
+    background: var(--light);
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.detalle-section h6 {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.detalle-info {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.detalle-info:last-child {
+    margin-bottom: 0;
+}
+
+.detalle-info i {
+    color: var(--primary);
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.detalle-info small {
+    color: var(--gray);
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.detalle-info p {
+    color: var(--dark);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.detalle-info .badge {
+    font-size: 0.8rem;
+    padding: 0.4em 0.8em;
+}
+
+.btn-descargar {
+    background: linear-gradient(145deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 0.6rem 2;
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-descargar:hover {
+    background: var(--primary-dark);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.modal-detalle .modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem 1.25rem;
+}
+
+.modal-detalle .btn-secondary {
+    background: var(--light);
+    color: var(--dark);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.modal-detalle .btn-secondary:hover {
+    background: var(--gray);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.bg-primary {
+    background-color: #4CAF50 !important;
+}
+
+.mb-0,
+.my-0 {
+    margin-bottom: 0 !important;
+    color: white;
+}
+
+@media (max-width: 991.98px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        min-height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .detalle-section {
+        padding: 1rem;
+    }
+
+    .detalle-info {
+        gap: 0.75rem;
+    }
+
+    .modal-detalle .modal-body {
+        padding: 1rem;
+    }
+}

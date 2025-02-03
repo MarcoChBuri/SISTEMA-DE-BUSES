@@ -1,0 +1,137 @@
+{% macro modales_pago() %}
+<div class="modal fade" id="agregarPagoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Método de Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="agregarPagoForm">
+                    <input type="hidden" name="id_persona" value="{{ session.user.id }}">
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Tarjeta</label>
+                        <select class="form-select" name="opcion_pago">
+                            <option value="">Seleccione una opcion de pago</option>
+                            <option value="Tarjeta_credito">Tarjeta de Crédito</option>
+                            <option value="Tarjeta_debito">Tarjeta de Débito</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de Tarjeta</label>
+                        <input type="text" class="form-control" name="numero_tarjeta"
+                            placeholder="Ingrese el número de tarjeta" pattern="[0-9]{16}" maxlength="19">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">Titular</label>
+                            <input type="text" class="form-control" placeholder="Ingrese el titular" name="titular">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Fecha Vencimiento</label>
+                            <input type="text" class="form-control" name="fecha_vencimiento" placeholder="MM/YY"
+                                maxlength="5">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">Código de Seguridad (CVV)</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="codigo_seguridad"
+                                    id="codigo_seguridad_agregar" maxlength="4">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    onclick="togglePassword('codigo_seguridad_agregar')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label>Saldo</label>
+                            <input type="number" step="0.01" class="form-control" name="saldo" id="saldo"
+                                placeholder="Ingrese el saldo">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="guardarPago">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Método de Pago -->
+<div class="modal fade" id="editarPagoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Método de Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editarPagoForm">
+                    <input type="hidden" name="id_persona" value="{{ session.user.id }}">
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Tarjeta</label>
+                        <select class="form-select" name="opcion_pago" id="opcion_pago">
+                            <option value="">Seleccione una opcion de pago</option>
+                            <option value="Tarjeta_credito" {% if session.metodo_pago and
+                                session.metodo_pago.opcion_pago=='Tarjeta_credito' %}selected{% endif %}>Tarjeta de
+                                Crédito</option>
+                            <option value="Tarjeta_debito" {% if session.metodo_pago and
+                                session.metodo_pago.opcion_pago=='Tarjeta_debito' %}selected{% endif %}>Tarjeta de
+                                Débito</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de Tarjeta</label>
+                        <input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta"
+                            placeholder="Ingrese el número de tarjeta"
+                            value="{{ session.metodo_pago.numero_tarjeta if session.metodo_pago else '' }}"
+                            pattern="[0-9]{16}" maxlength="19">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">Titular</label>
+                            <input type="text" class="form-control" name="titular" id="titular"
+                                placeholder="Ingrese el titular"
+                                value="{{ session.metodo_pago.titular if session.metodo_pago else '' }}">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Fecha Vencimiento</label>
+                            <input type="text" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento"
+                                placeholder="MM/YY"
+                                value="{{ session.metodo_pago.fecha_vencimiento if session.metodo_pago else '' }}"
+                                maxlength="5">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">Código de Seguridad (CVV)</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="codigo_seguridad"
+                                    id="codigo_seguridad_editar" maxlength="4">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    onclick="togglePassword('codigo_seguridad_editar')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label>Saldo</label>
+                            <input type="number" step="0.01" class="form-control" name="saldo" id="saldo"
+                                value="{{ session.metodo_pago.saldo if session.metodo_pago else '' }}"
+                                placeholder="Ingrese el saldo">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" onclick="guardarEdicionPago()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

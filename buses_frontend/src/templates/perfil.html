@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil - TICKET MOST WANTED</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/bus_5488571.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style_crud.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container position-relative">
+            <nav class="navbar navbar-expand-lg navbar-light py-3 py-lg-0">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 text-primary"><span class="text-dark">SISTEMA</span>BUS</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        {% if session.user.tipo_cuenta == 'Cliente' %}
+                        <div class="nav-item d-flex align-items-center">
+                            <span class="nav-link">
+                                <i class="fas fa-wallet me-1"></i>
+                                Saldo: ${{ "%.2f"|format(usuario.saldo_disponible) }}
+                            </span>
+                        </div>
+                        <a href="{{ url_for('router.home') }}" class="nav-item nav-link">
+                            <i class="fas fa-shopping-cart me-1"></i>Comprar
+                        </a>
+                        {% endif %}
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="avatar-circle mr-2">
+                                    <span class="avatar-initials">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ url_for('router.perfil') }}">
+                                    <i class="fas fa-user-circle me-2"></i>Mi Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url_for('router.cerrar_sesion') }}">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                                    </a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container-fluid position-relative p-0" style="margin-top: 15px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.home') }}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        {% if session.user.tipo_cuenta == 'Administrador' %}
+                        <a href="{{ url_for('router.administrador') }}">Panel Administrador</a>
+                        {% else %}
+                        <a href="{{ url_for('router.cliente') }}">Panel Cliente</a>
+                        {% endif %}
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Perfil</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="ticket-container">
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <h3 class="mb-0"><i class="fas fa-user-edit me-2"></i>Editar Perfil</h3>
+            </div>
+
+            <div class="card-body p-5">
+                <form method="POST" action="{{ url_for('router.perfil') }}" id="profileForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-id-card me-2"></i>Tipo de Identificación
+                            </label>
+                            <select class="form-select" name="tipo_identificacion" id="tipo_identificacion">
+                                <option value="">Seleccione tipo de identificacion</option>
+                                {% for tipo in tipos_identificacion %}
+                                <option value="{{ tipo }}" {% if tipo==usuario.tipo_identificacion %}selected{% endif
+                                    %}>
+                                    {{ tipo | replace('_', ' ') }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-id-card me-2"></i>Número de Identificación
+                            </label>
+                            <input type="text" class="form-control" name="numero_identificacion"
+                                id="numero_identificacion" placeholder="Ingrese el numero de dni" maxlength="10"
+                                value="{{ usuario.numero_identificacion }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-user me-2"></i>Nombres
+                            </label>
+                            <input type="text" class="form-control" name="nombre" id="nombre"
+                                placeholder="Ingrese el nombre" value="{{ usuario.nombre }}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-user me-2"></i>Apellidos
+                            </label>
+                            <input type="text" class="form-control" name="apellido" id="apellido"
+                                placeholder="Ingrese el apellido" value="{{ usuario.apellido }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-calendar me-2"></i>Fecha de Nacimiento
+                            </label>
+                            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{% if usuario.fecha_nacimiento %}
+                                    {{- usuario.fecha_nacimiento.split('/')[2] + '-' + 
+                                       (usuario.fecha_nacimiento.split('/')[1]|string).zfill(2) + '-' + 
+                                       (usuario.fecha_nacimiento.split('/')[0]|string).zfill(2) -}}
+                                {% endif %}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-home me-2"></i>Dirección
+                            </label>
+                            <input type="text" class="form-control" name="direccion" id="direccion"
+                                placeholder="Ingrese la direccion" value="{{ usuario.direccion }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-venus-mars me-2"></i>Género
+                            </label>
+                            <select class="form-select" name="genero" id="genero">
+                                {% for genero in generos %}
+                                <option value="{{ genero }}" {% if genero==usuario.genero %}selected{% endif %}>
+                                    {{ genero | replace('_', ' ') }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-phone me-2"></i>Teléfono
+                            </label>
+                            <input type="tel" class="form-control" name="telefono" id="telefono"
+                                placeholder="Ingrese el numero telefonico" maxlength="12"
+                                value="{{ usuario.telefono }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-envelope me-2"></i>Correo Electrónico
+                            </label>
+                            <input type="email" class="form-control" name="correo" id="correo"
+                                placeholder="Ingrese el correo" value="{{ usuario.correo }}">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-lock me-2"></i>Nueva Contraseña
+                            </label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="contrasenia" id="contrasenia"
+                                    value="{{ usuario.cuenta.contrasenia if usuario.cuenta else '' }}"
+                                    placeholder="Ingrese la contraseña">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    onclick="togglePassword('contrasenia')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <small class="text-muted">Dejar en blanco para mantener la actual</small>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-money-bill me-2"></i>Tipo tarifa
+                            </label>
+                            <input type="text" class="form-control" name="tipo_tarifa" id="tipo_tarifa"
+                                placeholder="Tarifa" value="{{ usuario.tipo_tarifa | replace('_', ' ') }}" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label"><i class="fas fa-wallet me-2"></i>Saldo Disponible</label>
+                            <input type="number" step="0.01" class="form-control" name="saldo_disponible"
+                                id="saldo_disponible" placeholder="0.00" value="{{ usuario.saldo_disponible }}"
+                                readonly>
+                        </div>
+                    </div>
+
+                    <h4 class="section-title mt-4"><i class="fas fa-credit-card me-2"></i>Métodos de Pago</h4>
+                    {% if usuario.metodo_pago %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="card-title">{{ usuario.metodo_pago.opcion_pago | replace('_', ' ') }}
+                                    </h5>
+                                    <p class="card-text">
+                                        Titular: {{ usuario.metodo_pago.titular }}<br>
+                                        Número: **** **** **** {{ usuario.metodo_pago.numero_tarjeta[-4:] }}<br>
+                                        Vence: {{ usuario.metodo_pago.fecha_vencimiento }}
+                                    </p>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#editarPagoModal">
+                                        <i class="fas fa-edit me-2"></i>Editar
+                                    </button>
+                                    <button type="button" class="btn btn-success" style="background: cornflowerblue;"
+                                        onclick="transferirSaldo()">
+                                        <i class="fas fa-exchange-alt me-2"></i>Transferir Saldo a Cuenta
+                                    </button>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="eliminarMetodoPago()">
+                                        <i class="fas fa-trash me-1"></i> Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-center mb-4">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#agregarPagoModal" id="btnAgregarMetodoPago">
+                            <i class="fas fa-plus"></i> Agregar Método de Pago
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    <div class="text-center">
+                        <a href="{% if session.user.tipo_cuenta == 'Administrador' %}{{ url_for('router.administrador') }}{% else %}{{ url_for('router.cliente') }}{% endif %}"
+                            class="btn btn-secondary px-4 py-2">
+                            <i class="fas fa-times me-2"></i>Regresar
+                        </a>
+                        <button type="submit" href="{{ url_for('router.perfil') }}"
+                            class="btn btn-primary px-4 py-2 me-2">
+                            <i class="fas fa-save me-2"></i>Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal agregar método de pago -->
+    <div class="modal fade" id="agregarPagoModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Método de Pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="agregarPagoForm">
+                        <input type="hidden" name="id_persona" value="{{ usuario.id_persona }}">
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Tarjeta</label>
+                            <select class="form-select" name="opcion_pago" id="opcion_pago">
+                                <option value="">Seleccione método de pago</option>
+                                <option value="Tarjeta_credito">Tarjeta de Crédito</option>
+                                <option value="Tarjeta_debito">Tarjeta de Débito</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Número de Tarjeta</label>
+                            <input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta"
+                                placeholder="Ingrese el numero de la tarjeta" pattern="[0-9]{16}" maxlength="19">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Titular</label>
+                                <input type="text" class="form-control" placeholder="Ingrese el titular" name="titular"
+                                    id="titular">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Fecha Vencimiento</label>
+                                <input type="text" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento"
+                                    placeholder="MM/YY" maxlength="5">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Código de Seguridad (CVV)</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="codigo_seguridad_agregar"
+                                        name="codigo_seguridad" placeholder="Ingrese el codigo de seguridad"
+                                        maxlength="4">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        onclick="togglePassword('codigo_seguridad_agregar')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Saldo</label>
+                                <input type="number" step="0.01" class="form-control" placeholder="Ingrese el saldo"
+                                    value="0" min="0" name="saldo" id="saldo">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="guardarPago">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Método de Pago -->
+    <div class="modal fade" id="editarPagoModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Método de Pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarPagoForm">
+                        <input type="hidden" name="id_persona" value="{{ usuario.id_persona }}">
+                        <div class="mb-3">
+                            <label class="form-label">Tipo de Tarjeta</label>
+                            <select class="form-select" name="opcion_pago" id="opcion_pago">
+                                <option value="">Seleccione método de pago</option>
+                                <option value="Tarjeta_credito" {% if usuario.metodo_pago and
+                                    usuario.metodo_pago.opcion_pago=='Tarjeta_credito' %}selected{% endif %}>Tarjeta de
+                                    Crédito</option>
+                                <option value="Tarjeta_debito" {% if usuario.metodo_pago and
+                                    usuario.metodo_pago.opcion_pago=='Tarjeta_debito' %}selected{% endif %}>Tarjeta de
+                                    Débito</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Número de Tarjeta</label>
+                            <input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta_editar"
+                                placeholder="Ingrese el número de tarjeta"
+                                value="{{ usuario.metodo_pago.numero_tarjeta if usuario.metodo_pago else '' }}"
+                                pattern="[0-9]{16}" maxlength="19">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Titular</label>
+                                <input type="text" class="form-control" name="titular" id="titular"
+                                    placeholder="Ingrese el titular"
+                                    value="{{ usuario.metodo_pago.titular if usuario.metodo_pago else '' }}">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Fecha Vencimiento</label>
+                                <input type="text" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento"
+                                    placeholder="MM/YY"
+                                    value="{{ usuario.metodo_pago.fecha_vencimiento if usuario.metodo_pago else '' }}"
+                                    maxlength="5">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Código de Seguridad (CVV)</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="codigo_seguridad_editar"
+                                        name="codigo_seguridad"
+                                        value="{{ usuario.metodo_pago.codigo_seguridad if usuario.metodo_pago else '' }}"
+                                        maxlength="4">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        onclick="togglePassword('codigo_seguridad_editar')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label>Saldo</label>
+                                <input type="number" step="0.01" class="form-control" name="saldo" id="saldo"
+                                    placeholder="Ingrese el saldo"
+                                    value="{{ usuario.metodo_pago.saldo if usuario.metodo_pago else 0.0 }}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarEdicionPago()">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/base.js"></script>
+    <script src="../static/js/funciones.js"></script>
+
+    <script>
+        "{% if error %}"
+        Swal.fire({
+            title: 'Error de Validación',
+            text: '{{ error }}',
+            icon: 'warning',
+            ...sweetAlertOptions
+        });
+        "{% endif %}"
+        "{% with messages = get_flashed_messages(with_categories = true) %}"
+        "{% if messages %}"
+        "{% for category, message in messages %}"
+        if ('{{ category }}' === 'success') {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: '{{ message }}',
+                icon: 'success',
+                confirmButtonColor: '#3085d6'
+            });
+        }
+        "{% endfor %}"
+        "{% endif %}"
+        "{% endwith %}"
+        document.addEventListener('DOMContentLoaded', function () {
+            function setupInputValidations() {
+                document.querySelectorAll('[name="titular"]').forEach(input => {
+                    input.addEventListener('input', function () {
+                        this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                    });
+                });
+                document.querySelectorAll('[name="nombre"], [name="apellido"]').forEach(input => {
+                    input.addEventListener('input', function () {
+                        this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+                    });
+                });
+                document.querySelectorAll('[name="numero_identificacion"]').forEach(input => {
+                    input.addEventListener('input', function () {
+                        this.value = this.value.replace(/\D/g, '');
+                        if (this.value.length > 10) {
+                            this.value = this.value.slice(0, 10);
+                        }
+                    });
+                });
+                document.querySelectorAll('[name="numero_tarjeta"]').forEach(input => {
+                    input.addEventListener('input', function () {
+                        let value = this.value.replace(/\D/g, '');
+                        if (value.length > 0) {
+                            value = value.match(/.{1,4}/g).join('-');
+                        }
+                        this.value = value.substring(0, 19);
+                    });
+                });
+                document.querySelectorAll('[name="fecha_vencimiento"]').forEach(input => {
+                    input.addEventListener('input', function () {
+                        let value = this.value.replace(/\D/g, '');
+                        if (value.length > 0) {
+                            if (value.length > 2) {
+                                value = value.substring(0, 2) + '/' + value.substring(2);
+                            }
+                            let month = parseInt(value.substring(0, 2));
+                            if (month > 12) value = '12' + value.substring(2);
+                            if (month === 0) value = '01' + value.substring(2);
+                        }
+                        this.value = value.substring(0, 5);
+                    });
+                });
+                document.querySelectorAll('[name="codigo_seguridad"]').forEach(input => {
+                    input.addEventListener('input', function () {
+                        this.value = this.value.replace(/\D/g, '');
+                    });
+                });
+            }
+            function validateProfileForm(form) {
+                const fields = {
+                    'tipo_identificacion': 'Debe seleccionar un tipo de identificación',
+                    'numero_identificacion': 'Ingrese el número de identificación',
+                    'nombre': 'Ingrese sus nombre',
+                    'apellido': 'Ingrese sus apellido',
+                    'fecha_nacimiento': 'Ingrese su fecha de nacimiento',
+                    'correo': 'Ingrese su correo electrónico'
+                };
+                for (const [fieldName, message] of Object.entries(fields)) {
+                    const field = form.querySelector(`[name="${fieldName}"]`);
+                    if (!field || !field.value.trim()) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Campo Requerido',
+                            text: message
+                        });
+                        if (field) field.focus();
+                        return false;
+                    }
+                }
+                const idNumber = form.querySelector('[name="numero_identificacion"]').value;
+                if (idNumber.length !== 10) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error en Número de Identificación',
+                        text: 'El número de identificación debe tener 10 dígitos'
+                    });
+                    return false;
+                }
+                const email = form.querySelector('[name="correo"]').value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error en Correo Electrónico',
+                        text: 'Ingrese un correo electrónico válido'
+                    });
+                    return false;
+                }
+                const birthDate = new Date(form.querySelector('[name="fecha_nacimiento"]').value);
+                const today = new Date();
+                const age = today.getFullYear() - birthDate.getFullYear();
+                if (age < 12) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error en Fecha de Nacimiento',
+                        text: 'Debe ser mayor de 12 años'
+                    });
+                    return false;
+                }
+                return true;
+            }
+            function validatePaymentForm(form) {
+                const fields = {
+                    'opcion_pago': 'Debe seleccionar un método de pago',
+                    'titular': 'Ingrese el nombre del titular de la tarjeta',
+                    'numero_tarjeta': 'Ingrese el número de tarjeta',
+                    'fecha_vencimiento': 'Ingrese la fecha de vencimiento',
+                    'codigo_seguridad': 'Ingrese el código de seguridad'
+                };
+                for (const [fieldName, message] of Object.entries(fields)) {
+                    const field = form.querySelector(`[name="${fieldName}"]`);
+                    if (!field || !field.value.trim()) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Campo Requerido',
+                            text: message
+                        });
+                        if (field) field.focus();
+                        return false;
+                    }
+                }
+                const cardNumber = form.querySelector('[name="numero_tarjeta"]').value.replace(/-/g, '');
+                if (cardNumber.length !== 16) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error en Número de Tarjeta',
+                        text: 'El número de tarjeta debe tener 16 dígitos'
+                    });
+                    return false;
+                }
+                const expDate = form.querySelector('[name="fecha_vencimiento"]').value;
+                const [month, year] = expDate.split('/');
+                if (!month || !year || month < 1 || month > 12) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error en Fecha',
+                        text: 'La fecha de vencimiento debe tener formato MM/YY válido'
+                    });
+                    return false;
+                }
+                const cvv = form.querySelector('[name="codigo_seguridad"]').value;
+                if (cvv.length < 3 || cvv.length > 4) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error en CVV',
+                        text: 'El código de seguridad debe tener entre 3 y 4 dígitos'
+                    });
+                    return false;
+                }
+                return true;
+            }
+            setupInputValidations();
+            document.getElementById('profileForm')?.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (validateProfileForm(this)) {
+                    this.submit();
+                }
+            });
+            document.getElementById('guardarPago').addEventListener('click', function () {
+                const agregarpagoForm = document.getElementById('agregarPagoForm');
+                if (validatePaymentForm(agregarpagoForm)) {
+                    const formData = new FormData(agregarpagoForm);
+                    const data = Object.fromEntries(formData.entries());
+                    fetch('/api/metodos-pago/agregar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Método de pago agregado',
+                                    showConfirmButton: true,
+                                }).then(() => {
+                                    const modal = $('#agregarPagoModal');
+                                    modal.modal('hide');
+                                    window.location.reload();
+                                });
+                            } else {
+                                throw new Error(result.message);
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: error.message
+                            });
+                        });
+                }
+            });
+            function guardarEdicionPago() {
+                const form = document.getElementById('editarPagoForm');
+                if (validatePaymentForm(form)) {
+                    const formData = new FormData(form);
+                    const numeroTarjeta = formData.get('numero_tarjeta');
+                    const numeroLimpio = numeroTarjeta.replace(/\D/g, '');
+                    const data = {
+                        id_persona: formData.get('id_persona'),
+                        opcion_pago: formData.get('opcion_pago'),
+                        numero_tarjeta: numeroLimpio.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1-$2-$3-$4'),
+                        titular: formData.get('titular'),
+                        fecha_vencimiento: formData.get('fecha_vencimiento'),
+                        codigo_seguridad: formData.get('codigo_seguridad'),
+                        saldo: parseFloat(formData.get('saldo'))
+                    };
+                    fetch('/api/metodos-pago/actualizar', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => {
+                            if (!response.ok) throw new Error('Error en la respuesta del servidor');
+                            return response.json();
+                        })
+                        .then(result => {
+                            if (result.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Actualizado',
+                                    text: 'El método de pago ha sido actualizado correctamente',
+                                    showConfirmButton: true,
+                                }).then(() => {
+                                    const modal = bootstrap.Modal.getInstance(document.getElementById('editarPagoModal'));
+                                    modal.hide();
+                                    window.location.reload();
+                                });
+                            } else {
+                                throw new Error(result.message || 'Error al actualizar el método de pago');
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: error.message
+                            });
+                        });
+                }
+            }
+            window.guardarEdicionPago = guardarEdicionPago;
+            window.eliminarMetodoPago = function () {
+                Swal.fire({
+                    title: '¿Está seguro?',
+                    text: "Esta acción eliminará el método de pago permanentemente",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('/api/metodos-pago/eliminar', {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id_persona: document.querySelector('[name="id_persona"]').value
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Eliminado',
+                                        text: 'El método de pago ha sido eliminado',
+                                        showConfirmButton: true,
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    throw new Error(data.message || 'Error al eliminar el método de pago');
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: error.message
+                                });
+                            });
+                    }
+                });
+            };
+            window.transferirSaldo = function () {
+                Swal.fire({
+                    title: '¿Transferir saldo?',
+                    text: "El saldo de la tarjeta será transferido a tu cuenta",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, transferir',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('/api/metodos-pago/transferir-saldo', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({})
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Éxito',
+                                        text: data.message,
+                                        showConfirmButton: true,
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: data.message
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Error al procesar la transferencia'
+                                });
+                            });
+                    }
+                });
+            };
+            ['agregarPagoModal', 'editarPagoModal'].forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.addEventListener('shown.bs.modal', function () {
+                        setupInputValidations();
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

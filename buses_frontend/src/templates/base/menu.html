@@ -1,0 +1,96 @@
+<nav class="nav_1">
+    <div class="logo top-logo" id="topLogo" style="position: absolute;">
+        <div class="menu-trigger">
+            <i class="bx bx-menu menu-icon"></i>
+            <span class="logo-name">Gestión</span>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="bx bx-menu menu-icon" style="margin-top: 15px;"></i>
+            <span class="logo-name" style="margin-top: 15px;">Gestión</span>
+        </div>
+        <div class="sidebar-content">
+            <ul_1 class="lists">
+                <li class="list">
+                    <a href="{{ url_for('router.lista_cooperativa') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Cooperativas">
+                        <i class="fas fa-building mr-2 icon"></i>
+                        <span class="link">Cooperativas</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_bus') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Buses">
+                        <i class="fas fa-bus mr-2 icon"></i>
+                        <span class="link">Buses</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_ruta') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Rutas">
+                        <i class="fas fa-route mr-2 icon"></i>
+                        <span class="link">Rutas</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_escala') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Escalas">
+                        <i class="fas fa-map-marker-alt mr-2 icon"></i>
+                        <span class="link">Escalas</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_horario') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Horarios">
+                        <i class="fas fa-clock mr-2 icon"></i>
+                        <span class="link">Horarios</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_turno') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Turnos">
+                        <i class="fas fa-exchange-alt mr-2 icon"></i>
+                        <span class="link">Turnos</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_frecuencia') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Frecuencias">
+                        <i class="fas fa-calendar-alt mr-2 icon"></i>
+                        <span class="link">Frecuencias</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_boleto') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Boletos">
+                        <i class="fas fa-ticket-alt mr-2 icon"></i>
+                        <span class="link">Boletos</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_persona') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Personas">
+                        <i class="fas fa-users mr-2 icon"></i>
+                        <span class="link">Personas</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_descuento') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Descuentos">
+                        <i class="fas fa-tags mr-2 icon"></i>
+                        <span class="link">Descuentos</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="{{ url_for('router.lista_cuenta') }}" class="nav-link" data-toggle="tooltip"
+                        data-placement="right" title="Cuentas">
+                        <i class="fas fa-user-circle mr-2 icon"></i>
+                        <span class="link">Cuentas</span>
+                    </a>
+                </li>
+            </ul_1>
+        </div>
+    </div>
+</nav>
+<section class="overlay"></section>

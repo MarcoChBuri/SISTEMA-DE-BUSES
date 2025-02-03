@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Crear Bus</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/bus_5488571.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style_crud.css" rel="stylesheet">
+</head>
+
+<body>
+
+    {% include 'base/menu.html' %}
+    {% include 'base/navegacion.html' %}
+
+    <div class="container-fluid position-relative p-0" style="margin-top: 15px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.home') }}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.administrador') }}">Panel Administrador</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.lista_bus') }}">Buses</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear Bus</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="ticket-container">
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <h3 class="mb-0"><i class="fas fa-bus me-2"></i>Crear Nuevo Bus</h3>
+            </div>
+            <div class="card-body p-5">
+                <form method="POST">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-hashtag me-2"></i>Número de Bus
+                            </label>
+                            <input type="number" class="form-control" id="numero_bus" name="numero_bus"
+                                value="{{ siguiente_numero }}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-id-card me-2"></i>Placa
+                            </label>
+                            <input type="text" class="form-control" id="placa" name="placa"
+                                value="{{ request.form.get('placa', '') }}" placeholder="Ingrese la placa del bus"
+                                pattern="[A-Z]{2,3}-[0-9]{4}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-trademark me-2"></i>Marca
+                            </label>
+                            <input type="text" class="form-control" id="marca" name="marca"
+                                value="{{ request.form.get('marca', '') }}" placeholder="Ingrese la marca del bus">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-car me-2"></i>Modelo
+                            </label>
+                            <input type="text" class="form-control" id="modelo" name="modelo" maxlength="4"
+                                value="{{ request.form.get('modelo', '') }}" placeholder="Ingrese el modelo del bus"
+                                pattern="[A-Za-z0-9\s]+" title="Solo letras, números y espacios permitidos"
+                                maxlength="50">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-users me-2"></i>Capacidad de Pasajeros
+                            </label>
+                            <input type="number" class="form-control" id="capacidad_pasajeros"
+                                value="{{ request.form.get('capacidad_pasajeros', '') }}"
+                                placeholder="Ingrese la cantidad maxima de pasajeros" min="1" max="80"
+                                name="capacidad_pasajeros">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-tachometer-alt me-2"></i>Velocidad
+                            </label>
+                            <input type="number" class="form-control" id="velocidad" name="velocidad"
+                                value="{{ request.form.get('velocidad', '') }}"
+                                placeholder="Ingrese la velocidad del bus" min="1" max="120">
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-toggle-on me-2"></i>Estado
+                            </label>
+                            <select class="form-select" id="estado_bus" name="estado_bus">
+                                <option value="Activo">Activo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-building me-2"></i>Cooperativa
+                            </label>
+                            <div class="searchable-select">
+                                <input type="text" class="form-control" id="cooperativa_input"
+                                    placeholder="Buscar cooperativa">
+                                <input type="hidden" id="cooperativa_id" name="cooperativa_id">
+                                <div class="searchable-select-dropdown"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ url_for('router.lista_bus') }}" class="btn btn-secondary px-4 py-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4 py-2 me-2">
+                            <i class="fas fa-save me-2"></i>Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../static/js/base.js"></script>
+    <script src="../static/js/funciones.js"></script>
+
+    <script>
+        "{% if error %}"
+        Swal.fire({
+            title: 'Error de Validación',
+            text: '{{ error }}',
+            icon: 'warning',
+            ...sweetAlertOptions
+        });
+        "{% endif %}"
+        document.addEventListener('DOMContentLoaded', function () {
+            const cooperativaInput = document.getElementById('cooperativa_input');
+            const cooperativaIdInput = document.getElementById('cooperativa_id');
+            const dropdown = cooperativaInput.parentElement.querySelector('.searchable-select-dropdown');
+            let previousValue = '';
+            let cooperativas = [];
+            "{% for cooperativa in cooperativas %}"
+            cooperativas.push({
+                id: "{{ cooperativa.id_cooperativa }}",
+                nombre_cooperativa: "{{ cooperativa.nombre_cooperativa }}"
+            });
+            " {% endfor %}"
+            function updateDropdown(searchText) {
+                dropdown.innerHTML = '';
+                const filteredCooperativas = cooperativas.filter(coop =>
+                    coop.nombre_cooperativa.toLowerCase().includes(searchText.toLowerCase())
+                );
+                if (filteredCooperativas.length === 0) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'searchable-select-option';
+                    noResults.textContent = 'No hay resultados';
+                    dropdown.appendChild(noResults);
+                    return;
+                }
+                filteredCooperativas.forEach(coop => {
+                    const option = document.createElement('div');
+                    option.className = 'searchable-select-option';
+                    option.textContent = coop.nombre_cooperativa;
+                    option.dataset.id = coop.id;
+                    option.addEventListener('click', function () {
+                        cooperativaInput.value = coop.nombre_cooperativa;
+                        cooperativaIdInput.value = coop.id;
+                        previousValue = coop.nombre_cooperativa;
+                        dropdown.style.display = 'none';
+                    });
+                    dropdown.appendChild(option);
+                });
+            }
+            cooperativaInput.addEventListener('focus', function () {
+                previousValue = this.value;
+                this.value = '';
+                dropdown.style.display = 'block';
+                updateDropdown('');
+            });
+            cooperativaInput.addEventListener('blur', function () {
+                setTimeout(() => {
+                    if (!this.value.trim()) {
+                        this.value = previousValue;
+                    }
+                    dropdown.style.display = 'none';
+                }, 200);
+            });
+            cooperativaInput.addEventListener('input', function () {
+                dropdown.style.display = 'block';
+                updateDropdown(this.value);
+            });
+            cooperativaInput.addEventListener('mousedown', function (e) {
+                if (dropdown.style.display === 'none' || !dropdown.style.display) {
+                    e.preventDefault();
+                    this.focus();
+                }
+            });
+            document.querySelector('form').addEventListener('submit', function (e) {
+                if (!cooperativaIdInput.value) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor seleccione una cooperativa válida'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

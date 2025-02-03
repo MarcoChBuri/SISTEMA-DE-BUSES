@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pago de Boleto - TICKET MOST WANTED</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/bus_5488571.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style_crud.css" rel="stylesheet">
+
+    <style>
+        .header-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../static/img/carousel-1.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 35px 0;
+            color: white;
+            margin-bottom: -50px;
+        }
+
+        .payment-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .trip-details {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 10px;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            padding-top: 1.25rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-item i {
+            color: var(--primary);
+            width: 25px;
+            margin-right: 10px;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            justify-content: center;
+        }
+
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .card-body_p {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            padding-top: 1.25rem;
+        }
+
+        .descuentos-container {
+            break-inside: avoid;
+            page-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            display: inline-block;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .payment-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-section">
+        <div class="container text-center">
+            <h1 class="display-4 text-white mb-3">Pago de Boleto</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:history.back()">Cooperativas</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:history.back()">Selección de Asientos</a></li>
+                    <li class="breadcrumb-item active">Pago</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="payment-container">
+        <div class="payment-card" style="width: 900px; padding-bottom: 1.25rem;">
+            <div class="payment-header" style="color: white;">
+                <h3 class="mb-0" style="color: white;"><i class="fas fa-ticket-alt me-2"></i>Resumen de Pago</h3>
+            </div>
+
+            <div class="card-body_p">
+                <div class="trip-details">
+                    <div>
+                        <h5 style="text-align: center; color: #2a5298;"><i class="fas fa-info-circle me-2"></i>Detalles del Viaje</h5>
+                    </div>
+                    <div id="resumenViaje" style="column-count: 2;"></div>
+
+                </div>
+            </div>
+
+            <div class="card-body_p">
+                <div class="trip-details">
+                    <div>
+                        <h5 style="text-align: center; color: #2a5298;"><i class="fas fa-user-circle me-2"></i>Información del Usuario
+                        </h5>
+                    </div>
+                    <div style="column-count: 2;">
+                        <div class="detail-item">
+                            <div><strong><i class="fas fa-user"></i>Nombre:</strong> <span id="nombreUsuario"></span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div><strong><i class="fas fa-envelope"></i>Correo:</strong> <span
+                                    id="correoUsuario"></span></div>
+                        </div>
+                        <div class="detail-item">
+                            <div><strong><i class="fas fa-wallet"></i>Saldo Disponible:</strong> $<span
+                                    id="saldoUsuario">0.00</span></div>
+                        </div>
+                        <div class="detail-item">
+                            <div>
+                                <strong><i class="fas fa-tag"></i>Tipo de Tarifa:</strong> <span
+                                    id="tipoTarifaUsuario"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body_p">
+                <div class="trip-details">
+                    <div>
+                        <h5 style="text-align: center; color: #2a5298;"><i class="fas fa-user-circle me-2"></i>Información del precio
+                        </h5>
+                    </div>
+                    <div style="column-count: 2;">
+                        <div class="detail-item">
+                            <div>
+                                <strong><i class="fas fa-dollar-sign"></i>Precio Original:</strong> $<span
+                                    id="precioOriginal">0.00</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="descuentos-container">
+                                <strong> <i class="fas fa-percent"></i>Descuentos Aplicables:</strong>
+                                <div id="descuentosUsuario"></div>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div>
+                                <strong><i class="fas fa-money-bill-wave"></i>Precio Final:</strong> $<span
+                                    id="precioFinal">0.00</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div>
+                                <strong><i class="fas fa-piggy-bank"></i>Ahorro Total:</strong> $<span
+                                    id="ahorroTotal">0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body_p">
+                <form id="formPago" method="POST">
+                    <input type="hidden" id="selected_payment_method" name="metodo_pago">
+                    <div class="mb-4">
+                        <h5><i class="fas fa-credit-card me-2"></i>Métodos de Pago</h5>
+                        <div id="metodosPagoContainer" class="mt-3">
+                            <button type="button" class="btn btn-agregar-metodo w-100 mb-3" data-bs-toggle="modal"
+                                data-bs-target="#agregarPagoModal">
+                                <i class="fas fa-plus me-2"></i>Agregar Nuevo Método de Pago
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <input type="hidden" id="viajeData" name="viajeData">
+                        <input type="hidden" id="selected_payment_method" name="selected_payment_method">
+                        <div id="metodosPagoContainer"></div>
+                        <button type="submit" class="btn btn-primary w-100" id="btnPagar" disabled>
+                            <i class="fas fa-lock me-2"></i>Confirmar Pago
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% from 'base/pago_modal.html' import modales_pago %}
+
+    {{ modales_pago() }}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/funciones.js"></script>
+
+    <script>
+        async function cargarDatosUsuario() {
+            try {
+                const viajeInfo = sessionStorage.getItem('viajeInfo');
+                const response = await fetch(`/api/metodos-pago/usuario?viajeInfo=${encodeURIComponent(viajeInfo)}`);
+                const data = await response.json();
+                if (data.persona) {
+                    document.getElementById('nombreUsuario').textContent =
+                        `${data.persona.nombre} ${data.persona.apellido}`;
+                    document.getElementById('correoUsuario').textContent =
+                        data.persona.correo;
+                    document.getElementById('saldoUsuario').textContent =
+                        data.persona.saldo_disponible.toFixed(2);
+                    document.getElementById('tipoTarifaUsuario').textContent =
+                        data.persona.tipo_tarifa;
+                    const descuentosDiv = document.getElementById('descuentosUsuario');
+                    if (data.persona.descuentos_aplicables && data.persona.descuentos_aplicables.length > 0) {
+                        const descuentosHtml = data.persona.descuentos_aplicables.map(d => `
+                            <div class="descuento-item mb-2">
+                                <span class="badge ${d.tipo === 'Promocional' ? 'bg-warning' : 'bg-info'} me-2">
+                                    ${d.tipo}
+                                </span>
+                                <span>${d.nombre}: ${d.porcentaje}%</span>
+                                ${d.vigencia ? `<br><small class="text-muted">${d.vigencia}</small>` : ''}
+                            </div>
+                        `).join('');
+                        descuentosDiv.innerHTML = descuentosHtml;
+                        document.getElementById('precioOriginal').textContent =
+                            data.persona.precio_original.toFixed(2);
+                        document.getElementById('precioFinal').textContent =
+                            data.persona.precio_final.toFixed(2);
+                        document.getElementById('ahorroTotal').textContent =
+                            data.persona.ahorro_total.toFixed(2);
+                        if (data.persona.ahorro_total > 0) {
+                            document.getElementById('ahorroTotal').parentElement.classList.add('text-success');
+                            document.getElementById('ahorroTotal').parentElement.innerHTML +=
+                                `<span class="badge bg-success ms-2">¡Ahorras ${data.persona.porcentaje_descuento_total}%!</span>`;
+                        }
+                    } else {
+                        descuentosDiv.innerHTML = '<span>No hay descuentos disponibles</span>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error al cargar datos del usuario:', error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            cargarDatosUsuario();
+            const viajeInfo = JSON.parse(sessionStorage.getItem('viajeInfo'));
+            if (!viajeInfo) {
+                window.location.href = '/';
+                return;
+            }
+            const resumenViaje = document.getElementById('resumenViaje');
+            const btnPagar = document.getElementById('btnPagar');
+            cargarMetodoPago();
+            btnPagar.disabled = true;
+            resumenViaje.innerHTML = `
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-map-marker-alt"></i>Origen:</strong> ${viajeInfo.origen}</div>
+                </div>
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-map-marker-alt"></i>Destino:</strong> ${viajeInfo.destino}</div>
+                </div>
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-calendar-alt"></i>Fecha:</strong> ${viajeInfo.fecha}</div>
+                </div>
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-clock"></i>Hora:</strong> ${viajeInfo.hora}</div>
+                </div>
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-chair"></i>Asientos:</strong> ${viajeInfo.asientos.join(', ')}</div>
+                </div>
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-dollar-sign"></i>Precio por asiento:</strong> $${viajeInfo.precio_unitario}</div>
+                </div>
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-money-bill-wave"></i>Total a pagar:</strong> $${viajeInfo.total}</div>
+                </div>
+                <div class="detail-item">
+                    <div><strong><i class="fas fa-bus"></i>Cooperativa:</strong> ${viajeInfo.cooperativa}</div>
+                </div>
+            `;
+            document.getElementById('viajeData').value = JSON.stringify(viajeInfo);
+            document.getElementById('formPago').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const selectedPayment = document.querySelector('input[name="metodo_pago"]:checked');
+                if (!selectedPayment) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor seleccione un método de pago'
+                    });
+                    return;
+                }
+                try {
+                    Swal.fire({
+                        title: 'Procesando pago...',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+                    const formData = new FormData(this);
+                    formData.append('viajeInfo', sessionStorage.getItem('viajeInfo'));
+                    const response = await fetch('/procesar_pago', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        document.getElementById('saldoUsuario').textContent =
+                            parseFloat(data.nuevo_saldo).toFixed(2);
+                        if (data.pdf_paths && data.pdf_paths.length > 0) {
+                            const result = await Swal.fire({
+                                icon: 'success',
+                                title: '¡Pago Exitoso!',
+                                text: 'Sus boletos han sido generados correctamente',
+                                showCancelButton: true,
+                                cancelButtonText: 'Ir a Mis Boletos',
+                                confirmButtonText: 'Descargar Boletos'
+                            });
+                            if (result.isConfirmed) {
+                                data.pdf_paths.forEach(path => {
+                                    window.open(path, '_blank');
+                                });
+                            }
+                        }
+                        sessionStorage.removeItem('viajeInfo');
+                        window.location.href = '/cliente';
+                    } else {
+                        throw new Error(data.message || 'Error al procesar el pago');
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.message || 'Error al procesar el pago'
+                    });
+                }
+            });
+            document.getElementById('formPago').innerHTML = `
+                <input type="hidden" id="viajeData" name="viajeData">
+                <input type="hidden" id="selected_payment_method" name="selected_payment_method">
+                <div id="metodosPagoContainer"></div>
+                <button type="submit" class="btn btn-primary w-100" id="btnPagar" disabled>
+                    <i class="fas fa-lock me-2"></i>Confirmar Pago
+                </button>
+            `;
+            window.editarMetodoPago = editarMetodoPago;
+            window.eliminarMetodoPago = eliminarMetodoPago;
+            window.guardarEdicionPago = guardarEdicionPago;
+            document.getElementById('guardarPago').addEventListener('click', function () {
+                const formData = new FormData(document.getElementById('agregarPagoForm'));
+                const data = {
+                    id_persona: formData.get('id_persona'),
+                    opcion_pago: formData.get('opcion_pago'),
+                    numero_tarjeta: formData.get('numero_tarjeta'),
+                    titular: formData.get('titular'),
+                    fecha_vencimiento: formData.get('fecha_vencimiento'),
+                    codigo_seguridad: formData.get('codigo_seguridad'),
+                    saldo: parseFloat(formData.get('saldo'))
+                };
+                try {
+                    validarDatosTarjeta(data);
+                    fetch('/api/metodos-pago/agregar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Método de pago agregado',
+                                    text: 'El método de pago se ha agregado correctamente',
+                                    showConfirmButton: true,
+                                }).then(() => {
+                                    const modal = bootstrap.Modal.getInstance(document.getElementById('agregarPagoModal'));
+                                    modal.hide();
+                                    cargarMetodoPago();
+                                });
+                            } else {
+                                throw new Error(result.message || 'Error al agregar el método de pago');
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: error.message || 'Error al procesar la solicitud'
+                            });
+                        });
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.message
+                    });
+                }
+            });
+            async function cargarMetodoPago() {
+                try {
+                    const response = await fetch('/api/metodos-pago/usuario');
+                    const data = await response.json();
+                    const metodosPagoContainer = document.getElementById('metodosPagoContainer');
+                    const btnPagar = document.getElementById('btnPagar');
+                    metodosPagoContainer.innerHTML = '';
+                    metodosPagoContainer.innerHTML = '';
+                    if (!data.metodos || data.metodos.length === 0) {
+                        metodosPagoContainer.innerHTML = `
+                        <button type="button" class="btn btn-outline-success w-100 mb-4" 
+                                data-bs-toggle="modal" data-bs-target="#agregarPagoModal">
+                            <i class="fas fa-plus me-2"></i>Agregar Nuevo Método de Pago
+                        </button>`;
+                    }
+                    if (data.metodos && data.metodos.length > 0) {
+                        data.metodos.forEach(metodo => {
+                            metodosPagoContainer.innerHTML += `
+                                    <div class="card mb-3" style="margin-top: 0px !important;">
+                                        <div class="card-body_p">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="metodo_pago" value="${metodo.id_pago}">
+                                                    <label class="form-check-label">
+                                                        <h5 class="mb-1">${metodo.opcion_pago.replace('_', ' ')}</h5>
+                                                        <p class="mb-0 text-muted">
+                                                            Titular: ${metodo.titular}<br>
+                                                            Número: **** **** **** ${metodo.numero_tarjeta.slice(-4)}<br>
+                                                            Vence: ${metodo.fecha_vencimiento}
+                                                        </p>
+                                                    </label>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary btn-sm" 
+                                                        onclick='editarMetodoPago(${JSON.stringify(metodo).replace(/'/g, "\\'")})'
+                                                    >
+                                                        <i class="fas fa-edit me-1"></i> Editar
+                                                    </button>
+                                                    <button type="button" class="btn btn-success" style="background: cornflowerblue;"
+                                                        onclick="transferirSaldo()">
+                                                        <i class="fas fa-exchange-alt me-2"></i>Transferir Saldo a Cuenta
+                                                    </button>
+                                                    <button type="button" class="btn btn-secondary btn-sm" 
+                                                        onclick="eliminarMetodoPago('${metodo.id_pago}')"
+                                                    >
+                                                        <i class="fas fa-trash me-1"></i> Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                        });
+                        document.querySelectorAll('input[name="metodo_pago"]').forEach(radio => {
+                            radio.addEventListener('change', () => {
+                                btnPagar.disabled = false;
+                                document.getElementById('selected_payment_method').value = radio.value;
+                            });
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Error al cargar los métodos de pago'
+                    });
+                }
+            }
+            function verificarSeleccion() {
+                const metodoPagoSeleccionado = document.querySelector('input[name="metodo_pago"]:checked');
+                const btnPagar = document.getElementById('btnPagar');
+                const viajeInfo = JSON.parse(sessionStorage.getItem('viajeInfo'));
+                if (metodoPagoSeleccionado) {
+                    fetch(`/api/metodos-pago/usuario/${metodoPagoSeleccionado.value}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const saldoDisponible = parseFloat(data.saldo);
+                            const totalPagar = parseFloat(viajeInfo.total);
+                            if (saldoDisponible >= totalPagar) {
+                                btnPagar.disabled = false;
+                                document.getElementById('selected_payment_method').value = metodoPagoSeleccionado.value;
+                            } else {
+                                btnPagar.disabled = true;
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Saldo Insuficiente',
+                                    text: 'El método de pago seleccionado no tiene saldo suficiente'
+                                });
+                            }
+                        });
+                } else {
+                    btnPagar.disabled = true;
+                    document.getElementById('selected_payment_method').value = '';
+                }
+            }
+            function guardarEdicionPago() {
+                const formData = new FormData(document.getElementById('editarPagoForm'));
+                const data = {
+                    id_persona: formData.get('id_persona'),
+                    opcion_pago: formData.get('opcion_pago'),
+                    numero_tarjeta: formData.get('numero_tarjeta'),
+                    titular: formData.get('titular'),
+                    fecha_vencimiento: formData.get('fecha_vencimiento'),
+                    codigo_seguridad: formData.get('codigo_seguridad'),
+                    saldo: parseFloat(formData.get('saldo')) || 0
+                };
+                try {
+                    validarDatosTarjeta(data);
+                    fetch('/api/metodos-pago/actualizar', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Actualizado',
+                                    text: 'Método de pago actualizado correctamente',
+                                    showConfirmButton: true,
+                                }).then(() => {
+                                    const modal = bootstrap.Modal.getInstance(document.getElementById('editarPagoModal'));
+                                    modal.hide();
+                                    cargarMetodoPago();
+                                });
+                            } else {
+                                throw new Error(result.message || 'Error al actualizar');
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: error.message
+                            });
+                        });
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.message
+                    });
+                }
+            }
+            function editarMetodoPago(metodo) {
+                if (typeof metodo === 'string') {
+                    metodo = JSON.parse(metodo);
+                }
+                const form = document.getElementById('editarPagoForm');
+                form.querySelector('[name="opcion_pago"]').value = metodo.opcion_pago || '';
+                form.querySelector('[name="numero_tarjeta"]').value = metodo.numero_tarjeta ? metodo.numero_tarjeta.replace(/(\d{4})(?=\d)/g, '$1-') : '';
+                form.querySelector('[name="titular"]').value = metodo.titular || '';
+                form.querySelector('[name="fecha_vencimiento"]').value = metodo.fecha_vencimiento || '';
+                form.querySelector('[name="codigo_seguridad"]').value = metodo.codigo_seguridad || '';
+                form.querySelector('[name="saldo"]').value = metodo.saldo || '0.00';
+                const modal = new bootstrap.Modal(document.getElementById('editarPagoModal'));
+                modal.show();
+            }
+            function eliminarMetodoPago(id_pago) {
+                Swal.fire({
+                    title: '¿Está seguro?',
+                    text: "Esta acción no se puede revertir",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        fetch('/api/metodos-pago/eliminar', {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id_persona: document.querySelector('[name="id_persona"]').value })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Eliminado',
+                                        text: 'Método de pago eliminado correctamente',
+                                        showConfirmButton: true,
+                                    }).then(() => {
+                                        cargarMetodoPago();
+                                    });
+                                } else {
+                                    throw new Error(data.message);
+                                }
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: error.message
+                                });
+                            });
+                    }
+                });
+            }
+            function validarDatosTarjeta(data) {
+                const numeroLimpio = data.numero_tarjeta;
+                if (!numeroLimpio || numeroLimpio.length !== 19) {
+                    throw new Error('El número de tarjeta debe tener 16 dígitos');
+                }
+                const [mes, anio] = data.fecha_vencimiento.split('/');
+                if (!mes || !anio || parseInt(mes) < 1 || parseInt(mes) > 12) {
+                    throw new Error('La fecha de vencimiento es inválida');
+                }
+                if (!data.codigo_seguridad || data.codigo_seguridad.length < 3) {
+                    throw new Error('El código de seguridad debe tener al menos 3 dígitos');
+                }
+                if (!data.titular || data.titular.trim() === '') {
+                    throw new Error('El nombre del titular es requerido');
+                }
+                if (isNaN(data.saldo) || data.saldo < 0) {
+                    throw new Error('El saldo debe ser un número válido y positivo');
+                }
+            }
+            document.querySelectorAll('[id^="toggleCVV"]').forEach(button => {
+                button.addEventListener('click', function () {
+                    const input = this.closest('.input-group').querySelector('input');
+                    const icon = this.querySelector('i');
+                    input.type = input.type === 'password' ? 'text' : 'password';
+                    icon.classList.toggle('fa-eye');
+                    icon.classList.toggle('fa-eye-slash');
+                });
+            });
+            document.querySelectorAll('input[name="numero_tarjeta"]').forEach(input => {
+                input.addEventListener('input', function () {
+                    let value = this.value.replace(/\D/g, '');
+                    if (value.length > 0) {
+                        value = value.match(/.{1,4}/g).join('-');
+                    }
+                    if (value.length > 19) {
+                        value = value.substring(0, 19);
+                    }
+                    this.value = value;
+                });
+            });
+            document.querySelectorAll('input[name="fecha_vencimiento"]').forEach(input => {
+                input.addEventListener('input', function () {
+                    let value = this.value.replace(/\D/g, '');
+                    if (value.length > 2) {
+                        value = value.substring(0, 2) + '/' + value.substring(2);
+                        const month = parseInt(value.substring(0, 2));
+                        if (month > 12) value = '12' + value.substring(2);
+                        if (month === 0) value = '01' + value.substring(2);
+                    }
+                    this.value = value;
+                });
+            });
+        });
+        function transferirSaldo() {
+            Swal.fire({
+                title: '¿Transferir saldo?',
+                text: "El saldo de la tarjeta será transferido a tu cuenta",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, transferir',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch('/api/metodos-pago/transferir-saldo', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({})
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Éxito',
+                                    text: data.message,
+                                    showConfirmButton: true,
+                                }).then(() => {
+                                    window.location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: data.message
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Error al procesar la transferencia'
+                            });
+                        });
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Crear Ruta</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/bus_5488571.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style_crud.css" rel="stylesheet">
+</head>
+
+<body>
+
+    {% include 'base/menu.html' %}
+    {% include 'base/navegacion.html' %}
+
+    <div class="container-fluid position-relative p-0" style="margin-top: 15px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.home') }}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.administrador') }}">Panel Administrador</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.lista_ruta') }}">Rutas</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear Ruta</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="ticket-container">
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <h3 class="mb-0"><i class="fas fa-route me-2"></i>Crear Nueva Ruta</h3>
+            </div>
+
+            <div class="card-body p-5">
+                <form method="POST">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-map-marker-alt me-2"></i>Origen
+                            </label>
+                            <input type="text" class="form-control" id="origen" name="origen"
+                                placeholder="Ingrese el origen" value="{{ request.form.get('origen', '') }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-map-pin me-2"></i>Destino
+                            </label>
+                            <input type="text" class="form-control" id="destino" name="destino"
+                                placeholder="Ingrese el destino" value="{{ request.form.get('destino', '') }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-dollar-sign me-2"></i>Precio
+                            </label>
+                            <input type="number" step="0.01" class="form-control"
+                                placeholder="Ingrese el precio unitario" id="precio_unitario" name="precio_unitario"
+                                min="0.25" value="{{ request.form.get('precio_unitario', '') }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-road me-2"></i>Distancia (km)
+                            </label>
+                            <input type="number" class="form-control" id="distancia" name="distancia"
+                                placeholder="Ingrese la distancia" min="1"
+                                value="{{ request.form.get('distancia', '') }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-clock me-2"></i>Tiempo Estimado
+                            </label>
+                            <input type="text" class="form-control" id="tiempo_estimado" name="tiempo_estimado"
+                                placeholder="Tiempo estimado se calcula automaticamente"
+                                value="{{ ruta.tiempo_estimado if ruta else '' }}" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-toggle-on me-2"></i>Estado
+                            </label>
+                            <select class="form-select" id="estado_ruta" name="estado_ruta">
+                                <option value="Disponible">Disponible</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fas fa-bus me-2"></i>Bus
+                        </label>
+                        <div class="searchable-select">
+                            <input type="text" class="form-control" id="bus_input" placeholder="Buscar bus">
+                            <input type="hidden" id="bus_id" name="bus_id">
+                            <div class="searchable-select-dropdown"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Escalas</h5>
+                        <div class="escala-container" id="escalasContainer">
+                            <div class="no-escalas-message" id="noEscalasMessage">
+                                <i class="fas fa-route"></i>
+                                <p class="mb-1">No hay escalas agregadas</p>
+                                <small class="text-muted">Haga clic en "Agregar Escala" para definir paradas
+                                    intermedias</small>
+                            </div>
+                        </div>
+                        <div class="text-end" style="padding: 10px;">
+                            <button type="button" class="btn btn-primary" onclick="agregarEscala()">
+                                <i class="fas fa-plus me-2"></i>Agregar Escala
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ url_for('router.lista_ruta') }}" class="btn btn-secondary px-4 py-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4 py-2 me-2">
+                            <i class="fas fa-save me-2"></i>Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../static/js/base.js"></script>
+    <script src="../static/js/funciones.js"></script>
+
+    <script>
+        "{% if error %}"
+        Swal.fire({
+            title: 'Error de Validación',
+            text: '{{ error }}',
+            icon: 'warning',
+            ...sweetAlertOptions
+        });
+        "{% endif %}"
+        document.addEventListener('DOMContentLoaded', function () {
+            const busInput = document.getElementById('bus_input');
+            const busIdInput = document.getElementById('bus_id');
+            const dropdown = busInput.parentElement.querySelector('.searchable-select-dropdown');
+            let previousValue = '';
+            let buses = [];
+            "{% for bus in buses %}"
+            buses.push({
+                id: "{{ bus.id_bus }}",
+                info: "{{ bus.placa }} - {{ bus.marca }} - {{ bus.cooperativa.nombre_cooperativa }}",
+                velocidad: "{{ bus.velocidad }}"
+            });
+            "{% endfor %}"
+            function updateDropdown(searchText) {
+                dropdown.innerHTML = '';
+                const filteredBuses = buses.filter(bus =>
+                    bus.info.toLowerCase().includes(searchText.toLowerCase())
+                );
+                if (filteredBuses.length === 0) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'searchable-select-option';
+                    noResults.textContent = 'No hay resultados';
+                    dropdown.appendChild(noResults);
+                    return;
+                }
+                filteredBuses.forEach(bus => {
+                    const option = document.createElement('div');
+                    option.className = 'searchable-select-option';
+                    option.textContent = bus.info;
+                    option.dataset.id = bus.id;
+                    option.dataset.velocidad = bus.velocidad;
+                    option.addEventListener('click', function () {
+                        busInput.value = bus.info;
+                        busIdInput.value = bus.id;
+                        previousValue = bus.info;
+                        dropdown.style.display = 'none';
+                        calcularTiempoEstimado();
+                    });
+                    dropdown.appendChild(option);
+                });
+            }
+            busInput.addEventListener('focus', function () {
+                previousValue = this.value;
+                this.value = '';
+                dropdown.style.display = 'block';
+                updateDropdown('');
+            });
+            busInput.addEventListener('blur', function () {
+                setTimeout(() => {
+                    if (!this.value.trim()) {
+                        this.value = previousValue;
+                    }
+                    dropdown.style.display = 'none';
+                }, 200);
+            });
+            busInput.addEventListener('input', function () {
+                dropdown.style.display = 'block';
+                updateDropdown(this.value);
+            });
+            busInput.addEventListener('mousedown', function (e) {
+                if (dropdown.style.display === 'none' || !dropdown.style.display) {
+                    e.preventDefault();
+                    this.focus();
+                }
+            });
+        });
+        let contadorEscalas = 0;
+        let mensajeActivo = false;
+        function actualizarEstadoEscalas() {
+            const container = document.getElementById('escalasContainer');
+            const mensaje = document.getElementById('noEscalasMessage');
+            const escalas = container.getElementsByClassName('escala-row');
+            if (escalas.length === 0) {
+                mensaje.style.display = 'block';
+            } else {
+                mensaje.style.display = 'none';
+            }
+        }
+        function validarCampoEscala(input, tipo) {
+            if (mensajeActivo) return false;
+            if (!input.value.trim()) {
+                mensajeActivo = true;
+                const mensaje = tipo === 'lugar' ?
+                    'Debe ingresar el lugar de la escala' :
+                    'Debe ingresar el tiempo de la escala';
+                Swal.fire({
+                    ...sweetAlertOptions,
+                    title: 'Campo Requerido',
+                    text: mensaje,
+                    icon: 'warning'
+                }).then(() => {
+                    mensajeActivo = false;
+                    input.focus();
+                });
+                return false;
+            }
+            return true;
+        }
+        function validarEscalaUnica(inputEscala) {
+            const todasLasEscalas = document.querySelectorAll('input[name^="lugar_escala_"]');
+            const valorActual = inputEscala.value.trim().toLowerCase();
+            let esUnica = true;
+            todasLasEscalas.forEach(escala => {
+                if (escala !== inputEscala && escala.value.trim().toLowerCase() === valorActual) {
+                    esUnica = false;
+                    escala.classList.add('is-invalid');
+                    inputEscala.classList.add('is-invalid');
+                }
+            });
+            if (esUnica) {
+                inputEscala.classList.remove('is-invalid');
+            }
+            return esUnica;
+        }
+        function validarTodasLasEscalas() {
+            const lugares = new Set();
+            const escalas = document.querySelectorAll('input[name^="lugar_escala_"]');
+            let esValido = true;
+            escalas.forEach(input => {
+                const lugar = input.value.trim().toLowerCase();
+                if (lugar) {
+                    if (lugares.has(lugar)) {
+                        input.classList.add('is-invalid');
+                        esValido = false;
+                    } else {
+                        lugares.add(lugar);
+                        input.classList.remove('is-invalid');
+                    }
+                }
+            });
+            if (!esValido) {
+                Swal.fire({
+                    ...sweetAlertOptions,
+                    title: 'Error de Validación',
+                    text: 'No pueden existir escalas con el mismo nombre',
+                    icon: 'warning'
+                });
+            }
+            return esValido;
+        }
+        function agregarEscala() {
+            const container = document.getElementById('escalasContainer');
+            const escalaDiv = document.createElement('div');
+            escalaDiv.className = 'row escala-row';
+            escalaDiv.innerHTML = `
+                <div class="col-lugar">
+                    <input type="text" class="form-control" name="lugar_escala_${contadorEscalas}" 
+                        placeholder="Ingrese el lugar de la escala" 
+                        oninput="this.value=this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]/g,'');validarEscalaUnica(this)"
+                        onchange="validarCampoEscala(this, 'lugar')">
+                    <div class="invalid-feedback">
+                        Este lugar de escala ya existe
+                    </div>
+                </div>
+                <div class="col-tiempo">
+                    <input type="time" class="form-control tiempo-escala" name="tiempo_escala_${contadorEscalas}" 
+                        onchange="validarCampoEscala(this, 'tiempo')">
+                </div>
+                <div class="col-accion">
+                    <button type="button" class="btn btn-danger" onclick="eliminarEscala(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(escalaDiv);
+            contadorEscalas++;
+            actualizarEstadoEscalas();
+        }
+        function eliminarEscala(button) {
+            button.closest('.escala-row').remove();
+            actualizarEstadoEscalas();
+            actualizarTiempoEstimado();
+        }
+    </script>
+</body>
+
+</html>

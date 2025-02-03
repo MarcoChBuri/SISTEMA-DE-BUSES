@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>TICKET MOST WANTED</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/bus_5488571.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="../static/css/style.css" rel="stylesheet">
+</head>
+
+<style>
+    .navbar-brand {
+        display: flex;
+        align-items: center; /* Alinea los elementos verticalmente al centro */
+    }
+
+    .row_a {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        justify-content: space-around;
+    }
+
+    .custom-select_a {
+        display: inline-block !important;
+        height: 45px !important;
+        padding: 0.375rem 0.75rem !important;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 0;
+    }
+
+    .custom-select_a option[disabled] {
+        color: #999;
+        font-style: italic;
+    }
+
+    .fecha-pasada {
+        color: #ff0000;
+        font-style: italic;
+    }
+
+    .searchable-select {
+        position: relative;
+        width: 100%;
+    }
+    
+
+    .searchable-select input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23343a40' viewBox='0 0 12 12'%3E%3Cpath d='M2 5l4 4 4-4'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 12px 12px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    .searchable-select-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: white;
+        border: 1px solid #ced4da;
+        border-top: none;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .searchable-select-option {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    .searchable-select-option:hover {
+        background-color: #f8f9fa;
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 7.5px;
+        text-align-last: center;
+    }
+
+    @media (min-width: 100px) {
+        .col-md-x {
+            flex: 0 0 25%;
+            max-width: 25%;
+            min-width: 33%;
+        }
+    }
+</style>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light pt-3 d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center">
+                        <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                        <p class="text-body px-3">|</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>+012 345 6789</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center text-lg-right">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-primary px-3" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-primary px-3" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-primary px-3" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-primary px-3" href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-primary pl-3" href="">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="index.html" class="navbar-brand d-flex align-items-center">
+                    <img src="../static/img/bus_5488571.png" alt="Ícono de autobús" style="width: 30px; height: 30px; margin-right: 10px;">
+                    <h1 class="m-0 text-primary"><span class="text-dark">TICKET</span> MOST WANTED</h1>
+                </a>
+                
+                
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link active">Inicio</a>
+                        <a href="about.html" class="nav-item nav-link">Acerca de</a>
+                        <a href="service.html" class="nav-item nav-link">Servicios</a>
+                        <!-- <a href="package.html" class="nav-item nav-link">Tour Packages</a> -->
+                        <div class="nav-item dropdown">
+                            <!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a> -->
+                            <div class="dropdown-menu border-0 rounded-0 m-0">
+                                <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                                <a href="single.html" class="dropdown-item">Blog Detail</a>
+                                <a href="destination.html" class="dropdown-item">Destination</a>
+                                <a href="guide.html" class="dropdown-item">Travel Guides</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            </div>
+                        </div>
+                        <a href="{{ url_for('router.iniciar_sesion') }}" class="nav-item nav-link">Iniciar sesion</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    {% block content %}
+    <!-- Contenido por defecto -->
+    {% endblock %}
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
+        <div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-primary">
+                        <span class="text-white">TICKET</span><br>
+                        MOST WANTED
+                    </h1>
+                </a>
+                <p class="text-justify">Bienvenido a Most Wanted, el sistema de compra y reserva de tickets de bus. Ofrecemos los mejores destinos, con seguridad y comodidad para tu viaje. ¡Reserva tu ticket hoy mismo y viaja sin preocupaciones!</p>
+                <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Síguenos</h6>
+                <div class="d-flex justify-content-start">
+                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Nuestros Servicios</h5>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Compra de tickets</a>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Enlaces Útiles</h5>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Acerca de TICKET MOST WANTED</a>
+
+                    <a class="text-white-50" href="#"><i class="fa fa-angle-right mr-2"></i>Blog</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <p><i class="fa fa-map-marker-alt mr-2"></i>UNL, Ciudad de Loja, Ecuador</p>
+                <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Suscríbete</h6>
+                <div class="w-100">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
+        style="border-color: rgba(256, 256, 256, .1) !important;">
+        <div class="row">
+            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
+                <p class="m-0 text-white-50">Copyright &copy; <a href="#">TICKET MOST WANTED</a>. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-lg-6 text-center text-md-right">
+                <p class="m-0 text-white-50">Diseñado por <a href="https://htmlcodex.com">HTML Codex</a></p>
+            </div>
+        </div>
+    </div>
+
+    {% block scripts %}
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="../static/mail/contact.js"></script>
+    <script src="../static/js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectOrigen = convertToSearchableSelect('selectOrigen', 'Buscar origen');
+            const selectDestino = convertToSearchableSelect('selectDestino', 'Buscar destino');
+            const selectFecha = convertToSearchableSelect('selectFecha', 'Buscar fecha');
+            selectDestino.disabled = true;
+            selectFecha.disabled = true;
+            let todosLosTurnos = [];
+            function convertToSearchableSelect(elementId, placeholder) {
+                const originalSelect = document.getElementById(elementId);
+                const container = document.createElement('div');
+                container.className = 'searchable-select';
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'custom-select_a px-4';
+                input.placeholder = placeholder;
+                input.style.height = '45px';
+                input.style.width = '100%';
+                const dropdown = document.createElement('div');
+                dropdown.className = 'searchable-select-dropdown';
+                dropdown.style.display = 'none';
+                container.appendChild(input);
+                container.appendChild(dropdown);
+                originalSelect.parentNode.replaceChild(container, originalSelect);
+                let options = [];
+                let selectedValue = '';
+                input.addEventListener('focus', function () {
+                    dropdown.style.display = 'block';
+                    updateDropdown(options, '');
+                });
+                input.addEventListener('blur', function () {
+                    setTimeout(() => dropdown.style.display = 'none', 200);
+                });
+                input.addEventListener('input', function () {
+                    updateDropdown(options, this.value);
+                });
+                function updateDropdown(allOptions, searchText) {
+                    dropdown.innerHTML = '';
+                    const filteredOptions = searchText ?
+                        allOptions.filter(opt => opt.toLowerCase().includes(searchText.toLowerCase())) :
+                        allOptions;
+                    if (filteredOptions.length === 0) {
+                        const noResults = document.createElement('div');
+                        noResults.className = 'searchable-select-option';
+                        noResults.textContent = 'No hay resultados';
+                        dropdown.appendChild(noResults);
+                        return;
+                    }
+                    filteredOptions.forEach(optionText => {
+                        const option = document.createElement('div');
+                        option.className = 'searchable-select-option';
+                        option.textContent = optionText;
+                        option.addEventListener('click', function () {
+                            input.value = optionText;
+                            selectedValue = optionText;
+                            dropdown.style.display = 'none';
+                            const event = new Event('change');
+                            input.dispatchEvent(event);
+                        });
+                        dropdown.appendChild(option);
+                    });
+                }
+                return {
+                    input: input,
+                    setOptions: function (newOptions) {
+                        options = newOptions;
+                        updateDropdown(options, '');
+                    },
+                    getValue: function () {
+                        return selectedValue;
+                    },
+                    setValue: function (value) {
+                        selectedValue = value;
+                        input.value = value;
+                    },
+                    disable: function () {
+                        input.disabled = true;
+                    },
+                    enable: function () {
+                        input.disabled = false;
+                    },
+                    addEventListener: function (event, callback) {
+                        input.addEventListener(event, callback);
+                    }
+                };
+            }
+            fetch('/api/rutas/opciones')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    todosLosTurnos = data.turnos || [];
+                    if (data.origenes && Array.isArray(data.origenes)) {
+                        selectOrigen.setOptions(data.origenes);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar las opciones:', error);
+                });
+            selectOrigen.addEventListener('change', function () {
+                const origenSeleccionado = selectOrigen.getValue();
+                selectDestino.setValue('');
+                selectFecha.setValue('');
+                selectFecha.disable();
+                if (!origenSeleccionado) {
+                    selectDestino.disable();
+                    return;
+                }
+                selectDestino.enable();
+                const destinosDisponibles = new Set();
+                todosLosTurnos.forEach(turno => {
+                    if (turno.horario?.ruta?.origen === origenSeleccionado) {
+                        destinosDisponibles.add(turno.horario.ruta.destino);
+                    }
+                });
+                selectDestino.setOptions(Array.from(destinosDisponibles));
+            });
+            selectDestino.addEventListener('change', function () {
+                const origenSeleccionado = selectOrigen.getValue();
+                const destinoSeleccionado = selectDestino.getValue();
+                selectFecha.setValue('');
+                if (!destinoSeleccionado) {
+                    selectFecha.disable();
+                    return;
+                }
+                selectFecha.enable();
+                const fechasDisponibles = new Set();
+                const hoy = new Date();
+                hoy.setHours(0, 0, 0, 0);
+                todosLosTurnos.forEach(turno => {
+                    if (turno.horario?.ruta?.origen === origenSeleccionado &&
+                        turno.horario?.ruta?.destino === destinoSeleccionado &&
+                        turno.estado_turno === "Disponible") {
+                        const partesFecha = turno.fecha_salida.split('/');
+                        const fechaTurno = new Date(
+                            parseInt(partesFecha[2]),
+                            parseInt(partesFecha[1]) - 1,
+                            parseInt(partesFecha[0])
+                        );
+                        if (fechaTurno >= hoy) {
+                            fechasDisponibles.add(turno.fecha_salida);
+                        }
+                    }
+                });
+                selectFecha.setOptions(Array.from(fechasDisponibles).sort());
+            });
+            function validateForm() {
+                var origen = selectOrigen.getValue();
+                var destino = selectDestino.getValue();
+                var fecha = selectFecha.getValue();
+                document.getElementById('hiddenOrigen').value = origen;
+                document.getElementById('hiddenDestino').value = destino;
+                document.getElementById('hiddenFecha').value = fecha;
+                if (!origen || !destino || !fecha) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campos incompletos',
+                        text: 'Por favor complete todos los campos',
+                        confirmButtonColor: '#4CAF50'
+                    });
+                    return false;
+                }
+                if (origen === "Seleccione origen" || destino === "Seleccione destino" || !fecha) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campos incompletos',
+                        text: 'Por favor complete todos los campos',
+                        confirmButtonColor: '#4CAF50'
+                    });
+                    return false;
+                }
+                if (fecha !== "") {
+                    const [dia, mes, anio] = fecha.split('/').map(Number);
+                    const fechaSeleccionada = new Date(anio, mes - 1, dia);
+                    const hoy = new Date();
+                    hoy.setHours(0, 0, 0, 0);
+                    if (fechaSeleccionada < hoy) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Fecha inválida',
+                            text: 'La fecha seleccionada ya ha pasado. Por favor seleccione una fecha futura.',
+                            confirmButtonColor: '#4CAF50'
+                        });
+                        return false;
+                    }
+                    return validateTurno(fecha, origen, destino);
+                }
+                return true;
+            }
+            window.onload = function () {
+                fetch('http://localhost:8099/api/ruta/lista')
+                    .then(response => response.json())
+                    .then(data => {
+                        const origenes = new Set();
+                        const destinos = new Set();
+                        const fechas = new Set();
+                        data.rutas.forEach(ruta => {
+                            origenes.add(ruta.origen);
+                            destinos.add(ruta.destino);
+                        });
+                        const selectOrigen = document.getElementById('selectOrigen');
+                        const selectDestino = document.getElementById('selectDestino');
+                        const selectFecha = document.getElementById('selectFecha');
+                        origenes.forEach(origen => {
+                            const option = document.createElement('option');
+                            option.value = origen;
+                            option.textContent = origen;
+                            selectOrigen.appendChild(option);
+                        });
+                        destinos.forEach(destino => {
+                            const option = document.createElement('option');
+                            option.value = destino;
+                            option.textContent = destino;
+                            selectDestino.appendChild(option);
+                        });
+                        fetch('http://localhost:8099/api/turno/lista')
+                            .then(response => response.json())
+                            .then(data => {
+                                data.turnos.forEach(turno => {
+                                    fechas.add(turno.fecha_salida);
+                                });
+                                fechas.forEach(fecha => {
+                                    const option = document.createElement('option');
+                                    option.value = fecha;
+                                    option.textContent = fecha;
+                                    selectFecha.appendChild(option);
+                                });
+                            });
+                    });
+            };
+            function validateTurno(fecha, origen, destino) {
+                fetch('/api/rutas/opciones')
+                    .then(response => response.json())
+                    .then(data => {
+                        const turnos = data.turnos;
+                        const turno = turnos.find(t =>
+                            t.fecha_salida === fecha &&
+                            t.horario?.ruta?.origen === origen &&
+                            t.horario?.ruta?.destino === destino
+                        );
+                        if (!turno) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Turno no encontrado',
+                                text: 'No se encontró el turno especificado',
+                                confirmButtonColor: '#4CAF50'
+                            });
+                            return false;
+                        }
+                        if (turno.estado_turno === "Cancelado") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Turno Cancelado',
+                                text: 'Este turno ha sido cancelado y no está disponible para compra',
+                                confirmButtonColor: '#4CAF50'
+                            });
+                            return false;
+                        }
+                        if (turno.estado_turno === "Agotado") {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Turno Agotado',
+                                text: 'No hay asientos disponibles para este turno',
+                                confirmButtonColor: '#4CAF50'
+                            });
+                            return false;
+                        }
+                        return true;
+                    });
+            }
+            window.validateForm = function () {
+                var origen = selectOrigen.getValue();
+                var destino = selectDestino.getValue();
+                var fecha = selectFecha.getValue();
+                document.getElementById('hiddenOrigen').value = origen;
+                document.getElementById('hiddenDestino').value = destino;
+                document.getElementById('hiddenFecha').value = fecha;
+                if (!origen || !destino || !fecha) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campos incompletos',
+                        text: 'Por favor complete todos los campos',
+                        confirmButtonColor: '#4CAF50'
+                    });
+                    return false;
+                }
+                return true;
+            };
+        });
+    </script>
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Panel Cliente - TICKET MOST WANTED</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/img/bus_5488571.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/style_p.css" rel="stylesheet">
+    <link href="../static/css/style_crud.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container position-relative">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 text-primary"><span class="text-dark">TICKET</span> MOST WANTED</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <div class="nav-item d-flex align-items-center">
+                            <span class="nav-link">
+                                <i class="fas fa-wallet me-1"></i>
+                                Saldo: ${{ "%.2f"|format(usuario.saldo_disponible) }}
+                            </span>
+                        </div>
+                        <a href="{{ url_for('router.home') }}" class="nav-item nav-link">
+                            <i class="fas fa-shopping-cart me-1"></i>Comprar
+                        </a>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="" id="userDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="avatar-circle mr-2">
+                                    <span class="avatar-initials">{{ usuario.nombre }} {{ usuario.apellido }}</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ url_for('router.perfil') }}">
+                                    <i class="fas fa-user-circle mr-2"></i>Mi Perfil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url_for('router.cerrar_sesion') }}">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container-fluid position-relative p-0" style="margin-top: 15px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.home') }}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Panel Cliente</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Dashboard Content Start -->
+    <div class="container-fluid">
+        <div class="container pt-5a pb-3">
+            <!-- Welcome Section -->
+            <div class="text-center">
+                <h1>Bienvenido(a), <span class="text-primary">{{ usuario.nombre }} {{ usuario.apellido }}</span></h1>
+                <p>¿A dónde viajaremos hoy?</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-primary mb-3 cursor-pointer" data-toggle="modal" data-target="#viajesModal">
+                        <div class="card-body text-center">
+                            <i class="fas fa-plane-departure fa-3x text-primary mb-3"></i>
+                            <h4>{{ stats.viajes_realizados }}</h4>
+                            <p>Viajes Realizados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-primary mb-3 cursor-pointer" data-toggle="modal"
+                        data-target="#destinosModal">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marked fa-3x text-success mb-3"></i>
+                            <h4>{{ stats.destinos_visitados }}</h4>
+                            <p>Destinos Visitados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-primary mb-3 cursor-pointer" data-toggle="modal"
+                        data-target="#boletosModal">
+                        <div class="card-body text-center">
+                            <i class="fas fa-ticket-alt fa-3x text-info mb-3"></i>
+                            <h4>{{ stats.boletos_activos }}</h4>
+                            <p>Boletos Activos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-primary mb-3 cursor-pointer" data-toggle="modal" data-target="#rutasModal">
+                        <div class="card-body text-center">
+                            <i class="fas fa-heart fa-3x text-warning mb-3"></i>
+                            <h4>{{ stats.rutas_favoritas }}</h4>
+                            <p>Rutas Favoritas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="row">
+                <!-- Historial de Viajes -->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Historial de Viajes</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha Compra</th>
+                                            <th>Fecha Salida</th>
+                                            <th>Destino</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for viaje in historial_viajes %}
+                                        <tr>
+                                            <td>{{ viaje.fecha_compra }}</td>
+                                            <td>{{ viaje.fecha_salida }}</td>
+                                            <td>{{ viaje.destino }}</td>
+                                            <td><span class="badge badge-success">{{ viaje.estado }}</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-primary"
+                                                    onclick="verDetalle('{{ viaje|tojson|urlencode }}')">
+                                                    Ver Detalles
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Próximos Viajes -->
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div
+                            class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Próximos Viajes</h5>
+                            <span class="badge badge-light">{{ proximos_viajes|length }} total</span>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="proximos-viajes-container" style="max-height: 400px; overflow-y: auto;">
+                                {% for viaje in proximos_viajes %}
+                                <div
+                                    class="d-flex align-items-center p-3 {% if not loop.last %}border-bottom{% endif %} {% if loop.index > 3 %}proximos-extra{% endif %}">
+                                    <i class="fas fa-plane-departure text-primary mr-3"></i>
+                                    <div style="width: 100% !important;">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">{{ viaje.destino }}</h6>
+                                            <small>{{ viaje.distancia }} km</small>
+                                        </div>
+                                        <small class="text-muted d-block">Comprado: {{ viaje.fecha_compra }}</small>
+                                        <small class="text-muted d-block">Dia de salida: {{ viaje.fecha_salida }} - {{ viaje.hora_salida }}</small>
+                                        <small class="text-muted d-block">Asiento: {{ viaje.numero_asiento }}</small>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Viajes Realizados -->
+    <div class="modal fade" id="viajesModal" tabindex="-1" role="dialog" aria-labelledby="viajesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="viajesModalLabel">Viajes Realizados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Origen</th>
+                                    <th>Destino</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for viaje in historial_viajes %}
+                                <tr>
+                                    <td>{{ viaje.fecha_salida }}</td>
+                                    <td>{{ viaje.destino.split(' - ')[0] }}</td>
+                                    <td>{{ viaje.destino.split(' - ')[1] }}</td>
+                                    <td><span class="badge badge-success">{{ viaje.estado }}</span></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Destinos Visitados -->
+    <div class="modal fade" id="destinosModal" tabindex="-1" role="dialog" aria-labelledby="destinosModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="destinosModalLabel">Destinos Visitados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        {% set destinos_unicos = [] %}
+                        {% for viaje in historial_viajes %}
+                        {% set destino = viaje.destino.split(' - ')[1] %}
+                        {% if destino not in destinos_unicos %}
+                        {% set _ = destinos_unicos.append(destino) %}
+                        <div class="list-group-item">
+                            <i class="fas fa-map-marker-alt text-primary mr-2"></i>
+                            {{ destino }}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Boletos Activos -->
+    <div class="modal fade" id="boletosModal" tabindex="-1" role="dialog" aria-labelledby="boletosModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">Boletos Activos</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Fecha Salida</th>
+                                <th class="text-center">Hora</th>
+                                <th class="text-center">Ruta</th>
+                                <th class="text-center">Asiento</th>
+                                <th class="text-center">Precio</th>
+                                <th class="text-center">Bus</th>
+                                <th class="text-center">Cooperativa</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for viaje in proximos_viajes %}
+                            <tr>
+                                <td class="text-center">{{ viaje.fecha_salida }}</td>
+                                <td class="text-center">{{ viaje.hora_salida }}</td>
+                                <td class="text-center">{{ viaje.destino }}</td>
+                                <td class="text-center">{{ viaje.numero_asiento }}</td>
+                                <td class="text-center">${{ viaje.precio_unitario }}</td>
+                                <td class="text-center">{{ viaje.bus_numero }}</td>
+                                <td class="text-center">{{ viaje.cooperativa }}</td>
+                                <td class="text-center"><span class="badge badge-success">{{ viaje.estado }}</span></td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-success"
+                                        onclick="descargarTicket('{{ viaje|tojson|urlencode }}')">
+                                        <i class="fas fa-ticket-alt mr-1"></i> Descargar
+                                    </button>
+                                    <button class="btn btn-sm btn-secondary" onclick="cancelarBoleto('{{ viaje.id }}')">
+                                        <i class="fas fa-times mr-1"></i> Cancelar
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cancelarBoletoModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Confirmar Cancelación</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro que desea cancelar este boleto?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-secondary" id="confirmarCancelacion">Sí, cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Rutas Favoritas -->
+    <div class="modal fade" id="rutasModal" tabindex="-1" role="dialog" aria-labelledby="rutasModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-white">
+                    <h5 class="modal-title" id="rutasModalLabel">Rutas Favoritas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- Rutas Visitadas -->
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Rutas Visitadas</h6>
+                            <div class="list-group">
+                                {% set rutas_visitadas = [] %}
+                                {% for viaje in historial_viajes %}
+                                {% if viaje.destino not in rutas_visitadas %}
+                                {% set _ = rutas_visitadas.append(viaje.destino) %}
+                                <div class="list-group-item">
+                                    <i class="fas fa-check-circle text-success mr-2"></i>
+                                    {{ viaje.destino }}
+                                    <small class="d-block text-muted">
+                                        {{ viaje.fecha_salida }} - {{ viaje.hora_salida }}
+                                    </small>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- Próximas Rutas -->
+                        <div class="col-md-6">
+                            <h6 class="mb-3">Próximas Rutas</h6>
+                            <div class="list-group">
+                                {% set rutas_proximas = [] %}
+                                {% for viaje in proximos_viajes %}
+                                {% if viaje.destino not in rutas_proximas %}
+                                {% set _ = rutas_proximas.append(viaje.destino) %}
+                                <div class="list-group-item">
+                                    <i class="fas fa-clock text-primary mr-2"></i>
+                                    {{ viaje.destino }}
+                                    <small class="d-block text-muted">
+                                        {{ viaje.fecha_salida }} - {{ viaje.hora_salida }}
+                                    </small>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalle Viaje -->
+    <div class="modal fade modal-detalle" id="detalleViajeModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-ticket-alt mr-2"></i>
+                        Detalles del Viaje
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="detalle-section">
+                                <h6><i class="fas fa-info-circle"></i> Información del Viaje</h6>
+                                <div class="detalle-info">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <div>
+                                        <small class="text-muted">Fecha de Compra</small>
+                                        <p class="mb-0" id="fechaCompra"></p>
+                                    </div>
+                                </div>
+                                <div class="detalle-info">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <div>
+                                        <small class="text-muted">Fecha de Salida</small>
+                                        <p class="mb-0" id="fechaSalida"></p>
+                                    </div>
+                                </div>
+                                <div class="detalle-info">
+                                    <i class="far fa-clock"></i>
+                                    <div>
+                                        <small class="text-muted">Hora de Salida</small>
+                                        <p class="mb-0" id="horaSalida"></p>
+                                    </div>
+                                </div>
+                                <div class="detalle-info">
+                                    <i class="fas fa-tag"></i>
+                                    <div>
+                                        <small class="text-muted">Estado</small>
+                                        <p class="mb-0" id="estadoViaje"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detalle-section">
+                                <h6><i class="fas fa-route"></i> Detalles de la Ruta</h6>
+                                <div class="detalle-info">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <small class="text-muted">Origen</small>
+                                        <p class="mb-0" id="origenViaje"></p>
+                                    </div>
+                                </div>
+                                <div class="detalle-info">
+                                    <i class="fas fa-map-marker"></i>
+                                    <div>
+                                        <small class="text-muted">Destino</small>
+                                        <p class="mb-0" id="destinoViaje"></p>
+                                    </div>
+                                </div>
+                                <div class="detalle-info">
+                                    <i class="fas fa-bus"></i>
+                                    <div>
+                                        <small class="text-muted">Bus</small>
+                                        <p class="mb-0" id="busViaje"></p>
+                                    </div>
+                                </div>
+                                <div class="detalle-info">
+                                    <i class="fas fa-chair"></i>
+                                    <div>
+                                        <small class="text-muted">Asiento</small>
+                                        <p class="mb-0" id="asientoViaje"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detalle-section">
+                        <h6><i class="fas fa-ticket-alt"></i> Información del Boleto</h6>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="detalle-info">
+                                    <i class="fas fa-hashtag"></i>
+                                    <div>
+                                        <small class="text-muted">Número de Boleto</small>
+                                        <p class="mb-0" id="numeroBoleto"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="detalle-info">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    <div>
+                                        <small class="text-muted">Precio</small>
+                                        <p class="mb-0" id="precioViaje"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="detalle-info">
+                                    <i class="fas fa-building"></i>
+                                    <div>
+                                        <small class="text-muted">Cooperativa</small>
+                                        <p class="mb-0" id="cooperativaViaje"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-descargar" id="descargarBoleto">
+                        <i class="fas fa-download mr-2"></i>Descargar Boleto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            "{% with messages = get_flashed_messages(with_categories = true) %}"
+            "{% if messages %}"
+            "{% for category, message in messages %}"
+            if ('{{ category }}' === 'success') {
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: '{{ message }}',
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6'
+                });
+            }
+            "{% endfor %}"
+            "{% endif %}"
+            "{% endwith %}"
+        });
+        function verDetalle(viaje) {
+            const detalleViaje = JSON.parse(decodeURIComponent(viaje));
+            document.getElementById('fechaCompra').textContent = detalleViaje.fecha_compra;
+            document.getElementById('fechaSalida').textContent = detalleViaje.fecha_salida;
+            document.getElementById('horaSalida').textContent = detalleViaje.hora_salida;
+            document.getElementById('estadoViaje').innerHTML = `<span class="badge badge-${detalleViaje.estado === 'Vendido' ? 'success' : 'warning'}">${detalleViaje.estado}</span>`;
+            document.getElementById('origenViaje').textContent = detalleViaje.destino.split(' - ')[0];
+            document.getElementById('destinoViaje').textContent = detalleViaje.destino.split(' - ')[1];
+            document.getElementById('busViaje').textContent = detalleViaje.bus_numero;
+            document.getElementById('asientoViaje').textContent = detalleViaje.numero_asiento;
+            document.getElementById('numeroBoleto').textContent = detalleViaje.id;
+            document.getElementById('precioViaje').textContent = `$${detalleViaje.precio_final}`;
+            document.getElementById('cooperativaViaje').textContent = detalleViaje.cooperativa;
+            $('#detalleViajeModal').modal('show');
+            document.getElementById('descargarBoleto').onclick = function () {
+                const id = document.getElementById('numeroBoleto').textContent;
+                window.open(`/generar_pdf_boleto/${id}`, '_blank');
+            };
+        }
+        function descargarTicket(viaje) {
+            const detalleViaje = JSON.parse(decodeURIComponent(viaje));
+            const id = detalleViaje.id;
+            const boton = event.target.closest('button');
+            const textoOriginal = boton.innerHTML;
+            boton.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Descargando...';
+            boton.disabled = true;
+            fetch(`/generar_ticket/${id}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al generar el ticket');
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `ticket_${id}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al descargar el ticket');
+                })
+                .finally(() => {
+                    boton.innerHTML = textoOriginal;
+                    boton.disabled = false;
+                });
+        }
+        function cancelarBoleto(boletoId) {
+            $('#cancelarBoletoModal').modal('show');
+            $('#confirmarCancelacion').off('click').on('click', function () {
+                fetch(`/boleto/eliminar/${boletoId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token() if csrf_token else "" }}'
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            throw new Error('Error al cancelar el boleto');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al cancelar el boleto');
+                    })
+                    .finally(() => {
+                        $('#cancelarBoletoModal').modal('hide');
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>

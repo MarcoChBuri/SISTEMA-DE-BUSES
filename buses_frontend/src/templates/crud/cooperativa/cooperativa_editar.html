@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Editar Cooperativa</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="{{ url_for('static', filename='../static/img/bus_5488571.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style_crud.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+    {% include 'base/menu.html' %}
+    {% include 'base/navegacion.html' %}
+
+    <div class="container-fluid position-relative p-0" style="margin-top: 15px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.home') }}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.administrador') }}">Panel Administrador</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.lista_cooperativa') }}">Cooperativas</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar Cooperativa</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="ticket-container">
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <h3 class="mb-0"><i class="fas fa-edit me-2"></i>Editar Cooperativa</h3>
+            </div>
+
+            <div class="card-body p-5">
+                <form method="POST">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-building me-2"></i>Nombre
+                            </label>
+                            <input type="text" class="form-control" id="nombre_cooperativa" name="nombre_cooperativa"
+                                value="{{ request.form.get('nombre_cooperativa', cooperativa.nombre_cooperativa) }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-id-card me-2"></i>RUC
+                            </label>
+                            <input type="text" class="form-control" id="ruc" name="ruc" minlength="13" maxlength="13"
+                                value="{{ request.form.get('ruc', cooperativa.ruc) }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="fas fa-map-marker-alt me-2"></i>Dirección
+                        </label>
+                        <input type="text" class="form-control" id="direccion" name="direccion"
+                            value="{{ request.form.get('direccion', cooperativa.direccion) }}">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-phone me-2"></i>Teléfono
+                            </label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" minlength="10"
+                                maxlength="13" value="{{ request.form.get('telefono', cooperativa.telefono) }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-envelope me-2"></i>Correo Empresarial
+                            </label>
+                            <input type="email" class="form-control" id="correo_empresarial" name="correo_empresarial"
+                                value="{{ request.form.get('correo_empresarial', cooperativa.correo_empresarial) }}">
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ url_for('router.lista_cooperativa') }}" class="btn btn-secondary px-4 py-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4 py-2 me-2">
+                            <i class="fas fa-save me-2"></i>Actualizar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='../static/js/base.js') }}"></script>
+    <script src="{{ url_for('static', filename='../static/js/funciones.js') }}"></script>
+
+    <script>
+        "{% if error %}"
+        Swal.fire({
+            title: 'Error de Validación',
+            text: '{{ error }}',
+            icon: 'warning',
+            ...sweetAlertOptions
+        });
+        "{% endif %}"
+    </script>
+
+</body>
+
+</html>

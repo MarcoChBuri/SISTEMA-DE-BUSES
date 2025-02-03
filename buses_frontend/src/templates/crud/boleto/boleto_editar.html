@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Editar Boleto</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="{{ url_for('static', filename='../static/img/bus_5488571.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style_crud.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+    {% include 'base/menu.html' %}
+    {% include 'base/navegacion.html' %}
+
+    <div class="container-fluid position-relative p-0" style="margin-top: 15px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.home') }}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.administrador') }}">Panel Administrador</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('router.lista_boleto') }}">Boeltos</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar Boleto</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="ticket-container">
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <h3 class="mb-0"><i class="fas fa-edit me-2"></i>Editar Boleto</h3>
+            </div>
+
+            <div class="card-body p-5">
+                <form method="POST">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-calendar me-2"></i>Fecha de compra
+                            </label>
+                            <input type="text" class="form-control" id="fecha_compra" name="fecha_compra"
+                                value="{{ boleto.fecha_compra }}" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-chair me-2"></i>Número de Asiento (Máx: <span id="max-asientos">{{
+                                    boleto.turno.horario.ruta.bus.capacidad_pasajeros }}</span>)
+                            </label>
+                            <input type="text" class="form-control" id="asientos" name="asientos"
+                                value="{{ boleto.numero_asiento }}" min="1"
+                                max="{{ boleto.turno.horario.ruta.bus.capacidad_pasajeros }}" pattern="[0-9]*"
+                                title="Ingrese un número entre 1 y {{ boleto.turno.horario.ruta.bus.capacidad_pasajeros }}"
+                                oninput="validarAsiento(this)">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-calculator me-2"></i>Cantidad
+                            </label>
+                            <input type="number" class="form-control" id="cantidad_boleto" name="cantidad_boleto"
+                                value="{{ boleto.cantidad_boleto }}" min="1" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-dollar-sign me-2"></i>Precio Unitario
+                            </label>
+                            <input type="number" step="0.01" class="form-control" id="precio_unitario"
+                                name="precio_unitario"
+                                value="{{ '%.2f'|format(boleto.turno.horario.ruta.precio_unitario|float) }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-money-bill-wave me-2"></i>Precio Final
+                            </label>
+                            <input type="number" step="0.01" class="form-control" id="precio_final" name="precio_final"
+                                value="{{ '%.2f'|format(boleto.precio_final|float) }}" readonly>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-flag me-2"></i>Estado
+                            </label>
+                            <select class="form-select" id="estado_boleto" name="estado_boleto">
+                                {% for estado in estados_boleto %}
+                                <option value="{{ estado }}" {% if estado==boleto.estado_boleto %}selected{% endif %}>
+                                    {{ estado }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="fas fa-user me-2"></i>Persona
+                        </label>
+                        <div class="searchable-select">
+                            <input type="text" class="form-control" id="persona_input"
+                                value="{{ boleto.persona.nombre }} {{ boleto.persona.apellido }} - {{ boleto.persona.numero_identificacion }}"
+                                placeholder="Buscar persona">
+                            <input type="hidden" id="persona_id" name="persona_id"
+                                value="{{ boleto.persona.id_persona }}">
+                            <div class="searchable-select-dropdown"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fas fa-clock me-2"></i>Turno
+                        </label>
+                        <div class="searchable-select">
+                            <input type="text" class="form-control" id="turno_input"
+                                value="{{ boleto.turno.fecha_salida }} - Turno #{{ boleto.turno.numero_turno }} - {{ boleto.turno.horario.ruta.origen }} a {{ boleto.turno.horario.ruta.destino }} - ${{ boleto.turno.horario.ruta.precio_unitario }}"
+                                placeholder="Buscar turno">
+                            <input type="hidden" id="turno_id" name="turno_id" value="{{ boleto.turno.id_turno }}">
+                            <div class="searchable-select-dropdown"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ url_for('router.lista_boleto') }}" class="btn btn-secondary px-4 py-2">
+                            <i class="fas fa-arrow-left me-2"></i>Volver
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4 py-2 me-2">
+                            <i class="fas fa-save me-2"></i>Actualizar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='../static/js/base.js') }}"></script>
+    <script src="{{ url_for('static', filename='../static/js/funciones.js') }}"></script>
+
+    <script>
+        "{% if error %}"
+        Swal.fire({
+            title: 'Error de Validación',
+            text: '{{ error }}',
+            icon: 'warning',
+            ...sweetAlertOptions
+        });
+        "{% endif %}"
+        document.getElementById('asientos').addEventListener('input', function (e) {
+            let valor = this.value;
+            if (!/^[\d,]*$/.test(valor)) {
+                this.value = valor.replace(/[^\d,]/g, '');
+                return;
+            }
+            const capacidadMaxima = parseInt(document.getElementById('max-asientos').textContent);
+            if (valor.endsWith(',')) {
+                return;
+            }
+            let asientosArray = valor.split(',')
+                .map(num => num.trim())
+                .filter(num => num !== '')
+                .map(num => {
+                    let asiento = parseInt(num);
+                    if (isNaN(asiento) || asiento < 1) {
+                        return '';
+                    } else if (asiento > capacidadMaxima) {
+                        return capacidadMaxima.toString();
+                    }
+                    return asiento.toString();
+                })
+                .filter(num => num !== '');
+            asientosArray = [...new Set(asientosArray)];
+            this.value = asientosArray.join(',');
+            calcularTotales();
+        });
+        $(document).on('change', '.searchable-select .dropdown-item', function () {
+            const turnoId = $(this).data('value');
+            fetch(`/api/turnos/${turnoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const capacidad = data.horario.ruta.bus.capacidad_pasajeros;
+                    document.getElementById('max-asientos').textContent = capacidad;
+                    const asientosInput = document.getElementById('asientos');
+                    asientosInput.setAttribute('max', capacidad);
+                    asientosInput.setAttribute('title', `Ingrese un número entre 1 y ${capacidad}`);
+                    validarAsiento(asientosInput);
+                });
+        });
+        document.getElementById('turno_input').addEventListener('change', function () {
+            const turnoData = JSON.parse(this.getAttribute('data-turno') || '{}');
+            if (turnoData.horario?.ruta?.bus?.capacidad_pasajeros) {
+                const capacidad = turnoData.horario.ruta.bus.capacidad_pasajeros;
+                document.getElementById('max-asientos').textContent = capacidad;
+            }
+        });
+        document.getElementById('asientos').addEventListener('keypress', function (e) {
+            if (e.key === ' ' || e.key === ',') {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const personaInput = document.getElementById('persona_input');
+            const personaIdInput = document.getElementById('persona_id');
+            const personaDropdown = personaInput.parentElement.querySelector('.searchable-select-dropdown');
+            const originalPersonaNombre = personaInput.value;
+            const originalPersonaId = personaIdInput.value;
+            let previousPersonaNombre = originalPersonaNombre;
+            let previousPersonaId = originalPersonaId;
+            let seleccionNuevaPersona = false;
+            const turnoInput = document.getElementById('turno_input');
+            const turnoIdInput = document.getElementById('turno_id');
+            const turnoDropdown = turnoInput.parentElement.querySelector('.searchable-select-dropdown');
+            const originalTurnoNombre = turnoInput.value;
+            const originalTurnoId = turnoIdInput.value;
+            let previousTurnoNombre = originalTurnoNombre;
+            let previousTurnoId = originalTurnoId;
+            let seleccionNuevaTurno = false;
+            let personas = [];
+            "{% for persona in personas %}"
+            personas.push({
+                id: "{{ persona.id_persona }}",
+                info: "{{ persona.nombre }} {{ persona.apellido }} - {{ persona.numero_identificacion }}"
+            });
+            "{% endfor %}"
+            let turnos = [];
+            "{% for turno in turnos %}"
+            turnos.push({
+                id: "{{ turno.id_turno }}",
+                info: "{{ turno.fecha_salida }} - Turno #{{ turno.numero_turno }} - {{ turno.horario.ruta.origen }} a {{ turno.horario.ruta.destino }} - ${{ turno.horario.ruta.precio_unitario }}",
+                precio: "{{ turno.horario.ruta.precio_unitario }}",
+                capacidad: "{{ turno.horario.ruta.bus.capacidad_pasajeros }}"
+            });
+            "{% endfor %}"
+            function setupSearchableSelect(input, idInput, dropdown, items, originalNombre, originalId, callback = null) {
+                let previousNombre = originalNombre;
+                let previousId = originalId;
+                let seleccionNueva = false;
+                function updateDropdown(searchText) {
+                    dropdown.innerHTML = '';
+                    const filteredItems = items.filter(item =>
+                        item.info.toLowerCase().includes(searchText.toLowerCase())
+                    );
+                    filteredItems.forEach(item => {
+                        const option = document.createElement('div');
+                        option.className = 'searchable-select-option';
+                        option.textContent = item.info;
+                        option.dataset.id = item.id;
+                        if (item.precio) option.dataset.precio = item.precio;
+                        option.addEventListener('click', function () {
+                            input.value = item.info;
+                            idInput.value = item.id;
+                            previousNombre = item.info;
+                            previousId = item.id;
+                            seleccionNueva = true;
+                            dropdown.style.display = 'none';
+                            if (callback) callback(item);
+                        });
+                        dropdown.appendChild(option);
+                    });
+                }
+                input.addEventListener('focus', function () {
+                    this.value = '';
+                    dropdown.style.display = 'block';
+                    updateDropdown('');
+                });
+                input.addEventListener('blur', function () {
+                    setTimeout(() => {
+                        if (!seleccionNueva || !this.value.trim()) {
+                            input.value = previousNombre;
+                            idInput.value = previousId;
+                        }
+                        dropdown.style.display = 'none';
+                    }, 200);
+                });
+                input.addEventListener('input', function () {
+                    seleccionNueva = false;
+                    dropdown.style.display = 'block';
+                    updateDropdown(this.value);
+                });
+                input.addEventListener('mousedown', function (e) {
+                    if (dropdown.style.display === 'none' || !dropdown.style.display) {
+                        e.preventDefault();
+                        this.focus();
+                    }
+                });
+            }
+            setupSearchableSelect(personaInput, personaIdInput, personaDropdown, personas, originalPersonaNombre, originalPersonaId);
+            setupSearchableSelect(turnoInput, turnoIdInput, turnoDropdown, turnos, originalTurnoNombre, originalTurnoId,
+                function (turno) {
+                    const nuevoPrecio = parseFloat(turno.precio.replace(',', '.'));
+                    document.getElementById('precio_unitario').value = nuevoPrecio.toFixed(2);
+                    const nuevaCapacidad = parseInt(turno.capacidad);
+                    document.getElementById('max-asientos').textContent = nuevaCapacidad;
+                    const asientosInput = document.getElementById('asientos');
+                    asientosInput.setAttribute('max', nuevaCapacidad);
+                    asientosInput.setAttribute('title', `Ingrese un número entre 1 y ${nuevaCapacidad}`);
+                    validarAsiento(asientosInput);
+                    actualizarPrecios();
+                }
+            );
+            const precioUnitarioInicial = parseFloat("{{ boleto.turno.horario.ruta.precio_unitario }}".replace(',', '.'));
+            const cantidadInicial = parseInt("{{ boleto.cantidad_boleto }}");
+            const precioFinalInicial = parseFloat("{{ boleto.precio_final }}".replace(',', '.'));
+            function actualizarPrecios() {
+                const precioUnitario = parseFloat(document.getElementById('precio_unitario').value) || 0;
+                const cantidad = parseInt(document.getElementById('cantidad_boleto').value) || 1;
+                const precioFinal = cantidad * precioUnitario;
+                document.getElementById('precio_unitario').value = precioUnitario.toFixed(2);
+                document.getElementById('cantidad_boleto').value = cantidad;
+                document.getElementById('precio_final').value = precioFinal.toFixed(2);
+            }
+            document.getElementById('precio_unitario').value = precioUnitarioInicial.toFixed(2);
+            document.getElementById('cantidad_boleto').value = cantidadInicial;
+            document.getElementById('precio_final').value = precioFinalInicial.toFixed(2);
+            document.getElementById('cantidad_boleto').addEventListener('input', actualizarPrecios);
+            document.getElementById('precio_unitario').addEventListener('input', actualizarPrecios);
+            actualizarPrecios();
+        });
+    </script>
+</body>
+
+</html>
